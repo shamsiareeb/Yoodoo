@@ -62,11 +62,20 @@ flutter:
      - family: TypoHoop
        fonts:
          - asset: fonts/TypoHoop-Bold.otf
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+     - family: AzoSans
+       fonts:
+         - asset: fonts/AzoSans-Thin.ttf
+         - asset: fonts/AzoSans-ThinItalic.ttf
+         - asset: fonts/AzoSans-Light.ttf
+         - asset: fonts/AzoSans-LightItalic.ttf
+         - asset: fonts/AzoSans-Regular.ttf
+         - asset: fonts/AzoSans-Italic.ttf
+         - asset: fonts/AzoSans-Medium.ttf
+         - asset: fonts/AzoSans-MediumItalic.ttf
+         - asset: fonts/AzoSans-Bold.ttf
+         - asset: fonts/AzoSans-BoldItalic.ttf
+         - asset: fonts/AzoSans-Black.ttf
+         - asset: fonts/AzoSans-BlackItalic.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
