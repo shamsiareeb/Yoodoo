@@ -9,5 +9,5 @@ void main() => runApp(MaterialApp(
       primaryColor: Colors.red,
       accentColor: Colors.yellowAccent),
   debugShowCheckedModeBanner: false,
-  home: HomeScreen(),
+  home: SplashScreen(),
 ));

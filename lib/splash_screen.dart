@@ -8,18 +8,27 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  startTime() async {
-    var _duration = new Duration(seconds: 2);
-    return new Timer(_duration, navigationPage);
-  }
-  void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/home_screen');
-  }
   @override
   void initState() {
     super.initState();
-    startTime();
+    new Timer(const Duration(seconds: 2), onClose);
   }
+
+  void onClose() {
+    Navigator.of(context).pushReplacement(new PageRouteBuilder(
+      maintainState: true,
+      opaque: true,
+      pageBuilder: (context, _, __) => new HomeScreen(),
+      transitionDuration: const Duration(seconds: 3),
+      transitionsBuilder: (context, anim1, anim2, child) {
+        return new FadeTransition(
+          child: child,
+          opacity: anim1,
+        );
+      }
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
