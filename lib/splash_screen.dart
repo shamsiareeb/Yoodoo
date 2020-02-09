@@ -16,16 +16,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void onClose() {
     Navigator.of(context).pushReplacement(new PageRouteBuilder(
-      maintainState: true,
-      opaque: true,
-      pageBuilder: (context, _, __) => new HomeScreen(),
-      transitionDuration: const Duration(seconds: 3),
-      transitionsBuilder: (context, anim1, anim2, child) {
-        return new FadeTransition(
-          child: child,
-          opacity: anim1,
-        );
-      }
+        maintainState: true,
+        opaque: true,
+        pageBuilder: (context, _, __) => new HomeScreen(),
+        /*transitionDuration: const Duration(seconds: 1),
+        transitionsBuilder: (context, anim1, anim2, child) {
+          return new FadeTransition(
+            child: child,
+            opacity: anim1,
+          );
+        }*/
     ));
   }
 
