@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'login_screen.dart';
 import 'dart:async' show Timer;
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.of(context).pushReplacement(new PageRouteBuilder(
         maintainState: true,
         opaque: true,
-        pageBuilder: (context, _, __) => new HomeScreen(),
+        pageBuilder: (context, _, __) => new LoginScreenUI(),
         /*transitionDuration: const Duration(seconds: 1),
         transitionsBuilder: (context, anim1, anim2, child) {
           return new FadeTransition(
