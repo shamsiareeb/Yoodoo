@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:yoodoo/home_screen.dart';
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -16,15 +17,47 @@ class _LoginForm extends State<LoginScreen>{
             ),
             key: formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: 'Email',
+                      hintText: 'example@xyz.com',
                       labelStyle: TextStyle(
                           color: Colors.red,
                           fontSize: 24
-                      )
+                      ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.red)
+                    )
                   ),
+                ),
+
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                      labelStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 24
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.red)
+                      ),
+                    hintText: 'NAI DOONGA!!!!'
+                  )
+                ),
+
+                RaisedButton(
+                  color: Colors.green,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen())
+                    );
+                  },
+                  child: Text(
+                      'ENTER',
+                       style: TextStyle(color:Colors.white))
                 )
               ],
             )
