@@ -1,4 +1,4 @@
-# yoodoo
+# Yoodoo
 
 Enterprise level task allotment application.
 
