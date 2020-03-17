@@ -73,7 +73,6 @@ class LoginScreenUI extends StatelessWidget {
             child: LoginScreen()
         )
     );
-
   }
 }
 class MyPainter extends CustomPainter{
