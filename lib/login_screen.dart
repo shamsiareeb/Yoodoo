@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -57,14 +58,49 @@ class _LoginForm extends State<LoginScreen>{
                   },
                   child: Text(
                       'ENTER',
-                       style: TextStyle(color:Colors.white))
-                )
-              ],
+                       style: TextStyle(color:Colors.white)),
+                ),
+                _createAccountLabel(context)
+              ]
             )
         )
     );
   }
 }
+
+Widget _createAccountLabel(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: 20),
+    alignment: Alignment.bottomCenter,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'Don\'t have an account ?',
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignupScreen()));
+          },
+          child: Text(
+            'Register',
+            style: TextStyle(
+                color: Colors.red,
+                fontSize: 15,
+                fontWeight: FontWeight.w600),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
 class LoginScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
     return new Material(
