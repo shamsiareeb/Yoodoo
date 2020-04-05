@@ -1,82 +1,107 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:yoodoo/home_screen.dart';
 
 class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
 }
 class _SignupForm extends State<SignupScreen>{
-  final formKey = GlobalKey<FormState>();
-  Widget build(BuildContext context){
+  final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
+  String _email, _password;
+  Widget build(BuildContext context) {
     return Form(
-        child: Padding(
-            padding: EdgeInsets.only(
-                left: 25.0,
-                top: 280.0,
-                right: 25.0
+        key: _formKey,
+        //child: Padding(
+        // padding: EdgeInsets.only(
+        // left: 25.0,
+        //  top: 280.0,
+        //   right: 25.0
+        //),
+        //key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            TextFormField(
+              validator: (input) {
+                if (input.isEmpty) {
+                  return 'Please type something';
+                }
+                return null;
+              },
+              onSaved: (input) => _email = input,
+              decoration: InputDecoration(
+                  labelText: 'Full Name',
+                  hintText: 'John Doe',
+                  labelStyle: TextStyle(
+                      color: Colors.green,
+                      fontSize: 24
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.green)
+                  )
+              ),
             ),
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Full Name',
-                      hintText: 'John Doe',
-                      labelStyle: TextStyle(
-                          color: Colors.green,
-                          fontSize: 24
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.green)
-                      )
+
+            TextFormField(
+              validator: (input) {
+                if (input.isEmpty) {
+                  return 'Please type something';
+                }
+                return null;
+              },
+              onSaved: (input) => _password = input,
+              decoration: InputDecoration(
+                  labelText: 'Email',
+                  hintText: 'example@xyz.com',
+                  labelStyle: TextStyle(
+                      color: Colors.green,
+                      fontSize: 24
                   ),
-                ),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.green)
+                  )
+              ),
+            ),
 
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'example@xyz.com',
-                      labelStyle: TextStyle(
-                          color: Colors.green,
-                          fontSize: 24
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.green)
-                      )
-                  ),
-                ),
-
-                TextFormField(
-                    decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle: TextStyle(
-                            color: Colors.green,
-                            fontSize: 24
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.green)
-                        ),
-                        hintText: 'Enter Password'
-                    )
-                ),
-
-                RaisedButton(
-                    color: Colors.red,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen())
-                      );
-                    },
-                    child: Text(
-                        'GET STARTED',
-                        style: TextStyle(color:Colors.white))
+            TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                        color: Colors.green,
+                        fontSize: 24
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: new BorderSide(color: Colors.green)
+                    ),
+                    hintText: 'Enter Password'
                 )
-              ],
+            ),
+
+            RaisedButton(
+                color: Colors.red,
+                onPressed: signUp,
+                child: Text(
+                    'GET STARTED',
+                    style: TextStyle(color: Colors.white))
             )
+          ],
         )
     );
+  }
+
+
+  void signUp() async {
+    if (_formKey.currentState.validate()){
+      _formKey.currentState.save();
+      try{
+        AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email , password: _password);
+        FirebaseUser user = authResult.user;
+        user.sendEmailVerification();
+      }
+      catch(e){
+        print(e.message);
+      }
+    }
   }
 }
 class SignupScreenUI extends StatelessWidget {

@@ -60,7 +60,38 @@ class _LoginForm extends State<LoginScreen>{
                       'ENTER',
                        style: TextStyle(color:Colors.white)),
                 ),
-                _createAccountLabel(context)
+                //_createAccountLabel(context)
+
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 20),
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Don\'t have an account ?',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignupScreenUI()));
+                },
+                child: Text(
+                  'Register',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600),
+                ),
+              )
+            ],
+          ),
+        )
               ]
             )
         )
@@ -68,38 +99,7 @@ class _LoginForm extends State<LoginScreen>{
   }
 }
 
-Widget _createAccountLabel(BuildContext context) {
-  return Container(
-    margin: EdgeInsets.symmetric(vertical: 20),
-    alignment: Alignment.bottomCenter,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          'Don\'t have an account ?',
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignupScreen()));
-          },
-          child: Text(
-            'Register',
-            style: TextStyle(
-                color: Colors.red,
-                fontSize: 15,
-                fontWeight: FontWeight.w600),
-          ),
-        )
-      ],
-    ),
-  );
-}
+
 
 class LoginScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
