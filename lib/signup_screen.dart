@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:yoodoo/login_screen.dart';
 
 class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
@@ -11,12 +12,12 @@ class _SignupForm extends State<SignupScreen>{
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
-        //child: Padding(
-        // padding: EdgeInsets.only(
-        // left: 25.0,
-        //  top: 280.0,
-        //   right: 25.0
-        //),
+        child: Padding(
+         padding: EdgeInsets.only(
+         left: 25.0,
+          top: 280.0,
+           right: 25.0
+        ),
         //key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -24,11 +25,10 @@ class _SignupForm extends State<SignupScreen>{
             TextFormField(
               validator: (input) {
                 if (input.isEmpty) {
-                  return 'Please type something';
+                  return 'Username field is empty';
                 }
                 return null;
               },
-              onSaved: (input) => _email = input,
               decoration: InputDecoration(
                   labelText: 'Full Name',
                   hintText: 'John Doe',
@@ -45,11 +45,11 @@ class _SignupForm extends State<SignupScreen>{
             TextFormField(
               validator: (input) {
                 if (input.isEmpty) {
-                  return 'Please type something';
+                  return 'Email field is empty';
                 }
                 return null;
               },
-              onSaved: (input) => _password = input,
+              onSaved: (input) => _email = input,
               decoration: InputDecoration(
                   labelText: 'Email',
                   hintText: 'example@xyz.com',
@@ -64,6 +64,13 @@ class _SignupForm extends State<SignupScreen>{
             ),
 
             TextFormField(
+              validator: (input) {
+                if(input.isEmpty){
+                  return'Password field is empty';
+                }
+                return null;
+              },
+                onSaved: (input) => _password = input,
                 decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: TextStyle(
@@ -86,6 +93,7 @@ class _SignupForm extends State<SignupScreen>{
             )
           ],
         )
+    )
     );
   }
 
@@ -97,6 +105,9 @@ class _SignupForm extends State<SignupScreen>{
         AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email , password: _password);
         FirebaseUser user = authResult.user;
         user.sendEmailVerification();
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginScreenUI()));
       }
       catch(e){
         print(e.message);
