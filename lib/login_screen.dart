@@ -1,3 +1,6 @@
+//import 'package:js/js.dart';
+//import 'dart:js';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yoodoo/home_screen.dart';
@@ -7,149 +10,187 @@ class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
 }
 class _LoginForm extends State<LoginScreen>{
-  final formKey = GlobalKey<FormState>();
-  Widget build(BuildContext context){
-    return Form(
-        child: Padding(
-            padding: EdgeInsets.only(
-                left: 25.0,
-                top: 280.0,
-                right: 25.0
-            ),
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'example@xyz.com',
-                      labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 24
-                      ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.red)
-                    )
-                  ),
-                ),
 
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                      labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 24
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.red)
-                      ),
-                    hintText: 'NAI DOONGA!!!!'
-                  )
-                ),
+  final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
-                RaisedButton(
-                  color: Colors.green,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen())
-                    );
-                  },
-                  child: Text(
-                      'ENTER',
-                       style: TextStyle(color:Colors.white)),
-                ),
-                //_createAccountLabel(context)
+  String emailValidator(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Email format is invalid';
+    } else {
+      return null;
+    }
+  }
 
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 20),
-          alignment: Alignment.bottomCenter,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+  String pwdValidator(String value) {
+    if (value.length < 8) {
+      return 'Password must be longer than 8 characters';
+    } else {
+      return null;
+    }
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
+      child: Form(
+        key: _formKey,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Don\'t have an account ?',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignupScreenUI()));
-                },
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
+        TextFormField(
+        decoration: InputDecoration(
+            //icon: new Icon(Icons.email),
+            hintText: 'Email ID',
+            hintStyle: TextStyle(color: Colors.grey),
+            enabledBorder: OutlineInputBorder(
+              borderSide: new BorderSide(color: Colors.black),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            )
+        ),
+          validator: emailValidator,
+          keyboardType: TextInputType.emailAddress,
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      TextFormField(
+          decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: TextStyle(color: Colors.grey),
+              enabledBorder: OutlineInputBorder(
+                borderSide: new BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              )
+          ),
+        obscureText: true,
+        validator: pwdValidator,
+      ),
+      ],
+      ),
+    ),
+    );
+  }
+}
+
+class LoginScreenUI extends StatelessWidget {
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(),
+                    ),
+                    _title(),
+                    _subtitle(),
+                    LoginScreen(),
+                    _submitButton(),
+                    Expanded(
+                        flex: 2,
+                        child: SizedBox()
+                    ),
+                    _createAccountLabel(),
+                  ],
                 ),
               )
             ],
           ),
-        )
-              ]
-            )
-        )
-    );
-  }
-}
-
-
-
-class LoginScreenUI extends StatelessWidget {
-  Widget build(BuildContext context){
-    return new Material(
-        child: CustomPaint(
-            painter: MyPainter(),
-            child: LoginScreen()
-        )
-    );
-  }
-}
-class MyPainter extends CustomPainter{
-  void paint(Canvas canvas, Size size){
-    final greenCenter = Offset(330, 75);
-    final greenRadius = 120.0;
-    final greenPaint = Paint()
-      ..color = Colors.green;
-    canvas.drawPaint(new Paint()..color = Colors.white);
-    canvas.drawCircle(greenCenter, greenRadius, greenPaint);
-    final yellowCenter = Offset(-23, 200);
-    final yellowRadius = 80.0;
-    final yellowPaint = Paint()
-      ..color = Colors.yellow;
-    canvas.drawCircle(yellowCenter, yellowRadius, yellowPaint);
-    final redCenter = Offset(230, 250);
-    final redRadius = 50.0;
-    final redPaint = Paint()
-      ..color = Colors.red;
-    canvas.drawCircle(redCenter, redRadius, redPaint);
-
-    TextSpan loginSpan = new TextSpan(
-        style: new TextStyle(
-            color: Colors.green,
-            fontSize: 32.0,
-            fontWeight: FontWeight.w400
         ),
-        text: 'LOGIN'
+      )
     );
-
-    TextPainter tp = new TextPainter(
-        text: loginSpan,
-        textAlign: TextAlign.left,
-        textDirection: TextDirection.ltr
-    );
-    tp.layout();
-    tp.paint(canvas, Offset(25,135));
   }
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    return null;
+
+  Widget _title() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      child: RichText(
+        textAlign: TextAlign.left,
+        text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Welcome Back!',
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ]),
+      ),
+    );
+  }
+
+  Widget _subtitle() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(20, 5, 10, 70),
+        child: RichText(
+          textAlign: TextAlign.left,
+          text: TextSpan(
+              children: [
+                TextSpan(
+                  text: 'It\'s good to see you again.',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+              ]),
+        ),
+    );
+  }
+
+  Widget _submitButton() {
+    return Container(
+      child: FlatButton(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 15),
+          alignment: Alignment.center,
+          child: Text(
+            'LOG IN',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.black,
+          ),
+        ),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget _createAccountLabel() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 20),
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          InkWell(
+            onTap: () {},
+            child: Text(
+              'Don\'t have an account ?  Register',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

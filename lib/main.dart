@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/login_screen.dart';
+import 'package:yoodoo/signup_screen.dart';
+import 'package:yoodoo/home_screen.dart';
 import 'splash_screen.dart';
 
-void main() => runApp(MaterialApp(
-  theme: ThemeData(
-      //const primaryColor: const Color(0xFF2529052),
-      primaryColor: Colors.red,
-      accentColor: Colors.yellowAccent),
-  debugShowCheckedModeBanner: false,
-  home: SplashScreen(),
-));
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Yoodoo',
+      home:HomeScreen(),
+    );
+  }
+}

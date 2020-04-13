@@ -25,15 +25,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         appBar: new AppBar(
           title: new Text('GROUPS',
             style: TextStyle(
-              fontFamily: 'AzoSans-Regular',
-              fontWeight: FontWeight.w400,
-              fontSize: 17.0,
+              //fontFamily: 'AzoSans-Regular',
+              fontWeight: FontWeight.w600,
+              fontSize: 20.0,
+              color: Colors.white
             ),),
-          backgroundColor: Color(0xFF2529052),
+          backgroundColor: Colors.black,
           leading: new Padding(
             padding: const EdgeInsets.all(10.0),
             child: new Material(
               shape: new CircleBorder(),
+              //color: Colors.grey,
             ),
           ),
         ),

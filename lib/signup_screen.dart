@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yoodoo/login_screen.dart';
@@ -7,96 +8,100 @@ class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
 }
 class _SignupForm extends State<SignupScreen>{
+
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
+
   String _email, _password;
-  Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Padding(
-         padding: EdgeInsets.only(
-         left: 25.0,
-          top: 280.0,
-           right: 25.0
-        ),
-        //key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            TextFormField(
-              validator: (input) {
-                if (input.isEmpty) {
-                  return 'Username field is empty';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                  labelText: 'Full Name',
-                  hintText: 'John Doe',
-                  labelStyle: TextStyle(
-                      color: Colors.green,
-                      fontSize: 24
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.green)
-                  )
-              ),
-            ),
 
-            TextFormField(
-              validator: (input) {
-                if (input.isEmpty) {
-                  return 'Email field is empty';
-                }
-                return null;
-              },
-              onSaved: (input) => _email = input,
-              decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'example@xyz.com',
-                  labelStyle: TextStyle(
-                      color: Colors.green,
-                      fontSize: 24
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.green)
-                  )
-              ),
-            ),
-
-            TextFormField(
-              validator: (input) {
-                if(input.isEmpty){
-                  return'Password field is empty';
-                }
-                return null;
-              },
-                onSaved: (input) => _password = input,
-                decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                        color: Colors.green,
-                        fontSize: 24
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.green)
-                    ),
-                    hintText: 'Enter Password'
-                )
-            ),
-
-            RaisedButton(
-                color: Colors.red,
-                onPressed: signUp,
-                child: Text(
-                    'GET STARTED',
-                    style: TextStyle(color: Colors.white))
-            )
-          ],
-        )
-    )
-    );
+  String emailValidator(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Email format is invalid';
+    } else {
+      return null;
+    }
   }
 
+  String pwdValidator(String value) {
+    if (value.length < 6) {
+      return 'Password must be longer than 6 characters';
+    } else {
+      return null;
+    }
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
+      child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                    hintText: 'Full Name',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    )
+                ),
+                keyboardType: TextInputType.text,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                onSaved: (input) => _email = input,
+                decoration: InputDecoration(
+                    hintText: 'Email ID',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    )
+                ),
+                keyboardType: TextInputType.emailAddress,
+                validator: emailValidator,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                  onSaved: (input) => _password = input,
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: new BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      )
+                  ),
+                obscureText: true,
+                validator: pwdValidator,
+              ),
+              /*FlatButton(
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  alignment: Alignment.center,
+                  child: Text(
+                      'SIGN UP',
+                      style: TextStyle(color: Colors.white)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: signUp,
+              )*/
+            ],
+          )
+      ),
+    );
+  }
 
   void signUp() async {
     if (_formKey.currentState.validate()){
@@ -107,7 +112,7 @@ class _SignupForm extends State<SignupScreen>{
         user.sendEmailVerification();
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LoginScreenUI()));
+            MaterialPageRoute(builder: (context) => LoginScreen()));
       }
       catch(e){
         print(e.message);
@@ -115,55 +120,123 @@ class _SignupForm extends State<SignupScreen>{
     }
   }
 }
+
 class SignupScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
-    return new Material(
-        child: CustomPaint(
-            painter: MyPainter(),
-            child: SignupScreen()
+    return Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: SizedBox(),
+                      ),
+                      _title(),
+                      _subtitle(),
+                      SignupScreen(),
+                      _submitButton(),
+                      Expanded(
+                          flex: 2,
+                          child: SizedBox()
+                      ),
+                      _loginLabel(),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
         )
     );
   }
-}
-class MyPainter extends CustomPainter{
-  void paint(Canvas canvas, Size size){
-    final greenCenter = Offset(330, 75);
-    final greenRadius = 120.0;
-    final greenPaint = Paint()
-      ..color = Colors.green;
-    canvas.drawPaint(new Paint()..color = Colors.white);
-    canvas.drawCircle(greenCenter, greenRadius, greenPaint);
-    final yellowCenter = Offset(-23, 200);
-    final yellowRadius = 80.0;
-    final yellowPaint = Paint()
-      ..color = Colors.yellow;
-    canvas.drawCircle(yellowCenter, yellowRadius, yellowPaint);
-    final redCenter = Offset(230, 250);
-    final redRadius = 50.0;
-    final redPaint = Paint()
-      ..color = Colors.red;
-    canvas.drawCircle(redCenter, redRadius, redPaint);
 
-    TextSpan signupSpan = new TextSpan(
-        style: new TextStyle(
-            color: Colors.red,
-            fontSize: 32.0,
-            fontWeight: FontWeight.w400
-        ),
-        text: 'SIGN UP'
-    );
-
-    TextPainter tp = new TextPainter(
-        text: signupSpan,
+  Widget _title() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      child: RichText(
         textAlign: TextAlign.left,
-        textDirection: TextDirection.ltr
+        text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Let\'s get started!',
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ]),
+      ),
     );
-    tp.layout();
-    tp.paint(canvas, Offset(25,135));
   }
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    return null;
+
+  Widget _subtitle() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(20, 5, 10, 70),
+      child: RichText(
+        textAlign: TextAlign.left,
+        text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'We are excited to see you here.',
+                style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+            ]),
+      ),
+    );
+  }
+
+  Widget _submitButton() {
+    return Container(
+      child: FlatButton(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 15),
+          alignment: Alignment.center,
+          child: Text(
+            'SIGN UP',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.black,
+          ),
+        ),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget _loginLabel() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 20),
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          InkWell(
+            onTap: () {},
+            child: Text(
+              'Already a member ?  Sign In',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

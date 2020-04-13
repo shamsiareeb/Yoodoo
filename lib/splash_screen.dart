@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'signup_screen.dart';
 import 'dart:async' show Timer;
 
 class SplashScreen extends StatefulWidget {
@@ -53,7 +54,7 @@ Widget _myWidget(BuildContext context) {
   return Text(
     myString,
     style: TextStyle(
-      fontSize: 30.0,
+      fontSize: 50.0,
       fontFamily: 'TypoHoop',
     ),
   );
