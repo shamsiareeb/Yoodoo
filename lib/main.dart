@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Yoodoo',
-      home:HomeScreen(),
+      home:SplashScreen(),
     );
   }
 }

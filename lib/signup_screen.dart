@@ -11,25 +11,26 @@ class _SignupForm extends State<SignupScreen>{
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
-  String _email, _password;
-
-  String emailValidator(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value)) {
-      return 'Email format is invalid';
-    } else {
-      return null;
-    }
-  }
-
+  String _email = '', _password = '', _error = '';
   String pwdValidator(String value) {
     if (value.length < 6) {
       return 'Password must be longer than 6 characters';
     } else {
       return null;
     }
+  }
+
+  String emailValidator(String value) {
+
+    value = value.trim();
+
+    if (value.endsWith('@gmail.com'))
+      return (null);
+    else if (value.endsWith('@iul.ac.in'))
+      return (null);
+    else
+      return ('Email not supported');
+
   }
 
   Widget build(BuildContext context) {
@@ -41,20 +42,7 @@ class _SignupForm extends State<SignupScreen>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(
-                    hintText: 'Full Name',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    )
-                ),
-                keyboardType: TextInputType.text,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
+                validator: emailValidator,
                 onSaved: (input) => _email = input,
                 decoration: InputDecoration(
                     hintText: 'Email ID',
@@ -64,13 +52,10 @@ class _SignupForm extends State<SignupScreen>{
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     )
                 ),
-                keyboardType: TextInputType.emailAddress,
-                validator: emailValidator,
-              ),
-              SizedBox(
-                height: 20,
+                keyboardType: TextInputType.emailAddress
               ),
               TextFormField(
+                  validator: pwdValidator,
                   onSaved: (input) => _password = input,
                   decoration: InputDecoration(
                       hintText: 'Password',
@@ -80,46 +65,60 @@ class _SignupForm extends State<SignupScreen>{
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       )
                   ),
-                obscureText: true,
-                validator: pwdValidator,
+                obscureText: true
               ),
-              /*FlatButton(
+              FlatButton(
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   alignment: Alignment.center,
                   child: Text(
-                      'SIGN UP',
-                      style: TextStyle(color: Colors.white)),
+                    'SIGN UP',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: Colors.black,
                   ),
                 ),
-                onPressed: signUp,
-              )*/
+                onPressed: () async {
+                  if (_formKey.currentState.validate()){
+                    _formKey.currentState.save();
+                    dynamic result = await signUp(_email, _password);
+                    if (result == null) {
+                      setState (() => _error = 'Sign up failed :(');
+                    }
+                  }
+                },
+              ),
+              Text(
+                _error
+              )
             ],
           )
       ),
     );
   }
-
-  void signUp() async {
-    if (_formKey.currentState.validate()){
-      _formKey.currentState.save();
+  Future signUp(String email, String pass) async {
       try{
-        AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email , password: _password);
+        AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email , password: pass);
         FirebaseUser user = authResult.user;
         user.sendEmailVerification();
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()));
+
+        if(user.isEmailVerified)
+          return user;
+        else
+          return null;
+        //user.sendEmailVerification();
+        //Navigator.push(
+        //    context,
+        //    MaterialPageRoute(builder: (context) => LoginScreen()));
       }
       catch(e){
         print(e.message);
+        return null;
       }
     }
   }
-}
 
 class SignupScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
@@ -142,7 +141,7 @@ class SignupScreenUI extends StatelessWidget {
                       _title(),
                       _subtitle(),
                       SignupScreen(),
-                      _submitButton(),
+                      //submitButton(),
                       Expanded(
                           flex: 2,
                           child: SizedBox()
@@ -198,7 +197,7 @@ class SignupScreenUI extends StatelessWidget {
     );
   }
 
-  Widget _submitButton() {
+ /* Widget submitButton() {
     return Container(
       child: FlatButton(
         child: Container(
@@ -213,10 +212,12 @@ class SignupScreenUI extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          if ()
+        },
       ),
     );
-  }
+  }*/
 
   Widget _loginLabel() {
     return Container(

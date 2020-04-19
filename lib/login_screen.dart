@@ -1,5 +1,3 @@
-//import 'package:js/js.dart';
-//import 'dart:js';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -101,7 +99,7 @@ class LoginScreenUI extends StatelessWidget {
                         flex: 2,
                         child: SizedBox()
                     ),
-                    _createAccountLabel(),
+                    _createAccountLabel(context),
                   ],
                 ),
               )
@@ -172,7 +170,7 @@ class LoginScreenUI extends StatelessWidget {
     );
   }
 
-  Widget _createAccountLabel() {
+  Widget _createAccountLabel(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.bottomCenter,
@@ -180,7 +178,12 @@ class LoginScreenUI extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignupScreenUI()),
+              );
+            },
             child: Text(
               'Don\'t have an account ?  Register',
               style: TextStyle(
