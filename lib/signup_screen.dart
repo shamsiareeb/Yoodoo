@@ -33,6 +33,8 @@ class _SignupForm extends State<SignupScreen>{
 
   }
 
+
+
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
@@ -146,7 +148,7 @@ class SignupScreenUI extends StatelessWidget {
                           flex: 2,
                           child: SizedBox()
                       ),
-                      _loginLabel(),
+                      _loginLabel(context),
                     ],
                   ),
                 )
@@ -219,7 +221,7 @@ class SignupScreenUI extends StatelessWidget {
     );
   }*/
 
-  Widget _loginLabel() {
+  Widget _loginLabel(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.bottomCenter,
@@ -227,7 +229,12 @@ class SignupScreenUI extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreenUI()),
+              );
+            },
             child: Text(
               'Already a member ?  Sign In',
               style: TextStyle(
@@ -240,4 +247,28 @@ class SignupScreenUI extends StatelessWidget {
       ),
     );
   }
+
+  void _popupDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+            ),
+            title: Text("User Created"),
+            content: Text("Please verify your email to log in to the app."),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Close"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        }
+    );
+  }
+
 }
