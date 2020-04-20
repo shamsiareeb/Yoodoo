@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yoodoo/login_screen.dart';
 
+import 'dialogues.dart';
+
 class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
 }
@@ -85,10 +87,8 @@ class _SignupForm extends State<SignupScreen>{
                 onPressed: () async {
                   if (_formKey.currentState.validate()){
                     _formKey.currentState.save();
+                    popupDialog1(context);
                     dynamic result = await signUp(_email, _password);
-                    if (result == null) {
-                      setState (() => _error = 'Sign up failed :(');
-                    }
                   }
                 },
               ),
@@ -104,23 +104,22 @@ class _SignupForm extends State<SignupScreen>{
       try{
         AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email , password: pass);
         FirebaseUser user = authResult.user;
+        popupDialog2(context);
         user.sendEmailVerification();
-
-        if(user.isEmailVerified)
-          return user;
-        else
-          return null;
+        popupDialog3(context);
+        return user;
         //user.sendEmailVerification();
         //Navigator.push(
         //    context,
         //    MaterialPageRoute(builder: (context) => LoginScreen()));
       }
       catch(e){
-        print(e.message);
+        setState(() => _error = e.message);
+        popupDialog4(context, _error);
         return null;
       }
     }
-  }
+}
 
 class SignupScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
@@ -247,28 +246,4 @@ class SignupScreenUI extends StatelessWidget {
       ),
     );
   }
-
-  void _popupDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0)
-            ),
-            title: Text("User Created"),
-            content: Text("Please verify your email to log in to the app."),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        }
-    );
-  }
-
 }
