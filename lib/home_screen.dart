@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:yoodoo/login_screen.dart';
+import 'package:yoodoo/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,21 +25,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('GROUPS',
+          automaticallyImplyLeading: false,
+          titleSpacing: 25.0,
+          title: new Text('Yoodoo',
             style: TextStyle(
-              //fontFamily: 'AzoSans-Regular',
-              fontWeight: FontWeight.w600,
-              fontSize: 20.0,
+              fontFamily: 'TypoHoop',
+              fontWeight: FontWeight.w100,
+              fontSize: 25.0,
               color: Colors.white
             ),),
-          backgroundColor: Colors.black,
-          leading: new Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: new Material(
-              shape: new CircleBorder(),
-              //color: Colors.grey,
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 25.0),
+              child: GestureDetector(
+                onTap: () {
+                  final route = MaterialPageRoute(builder: (BuildContext context) => ProfileScreen());
+                  Navigator.of(this.context).pushAndRemoveUntil(route, (Route<dynamic> route) => false);
+                },
+                child: Icon(
+                    Icons.person
+                ),
+              ),
             ),
-          ),
+            Padding(
+              padding: EdgeInsets.only(right: 25.0),
+              child: GestureDetector(
+                onTap: () {
+                  final route = MaterialPageRoute(builder: (BuildContext context) => LoginScreenUI());
+                  Navigator.of(this.context).pushAndRemoveUntil(route, (Route<dynamic> route) => false);
+                },
+                child: Icon(
+                  Icons.exit_to_app
+                ),
+              ),
+            ),
+          ],
+          backgroundColor: Colors.black,
         ),
         floatingActionButton: new Column(
             mainAxisSize: MainAxisSize.min,
@@ -67,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ..add(
                   new FloatingActionButton(
                       heroTag: null,
+                      backgroundColor: Colors.black,
                       child: new AnimatedBuilder(
                         animation: _controller,
                         builder: (BuildContext context, Widget child) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
-import 'signup_screen.dart';
+import 'package:yoodoo/login_screen.dart';
 import 'dart:async' show Timer;
 
 class SplashScreen extends StatefulWidget {
@@ -20,13 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
         maintainState: true,
         opaque: true,
         pageBuilder: (context, _, __) => new LoginScreenUI(),
-        /*transitionDuration: const Duration(seconds: 1),
-        transitionsBuilder: (context, anim1, anim2, child) {
-          return new FadeTransition(
-            child: child,
-            opacity: anim1,
-          );
-        }*/
     ));
   }
 

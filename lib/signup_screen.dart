@@ -17,7 +17,7 @@ class _SignupForm extends State<SignupScreen>{
 
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 60),
       child: Form(
           key: _formKey,
           child: Column(
@@ -32,9 +32,13 @@ class _SignupForm extends State<SignupScreen>{
                     enabledBorder: OutlineInputBorder(
                       borderSide: new BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    )
+                    ),
+                  prefixIcon: new Icon(Icons.email, color: Colors.black,),
                 ),
                 keyboardType: TextInputType.emailAddress
+              ),
+              SizedBox(
+                height: 20,
               ),
               TextFormField(
                   validator: pwdValidator,
@@ -45,11 +49,15 @@ class _SignupForm extends State<SignupScreen>{
                       enabledBorder: OutlineInputBorder(
                         borderSide: new BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      )
+                      ),
+                    prefixIcon: new Icon(Icons.lock, color: Colors.black,),
                   ),
                 obscureText: true
               ),
-              FlatButton(
+              SizedBox(
+                height: 50,
+              ),
+              InkWell(
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   alignment: Alignment.center,
@@ -62,7 +70,7 @@ class _SignupForm extends State<SignupScreen>{
                     color: Colors.black,
                   ),
                 ),
-                onPressed: () async {
+                onTap: () async {
                   if (_formKey.currentState.validate()){
                     _formKey.currentState.save();
                     popupDialog1(context);
@@ -109,7 +117,7 @@ class SignupScreenUI extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: SizedBox(),
                       ),
                       _title(),
@@ -133,7 +141,7 @@ class SignupScreenUI extends StatelessWidget {
 
   Widget _title() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(horizontal: 5),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
@@ -141,7 +149,7 @@ class SignupScreenUI extends StatelessWidget {
               TextSpan(
                 text: 'Let\'s get started!',
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: 45,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -153,7 +161,7 @@ class SignupScreenUI extends StatelessWidget {
 
   Widget _subtitle() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 5, 10, 70),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 40),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
@@ -170,28 +178,6 @@ class SignupScreenUI extends StatelessWidget {
       ),
     );
   }
-
- /* Widget submitButton() {
-    return Container(
-      child: FlatButton(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15),
-          alignment: Alignment.center,
-          child: Text(
-            'SIGN UP',
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.black,
-          ),
-        ),
-        onPressed: () async {
-          if ()
-        },
-      ),
-    );
-  }*/
 
   Widget _loginLabel(BuildContext context) {
     return Container(

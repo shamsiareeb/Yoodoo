@@ -16,21 +16,21 @@ class _LoginForm extends State<LoginScreen>{
   String _email = '', _password = '', _error = '';
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 60),
       child: Form(
         key: _formKey,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
         TextFormField(
-        decoration: InputDecoration(
-            //icon: new Icon(Icons.email),
+          decoration: InputDecoration(
             hintText: 'Email ID',
             hintStyle: TextStyle(color: Colors.grey),
             enabledBorder: OutlineInputBorder(
               borderSide: new BorderSide(color: Colors.black),
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            )
+            ),
+            prefixIcon: new Icon(Icons.email, color: Colors.black,),
         ),
           validator: emailValidator,
           keyboardType: TextInputType.emailAddress,
@@ -46,13 +46,17 @@ class _LoginForm extends State<LoginScreen>{
               enabledBorder: OutlineInputBorder(
                 borderSide: new BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              )
+              ),
+            prefixIcon: new Icon(Icons.lock, color: Colors.black,),
           ),
         obscureText: true,
         validator: pwdValidator,
         onSaved: (input) => _password = input,
       ),
-              FlatButton(
+              SizedBox(
+                height: 50,
+              ),
+              InkWell(
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   alignment: Alignment.center,
@@ -65,7 +69,7 @@ class _LoginForm extends State<LoginScreen>{
                     color: Colors.black,
                   ),
                 ),
-                onPressed: () async {
+                onTap: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     popupDialog5(context);
@@ -130,7 +134,7 @@ class LoginScreenUI extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Expanded(
-                      flex: 1,
+                      flex: 3,
                       child: SizedBox(),
                     ),
                     _title(),
@@ -153,7 +157,7 @@ class LoginScreenUI extends StatelessWidget {
 
   Widget _title() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(horizontal: 5),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
@@ -161,7 +165,7 @@ class LoginScreenUI extends StatelessWidget {
               TextSpan(
                 text: 'Welcome Back!',
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: 45,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -173,7 +177,7 @@ class LoginScreenUI extends StatelessWidget {
 
   Widget _subtitle() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 5, 10, 70),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 40),
         child: RichText(
           textAlign: TextAlign.left,
           text: TextSpan(
@@ -190,26 +194,6 @@ class LoginScreenUI extends StatelessWidget {
         ),
     );
   }
-
-  /*Widget _submitButton() {
-    return Container(
-      child: FlatButton(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15),
-          alignment: Alignment.center,
-          child: Text(
-            'LOG IN',
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.black,
-          ),
-        ),
-        onPressed: () {},
-      ),
-    );
-  }*/
 
   Widget _createAccountLabel(BuildContext context) {
     return Container(

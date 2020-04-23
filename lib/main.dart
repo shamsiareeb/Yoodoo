@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/login_screen.dart';
+import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/signup_screen.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'splash_screen.dart';
@@ -13,6 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Yoodoo',
+      theme: ThemeData(
+        primaryColor: Colors.black,
+        accentColor: Colors.black,
+      ),
       home:SplashScreen(),
     );
   }
