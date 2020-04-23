@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/signup_screen.dart';
+import 'package:yoodoo/validators.dart';
+import 'package:yoodoo/dialogues.dart';
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -10,26 +13,7 @@ class LoginScreen extends StatefulWidget{
 class _LoginForm extends State<LoginScreen>{
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
-
-  String emailValidator(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value)) {
-      return 'Email format is invalid';
-    } else {
-      return null;
-    }
-  }
-
-  String pwdValidator(String value) {
-    if (value.length < 8) {
-      return 'Password must be longer than 8 characters';
-    } else {
-      return null;
-    }
-  }
-
+  String _email = '', _password = '', _error = '';
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
@@ -50,6 +34,7 @@ class _LoginForm extends State<LoginScreen>{
         ),
           validator: emailValidator,
           keyboardType: TextInputType.emailAddress,
+          onSaved: (input) => _email = input,
       ),
       SizedBox(
         height: 20,
@@ -65,12 +50,69 @@ class _LoginForm extends State<LoginScreen>{
           ),
         obscureText: true,
         validator: pwdValidator,
+        onSaved: (input) => _password = input,
       ),
+              FlatButton(
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'LOG IN',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    popupDialog5(context);
+                    logIn(_email, _password);
+                  }
+                }
+              )
       ],
       ),
     ),
     );
   }
+
+  void logIn(String email, String pass) async {
+    try{
+      AuthResult authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email , password: pass);
+      FirebaseUser user = authResult.user;
+      if(user == null)
+        popupDialog6(context);
+      else
+        {
+          if(user.isEmailVerified)
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            }
+          else
+            {
+              popupDialog7(context);
+            }
+        }
+      //popupDialog2(context);
+      //user.sendEmailVerification();
+      //popupDialog3(context);
+      //user.sendEmailVerification();
+      //Navigator.push(
+      //    context,
+      //    MaterialPageRoute(builder: (context) => LoginScreen()));
+    }
+    catch(e){
+      setState(() => _error = e.message);
+      popupDialog4(context, _error);
+    }
+  }
+
 }
 
 class LoginScreenUI extends StatelessWidget {
@@ -94,7 +136,6 @@ class LoginScreenUI extends StatelessWidget {
                     _title(),
                     _subtitle(),
                     LoginScreen(),
-                    _submitButton(),
                     Expanded(
                         flex: 2,
                         child: SizedBox()
@@ -150,7 +191,7 @@ class LoginScreenUI extends StatelessWidget {
     );
   }
 
-  Widget _submitButton() {
+  /*Widget _submitButton() {
     return Container(
       child: FlatButton(
         child: Container(
@@ -168,7 +209,7 @@ class LoginScreenUI extends StatelessWidget {
         onPressed: () {},
       ),
     );
-  }
+  }*/
 
   Widget _createAccountLabel(BuildContext context) {
     return Container(

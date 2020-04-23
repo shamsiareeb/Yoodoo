@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yoodoo/login_screen.dart';
-
+import 'package:yoodoo/validators.dart';
 import 'dialogues.dart';
 
 class SignupScreen extends StatefulWidget{
@@ -14,28 +14,6 @@ class _SignupForm extends State<SignupScreen>{
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
   String _email = '', _password = '', _error = '';
-  String pwdValidator(String value) {
-    if (value.length < 6) {
-      return 'Password must be longer than 6 characters';
-    } else {
-      return null;
-    }
-  }
-
-  String emailValidator(String value) {
-
-    value = value.trim();
-
-    if (value.endsWith('@gmail.com'))
-      return (null);
-    else if (value.endsWith('@iul.ac.in'))
-      return (null);
-    else
-      return ('Email not supported');
-
-  }
-
-
 
   Widget build(BuildContext context) {
     return Container(
@@ -88,26 +66,22 @@ class _SignupForm extends State<SignupScreen>{
                   if (_formKey.currentState.validate()){
                     _formKey.currentState.save();
                     popupDialog1(context);
-                    dynamic result = await signUp(_email, _password);
+                    signUp(_email, _password);
                   }
                 },
-              ),
-              Text(
-                _error
               )
             ],
           )
       ),
     );
   }
-  Future signUp(String email, String pass) async {
+  void signUp(String email, String pass) async {
       try{
         AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email , password: pass);
         FirebaseUser user = authResult.user;
         popupDialog2(context);
         user.sendEmailVerification();
         popupDialog3(context);
-        return user;
         //user.sendEmailVerification();
         //Navigator.push(
         //    context,
@@ -116,7 +90,6 @@ class _SignupForm extends State<SignupScreen>{
       catch(e){
         setState(() => _error = e.message);
         popupDialog4(context, _error);
-        return null;
       }
     }
 }
