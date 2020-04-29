@@ -50,7 +50,7 @@ void popupDialog3(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Don't close the app"),
+                title: Text("YOODOO"),
                 content: Text('Please verify your email to login to the app.'),
               actions: <Widget>[
                 FlatButton(
@@ -79,7 +79,7 @@ void popupDialog4(BuildContext context, String error) {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0)
               ),
-              title: Text("Kuchh to gadbad hai"),
+              title: Text("Whoops!"),
               content: Text(error),
               actions: <Widget>[
                 FlatButton(
@@ -126,7 +126,7 @@ void popupDialog6(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Woops"),
+                title: Text("Woops!"),
                 content: Text('No such user was found')
             )
         );

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +7,15 @@ import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/signup_screen.dart';
 import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/profile_screen.dart';
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
 }
 class _LoginForm extends State<LoginScreen>{
 
+  bool flag = false;
+  final CollectionReference usersCollection = Firestore.instance.collection('users');
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
   String _email = '', _password = '', _error = '';
   Widget build(BuildContext context) {
@@ -93,30 +97,37 @@ class _LoginForm extends State<LoginScreen>{
         {
           if(user.isEmailVerified)
             {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
-              );
+              //check if flag is true
+              checkFlag(user);
             }
           else
             {
               popupDialog7(context);
             }
         }
-      //popupDialog2(context);
-      //user.sendEmailVerification();
-      //popupDialog3(context);
-      //user.sendEmailVerification();
-      //Navigator.push(
-      //    context,
-      //    MaterialPageRoute(builder: (context) => LoginScreen()));
     }
     catch(e){
       setState(() => _error = e.message);
       popupDialog4(context, _error);
     }
-  }
-
+}
+void checkFlag(FirebaseUser user) async {
+  usersCollection.document(user.uid).get().then((DocumentSnapshot ds) {
+     flag = (ds['flag']);
+     if (flag == true) {
+       Navigator.push(
+         context,
+         MaterialPageRoute(builder: (context) => ProfileScreen()),
+       );
+     }
+     else{
+       Navigator.push(
+         context,
+         MaterialPageRoute(builder: (context) => HomeScreen()),
+       );
+     }
+  });
+}
 }
 
 class LoginScreenUI extends StatelessWidget {

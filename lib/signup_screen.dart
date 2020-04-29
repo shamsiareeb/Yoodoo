@@ -5,11 +5,14 @@ import 'package:flutter/painting.dart';
 import 'package:yoodoo/login_screen.dart';
 import 'package:yoodoo/validators.dart';
 import 'dialogues.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
 }
 class _SignupForm extends State<SignupScreen>{
+
+  final CollectionReference usersCollection = Firestore.instance.collection('users');
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
@@ -87,6 +90,7 @@ class _SignupForm extends State<SignupScreen>{
       try{
         AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email , password: pass);
         FirebaseUser user = authResult.user;
+        initUserData(user);
         popupDialog2(context);
         user.sendEmailVerification();
         popupDialog3(context);
@@ -100,6 +104,16 @@ class _SignupForm extends State<SignupScreen>{
         popupDialog4(context, _error);
       }
     }
+
+  Future initUserData(FirebaseUser user) async{
+
+    return await usersCollection.document(user.uid).setData({
+      'flag': true,
+      'name': '',
+      'workplace':'',
+      'designation':''
+    });
+  }
 }
 
 class SignupScreenUI extends StatelessWidget {
