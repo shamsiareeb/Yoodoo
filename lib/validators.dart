@@ -18,3 +18,15 @@ String pwdValidator(String value) {
     return null;
   }
 }
+
+String blankValidator(String value) {
+
+  value = value.trim();
+
+  if (value.length == 0){
+    return "Required";
+  }
+  else{
+    return null;
+  }
+}

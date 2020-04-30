@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/validators.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -45,7 +46,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
+                          TextFormField(
+                            validator: blankValidator,
                             decoration: InputDecoration(
                               hintText: 'John',
                               hintStyle: TextStyle(color: Colors.grey),
@@ -76,7 +78,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                          TextField(
+                          TextFormField(
+                            validator: blankValidator,
                             decoration: InputDecoration(
                               hintText: 'Doe',
                               hintStyle: TextStyle(color: Colors.grey),
@@ -108,7 +111,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 5,
                     ),
-                    TextField(
+                    TextFormField(
+                      validator: blankValidator,
                       decoration: InputDecoration(
                         hintText: 'Company Name',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -136,7 +140,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 5,
                     ),
-                    TextField(
+                    TextFormField(
+                      validator: blankValidator,
                       decoration: InputDecoration(
                         hintText: 'Job Title',
                         hintStyle: TextStyle(color: Colors.grey),
