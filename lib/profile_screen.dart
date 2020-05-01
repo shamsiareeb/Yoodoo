@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:yoodoo/validators.dart';
+import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -171,7 +173,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Colors.black,
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              if (flag == true){
+                                popupDialog8(context);
+                              }
+                              else {
+                                popupDialog9(context);
+                              }
+                            },
                           ),
                         ),
                         SizedBox(

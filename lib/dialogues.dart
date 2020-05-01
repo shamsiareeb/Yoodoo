@@ -147,12 +147,82 @@ void popupDialog7(BuildContext context) {
                     borderRadius: BorderRadius.circular(5.0)
                 ),
                 title: Text("Woops!"),
-                content: Text('Either email was not verified or this emai does not exist'),
+                content: Text('Either email was not verified or this email does not exist'),
                 actions: <Widget>[
                   FlatButton(
                     child: Text("Close"),
                     onPressed: () {
                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
+
+void popupDialog8(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo"),
+                content: Text('Cancel profile setup and go back to login screen?'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Yes"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      //TODO insert proper log out code
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("No"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
+void popupDialog9(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo"),
+                content: Text('Are you sure?'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Yes"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("No"),
+                    onPressed: () {
                       Navigator.of(context).pop();
                     },
                   )

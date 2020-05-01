@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               width: MediaQuery.of(context).size.width * 0.8,
               child: Card(
                 color: Colors.lightBlueAccent,
-                shadowColor: Colors.black,
+                //shadowColor: Colors.black,
                 child: Container(
                   child: Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 36.0),)),
                 ),

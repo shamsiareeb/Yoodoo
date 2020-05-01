@@ -9,12 +9,14 @@ import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/profile_screen.dart';
 
+
+bool flag = false;
+
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
 }
 class _LoginForm extends State<LoginScreen>{
 
-  bool flag = false;
   final CollectionReference usersCollection = Firestore.instance.collection('users');
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
   String _email = '', _password = '', _error = '';
