@@ -5,6 +5,7 @@ import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/signup_screen.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'splash_screen.dart';
+import 'package:yoodoo/group_info.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         accentColor: Colors.black,
       ),
-      home:SplashScreen(),
+      home:GroupInfo(),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void popupDialog1(BuildContext context) {
@@ -160,5 +161,37 @@ void popupDialog7(BuildContext context) {
         );
       },
       barrierDismissible: false
+  );
+}
+
+void groupName(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return new Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0)
+        ),
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Name your new group"
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
   );
 }

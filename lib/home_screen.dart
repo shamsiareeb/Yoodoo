@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   AnimationController _controller;
+  final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
 
   static const List<IconData> icons = const [Icons.input, Icons.add];
 
@@ -115,9 +116,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               )
         ),
         //floatingActionButton: FancyFab(),
-        body: new Center(
+        body: /*new Center(
             child: new Text('No groups to show')
-        )
+        )*/
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+          height: MediaQuery.of(context).size.height,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: numbers.length, itemBuilder: (context, index) {
+            return Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Card(
+                color: Colors.lightBlueAccent,
+                shadowColor: Colors.black,
+                child: Container(
+                  child: Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 36.0),)),
+                ),
+              ),
+            );
+          }),
+        ),
     );
   }
 

@@ -16,6 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        automaticallyImplyLeading: false,
         title: new Text('PROFILE',
         style: TextStyle(
           fontSize: 20.0,
@@ -154,21 +155,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 100,
                     ),
-                    InkWell(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'SAVE',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: InkWell(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'CANCEL',
+                                style: TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {},
+                          ),
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.black,
+                        SizedBox(
+                          width: 15,
                         ),
-                      ),
-                      onTap: () {},
-                    )
+                        Expanded(
+                          child: InkWell(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'SAVE',
+                                style: TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],
