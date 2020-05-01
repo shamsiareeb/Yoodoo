@@ -11,6 +11,7 @@ import 'package:yoodoo/profile_screen.dart';
 
 
 bool flag = false;
+FirebaseUser user;
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -55,9 +56,9 @@ class _LoginForm extends State<LoginScreen>{
               ),
             prefixIcon: new Icon(Icons.lock, color: Colors.black,),
           ),
-        obscureText: true,
-        validator: pwdValidator,
-        onSaved: (input) => _password = input,
+          obscureText: true,
+          validator: pwdValidator,
+          onSaved: (input) => _password = input,
       ),
               SizedBox(
                 height: 50,
@@ -92,7 +93,7 @@ class _LoginForm extends State<LoginScreen>{
   void logIn(String email, String pass) async {
     try{
       AuthResult authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email , password: pass);
-      FirebaseUser user = authResult.user;
+      user = authResult.user;
       if(user == null)
         popupDialog6(context);
       else

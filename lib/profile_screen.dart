@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -11,6 +12,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
+  final CollectionReference usersCollection = Firestore.instance.collection('users');
+  String _name1, _name2, _designation, _company;
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
   @override
@@ -51,6 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           TextFormField(
                             validator: blankValidator,
+                            onSaved: (input) => _name1 = input,
                             decoration: InputDecoration(
                               hintText: 'John',
                               hintStyle: TextStyle(color: Colors.grey),
@@ -83,6 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           TextFormField(
                             validator: blankValidator,
+                            onSaved: (input) => _name2 = input,
                             decoration: InputDecoration(
                               hintText: 'Doe',
                               hintStyle: TextStyle(color: Colors.grey),
@@ -116,6 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     TextFormField(
                       validator: blankValidator,
+                      onSaved: (input) => _company = input,
                       decoration: InputDecoration(
                         hintText: 'Company Name',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -145,6 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     TextFormField(
                       validator: blankValidator,
+                      onSaved: (input) => _designation = input,
                       decoration: InputDecoration(
                         hintText: 'Job Title',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -200,7 +207,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Colors.black,
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () async {
+                              if (_formKey.currentState.validate()){
+                                _formKey.currentState.save();
+                                if (popupDialog10(context) == true){
+                                  save(_name1,_name2,_company,_designation);
+                                }
+                                else{
+                                  Navigator.of(context).pop();
+                                }
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -212,6 +229,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
     );
+  }
+  Future save(_name1,_name2,_company,_designation) async{
+    String n1 = _name1, n2 = _name2;
+    n1 = n1.trim();
+    n2 = n2.trim();
+    n1 = n1 + ' ' + n2;
+    return await usersCollection.document(user.uid).setData({
+      'flag': false,
+      'name': n1,
+      'workplace': _company,
+      'designation': _designation
+    });
   }
 }
 

@@ -234,6 +234,39 @@ void popupDialog9(BuildContext context) {
   );
 }
 
+bool popupDialog10(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo"),
+                content: Text('Are you sure?'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Yes"),
+                    onPressed: () {
+                      return true;
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("No"),
+                    onPressed: () {
+                      return false;
+                    },
+                  )
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
 void groupName(BuildContext context) {
   showDialog(
     context: context,
