@@ -62,6 +62,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 borderSide: new BorderSide(color: Colors.black),
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                               ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(color: Colors.black),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              ),
                             ),
                           ),
                         ],
@@ -95,12 +99,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 borderSide: new BorderSide(color: Colors.black),
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                               ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(color: Colors.black),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-
                   ],
                 ),
                 SizedBox(
@@ -126,6 +133,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         hintText: 'Company Name',
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderSide: new BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         ),
@@ -156,6 +167,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         hintText: 'Job Title',
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderSide: new BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         ),

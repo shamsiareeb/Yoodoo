@@ -36,6 +36,10 @@ class _SignupForm extends State<SignupScreen>{
                       borderSide: new BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
                   prefixIcon: new Icon(Icons.email, color: Colors.black,),
                 ),
                 keyboardType: TextInputType.emailAddress
@@ -53,6 +57,10 @@ class _SignupForm extends State<SignupScreen>{
                         borderSide: new BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
                     prefixIcon: new Icon(Icons.lock, color: Colors.black,),
                   ),
                 obscureText: true
