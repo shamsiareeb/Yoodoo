@@ -108,7 +108,7 @@ class _GroupInfoState extends State<GroupInfo> {
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: new BorderSide(color: Colors.black),
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
                                       ),
                                     ),
                                   ),

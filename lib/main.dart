@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         accentColor: Colors.black,
       ),
-      home:GroupInfo(),
+      home:HomeScreen(),
     );
   }
 }

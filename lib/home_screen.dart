@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/group_info.dart';
 import 'dart:math' as math;
 import 'package:yoodoo/login_screen.dart';
 import 'package:yoodoo/profile_screen.dart';
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ],
           backgroundColor: Colors.black,
         ),
-        floatingActionButton: new Column(
+        /*floatingActionButton: new Column(
             mainAxisSize: MainAxisSize.min,
             children: new List.generate(icons.length, (int index) {
               Widget child = new Container(
@@ -114,12 +115,91 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       }
                   )
               )
+        ),*/
+      bottomNavigationBar: BottomAppBar(
+        //color: Colors.red,
+        child: Container(
+          height: 60,
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: InkWell(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'JOIN',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    decoration: BoxDecoration(
+                      //borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+
+                  },
+                ),
+              ),
+              SizedBox(
+                child: Divider(
+                  color: Colors.white,
+                  thickness: 100,
+                ),
+              ),
+              Expanded(
+                child: InkWell(
+                  child:  Container(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'CREATE',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    decoration: BoxDecoration(
+                      //borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => GroupInfo()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
-        //floatingActionButton: FancyFab(),
-        body: /*new Center(
+        elevation: 0,
+      ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Center(
+                  child: new Text('No groups to show')
+              ),
+            ),
+          ],
+        ),
+    );
+  }
+
+}
+
+
+      /*new Center(
             child: new Text('No groups to show')
         )*/
-        Container(
+        /*Container(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
@@ -136,8 +216,4 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             );
           }),
-        ),
-    );
-  }
-
-}
+        ),*/
