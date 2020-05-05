@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/group_info.dart';
 import 'dart:math' as math;
 import 'package:yoodoo/login_screen.dart';
@@ -167,10 +168,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => GroupInfo()),
-                    );
+                    groupName(context);
                   },
                 ),
               ),

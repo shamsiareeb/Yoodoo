@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/group_info.dart';
+import 'package:yoodoo/validators.dart';
 
 void popupDialog1(BuildContext context) {
   showDialog(
@@ -271,11 +273,38 @@ void groupName(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) {
-      return new Dialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0)
-        ),
-        child: Container(
+      return new WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)
+            ),
+            title: Text("Name your new group"),
+            content: TextField(
+              maxLength: 30,
+              decoration: InputDecoration(
+                hintText: 'Max 30 characters.',
+              )),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cancel"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text("Next"),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => GroupInfo()),
+                  );
+                },
+              )
+            ],
+          ),
+
+        /*child: Container(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
@@ -293,7 +322,7 @@ void groupName(BuildContext context) {
               ],
             ),
           ),
-        ),
+        ),*/
       );
     },
   );
