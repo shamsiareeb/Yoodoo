@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:yoodoo/validators.dart';
+import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/dialogues.dart';
 
 class GroupInfo extends StatefulWidget {
   @override
@@ -96,7 +98,7 @@ class _GroupInfoState extends State<GroupInfo> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  TextFormField(
+                                  /*TextFormField(
                                     validator: blankValidator,
                                     controller: myRewardController,
                                     decoration: InputDecoration(
@@ -111,7 +113,7 @@ class _GroupInfoState extends State<GroupInfo> {
                                         borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
                                       ),
                                     ),
-                                  ),
+                                  ),*/
                                 ],
                               ),
                             ),
@@ -120,7 +122,7 @@ class _GroupInfoState extends State<GroupInfo> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  TextFormField(
+                                  /*TextFormField(
                                     validator: blankValidator,
                                     controller: myPointsController,
                                     decoration: InputDecoration(
@@ -135,7 +137,7 @@ class _GroupInfoState extends State<GroupInfo> {
                                         borderRadius: BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
                                       ),
                                     ),
-                                  ),
+                                  ),*/
                                 ],
                               ),
                             ),
@@ -143,7 +145,8 @@ class _GroupInfoState extends State<GroupInfo> {
                               flex: 1,
                               child: FloatingActionButton(
                                 onPressed: () {
-                                  setState(() {
+                                  popupDialog12(context);
+                                  /*setState(() {
                                     this.row.add(
                                       row[index] = new DataRow(
                                           cells: [
@@ -153,14 +156,19 @@ class _GroupInfoState extends State<GroupInfo> {
                                     );
                                   });
                                   index = index+1;
-                                  return this.row;
+                                  return this.row;*/
                                 },
                                 child: Icon(Icons.add),
                                 foregroundColor: Colors.white,
                                 backgroundColor: Colors.black,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(5),
+                                      bottomRight: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5),
+                                      topLeft: Radius.circular(5)
+                                  ),
                                 ),
                               )
                             ),

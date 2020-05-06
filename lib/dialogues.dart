@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/group_info.dart';
+import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/validators.dart';
 
 void popupDialog1(BuildContext context) {
@@ -220,6 +221,11 @@ void popupDialog9(BuildContext context) {
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+
                     },
                   ),
                   FlatButton(
@@ -269,7 +275,8 @@ bool popupDialog10(BuildContext context) {
   );
 }
 
-void groupName(BuildContext context) {
+String acceptGroupName(BuildContext context) {
+  TextEditingController c = new TextEditingController();
   showDialog(
     context: context,
     builder: (context) {
@@ -280,50 +287,123 @@ void groupName(BuildContext context) {
                 borderRadius: BorderRadius.circular(5.0)
             ),
             title: Text("Name your new group"),
-            content: TextField(
+            content: TextField (
               maxLength: 30,
               decoration: InputDecoration(
                 hintText: 'Max 30 characters.',
-              )),
+              ),
+              controller: c,
+            ),
             actions: <Widget>[
               FlatButton(
                 child: Text("Cancel"),
                 onPressed: () {
                   Navigator.pop(context);
+                  return null;
                 },
               ),
               FlatButton(
                 child: Text("Next"),
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  String input = c.text;
+                  input = input.trim();
+                  if(input.length == 0){
+                    popupDialog11(context);
+                    return null;
+                  }
+                  else{
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => GroupInfo()),
-                  );
+                    );
+                    return c.text;
+                  }
                 },
               )
             ],
           ),
-
-        /*child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Name your new group"
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),*/
       );
     },
   );
 }
+
+void popupDialog11(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return new WillPopScope(
+              onWillPop: () async => false,
+              child:AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)
+                  ),
+                  title: Text("Yoodoo"),
+                  content: Text("Group name shouldn't be blank"),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Got it!"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        acceptGroupName(context);
+                      },
+                    ),
+                  ]
+              )
+          );
+        },
+        barrierDismissible: false
+    );
+  }
+
+  void popupDialog12(BuildContext context){
+    TextEditingController c = new TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)
+            ),
+            title: Text("Enter new reward and its value in Yoodoos"),
+            content: TextField (
+              maxLength: 60,
+              decoration: InputDecoration(
+                hintText: 'Max 60 characters.',
+              ),
+              controller: c,
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cancel"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  return null;
+                },
+              ),
+              FlatButton(
+                child: Text("Next"),
+                onPressed: () {
+                  String input = c.text;
+                  input = input.trim();
+                  if(input.length == 0){
+                    popupDialog11(context);
+                    return null;
+                  }
+                  else{
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => GroupInfo()),
+                    );
+                    return c.text;
+                  }
+                },
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
