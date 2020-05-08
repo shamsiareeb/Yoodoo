@@ -4,6 +4,8 @@ import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/dialogues.dart';
 
+import 'configure_rewards.dart';
+
 class GroupInfo extends StatefulWidget {
   @override
   _GroupInfoState createState() => new _GroupInfoState();
@@ -41,12 +43,12 @@ class _GroupInfoState extends State<GroupInfo> {
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w500,
-        ),),
+        ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-
           child: Form(
             key: _formkey,
             child: Column(
@@ -56,6 +58,36 @@ class _GroupInfoState extends State<GroupInfo> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Text(
+                      "Group's Name",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      maxLength: 30,
+                      validator: blankValidator,
+                      decoration: InputDecoration(
+                        counterText: '',
+                        hintText: "Max 30 characters",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     Text(
                       "Short Description",
                       style: TextStyle(
@@ -84,141 +116,35 @@ class _GroupInfoState extends State<GroupInfo> {
                       ),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      verticalDirection: VerticalDirection.down,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  /*TextFormField(
-                                    validator: blankValidator,
-                                    controller: myRewardController,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter reward name',
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: new BorderSide(color: Colors.black),
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: new BorderSide(color: Colors.black),
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
-                                      ),
-                                    ),
-                                  ),*/
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  /*TextFormField(
-                                    validator: blankValidator,
-                                    controller: myPointsController,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter points',
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: new BorderSide(color: Colors.black),
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: new BorderSide(color: Colors.black),
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                                      ),
-                                    ),
-                                  ),*/
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  popupDialog12(context);
-                                  /*setState(() {
-                                    this.row.add(
-                                      row[index] = new DataRow(
-                                          cells: [
-                                            DataCell(Text(myRewardController.text),),
-                                            DataCell(Text(myPointsController.text),),
-                                          ])
-                                    );
-                                  });
-                                  index = index+1;
-                                  return this.row;*/
-                                },
-                                child: Icon(Icons.add),
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.black,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(5),
-                                      bottomRight: Radius.circular(5),
-                                      bottomLeft: Radius.circular(5),
-                                      topLeft: Radius.circular(5)
-                                  ),
-                                ),
-                              )
-                            ),
-                          ],
+                    InkWell(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        alignment: Alignment.center,
+                        child: Text(
+                          'NEXT',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
-                        SizedBox(
-                          height: 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: Colors.black,
                         ),
-                        Card(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            ),
-                            child: DataTable(
-                              columns: [
-                                DataColumn(label: Text(
-                                  'Reward',
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black
-                                  ),
-                                ),
-                                ),
-                                DataColumn(label: Text(
-                                  'Points',
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black
-                                  ),
-                                ),
-                                  numeric: true,
-                                ),
-                              ],
-                              rows: (index > 0) ? row: [],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                  ],
-                )
-              ],
-            ),
+                      ),
+                      onTap: (){
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => ConfigureRewards()),
+                        );
+                      },
+                    )
+            ],
           )
+            ]
         ),
       ),
+    )
+      )
     );
   }
-
 }

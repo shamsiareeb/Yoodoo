@@ -169,7 +169,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                   onTap: () {
-                    groupname = acceptGroupName(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => GroupInfo()),
+                    );
                   },
                 ),
               ),

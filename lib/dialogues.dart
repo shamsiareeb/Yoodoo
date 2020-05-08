@@ -275,58 +275,6 @@ bool popupDialog10(BuildContext context) {
   );
 }
 
-String acceptGroupName(BuildContext context) {
-  TextEditingController c = new TextEditingController();
-  showDialog(
-    context: context,
-    builder: (context) {
-      return new WillPopScope(
-          onWillPop: () async => false,
-          child: AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)
-            ),
-            title: Text("Name your new group"),
-            content: TextField (
-              maxLength: 30,
-              decoration: InputDecoration(
-                hintText: 'Max 30 characters.',
-              ),
-              controller: c,
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Cancel"),
-                onPressed: () {
-                  Navigator.pop(context);
-                  return null;
-                },
-              ),
-              FlatButton(
-                child: Text("Next"),
-                onPressed: () {
-                  String input = c.text;
-                  input = input.trim();
-                  if(input.length == 0){
-                    popupDialog11(context);
-                    return null;
-                  }
-                  else{
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => GroupInfo()),
-                    );
-                    return c.text;
-                  }
-                },
-              )
-            ],
-          ),
-      );
-    },
-  );
-}
-
 void popupDialog11(BuildContext context) {
     showDialog(
         context: context,
@@ -338,14 +286,14 @@ void popupDialog11(BuildContext context) {
                       borderRadius: BorderRadius.circular(5.0)
                   ),
                   title: Text("Yoodoo"),
-                  content: Text("Group name shouldn't be blank"),
+                  content: Text("Please enter something!"),
                   actions: <Widget>[
                     FlatButton(
                       child: Text("Got it!"),
                       onPressed: () {
                         Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                        acceptGroupName(context);
+                        //Navigator.of(context).pop();
+                        //acceptGroupName(context);
                       },
                     ),
                   ]
@@ -367,7 +315,7 @@ void popupDialog11(BuildContext context) {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)
             ),
-            title: Text("Enter new reward and its value in Yoodoos"),
+            title: Text("Step 1. Enter new reward"),
             content: TextField (
               maxLength: 60,
               decoration: InputDecoration(
@@ -380,7 +328,7 @@ void popupDialog11(BuildContext context) {
                 child: Text("Cancel"),
                 onPressed: () {
                   Navigator.pop(context);
-                  return null;
+                  //return null;
                 },
               ),
               FlatButton(
@@ -390,14 +338,11 @@ void popupDialog11(BuildContext context) {
                   input = input.trim();
                   if(input.length == 0){
                     popupDialog11(context);
-                    return null;
+                    //return null;
                   }
                   else{
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => GroupInfo()),
-                    );
-                    return c.text;
+                    popupDialog13(context);
+                    print(c.text);
                   }
                 },
               )
@@ -407,3 +352,47 @@ void popupDialog11(BuildContext context) {
       },
     );
   }
+
+void popupDialog13(BuildContext context){
+  double reward = 1;
+  TextEditingController c = new TextEditingController();
+  showDialog(
+    context: context,
+    builder: (context) {
+      return new WillPopScope(
+        onWillPop: () async => false,
+        child: AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          title: Text("Step 2. Set Yoodoos"),
+          content: TextField (
+            keyboardType: TextInputType.number,
+            maxLength: 2,
+            decoration: InputDecoration(
+              hintText: 'min=1 and max=10',
+            ),
+            controller: c,
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Back"),
+              onPressed: () {
+                Navigator.pop(context);
+                //return null;
+              },
+            ),
+            FlatButton(
+              child: Text("Done"),
+              onPressed: () {
+                print (c.text);
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      );
+    },
+  );
+}
