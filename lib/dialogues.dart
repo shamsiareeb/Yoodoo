@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:yoodoo/group_info.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/validators.dart';
+import 'dart:convert';
+import 'package:yoodoo/configure_rewards.dart';
 
 void popupDialog1(BuildContext context) {
   showDialog(
@@ -304,7 +306,7 @@ void popupDialog11(BuildContext context) {
     );
   }
 
-  void popupDialog12(BuildContext context){
+  void popupDialog12(BuildContext context) {
     TextEditingController c = new TextEditingController();
     showDialog(
       context: context,
@@ -315,7 +317,7 @@ void popupDialog11(BuildContext context) {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)
             ),
-            title: Text("Step 1. Enter new reward"),
+            title: Text("Step 1. Type the new reward"),
             content: TextField (
               maxLength: 60,
               decoration: InputDecoration(
@@ -341,8 +343,8 @@ void popupDialog11(BuildContext context) {
                     //return null;
                   }
                   else{
-                    popupDialog13(context);
-                    print(c.text);
+                     rewards.add(c.text);
+                     popupDialog13(context);
                   }
                 },
               )
@@ -354,7 +356,6 @@ void popupDialog11(BuildContext context) {
   }
 
 void popupDialog13(BuildContext context){
-  double reward = 1;
   TextEditingController c = new TextEditingController();
   showDialog(
     context: context,
@@ -379,20 +380,83 @@ void popupDialog13(BuildContext context){
               child: Text("Back"),
               onPressed: () {
                 Navigator.pop(context);
-                //return null;
+                rewards.removeLast();
               },
             ),
             FlatButton(
               child: Text("Done"),
               onPressed: () {
-                print (c.text);
                 Navigator.pop(context);
                 Navigator.pop(context);
+                if(int.parse(c.text) <= 10 && int.parse(c.text) >0){
+                  yoodoos.add(int.parse(c.text));
+                }
+                else{
+                  popupDialog14(context);
+                }
               },
             )
           ],
         ),
       );
     },
+  );
+}
+
+void popupDialog14(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo"),
+                content: Text("Please enter a number between 0 and 10"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Got it!"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
+                      //acceptGroupName(context);
+                    },
+                  ),
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
+void popupDialog15(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo"),
+                content: Text("No rewards have been set"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Got it!"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
+                      //acceptGroupName(context);
+                    },
+                  ),
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
   );
 }

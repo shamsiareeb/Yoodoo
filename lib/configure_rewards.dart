@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dialogues.dart';
 
+var rewards = List();
+var yoodoos = List();
+
 class ConfigureRewards extends StatefulWidget{
   _RewardScreen createState() => new _RewardScreen();
 }
@@ -43,6 +46,13 @@ class _RewardScreen extends State<ConfigureRewards> {
                     ),
                   ),
                   onTap: () {
+                    if(rewards.isNotEmpty){
+                      rewards.removeLast();
+                      yoodoos.removeLast();
+                    }
+                    else{
+                      popupDialog15(context);
+                    }
                   },
                 ),
               ),
