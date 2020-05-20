@@ -118,79 +118,84 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   )
               )
         ),*/
-      bottomNavigationBar: BottomAppBar(
-        //color: Colors.red,
-        child: Container(
-          height: 60,
-          alignment: Alignment.bottomCenter,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
             children: <Widget>[
               Expanded(
-                child: InkWell(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'JOIN',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                          color: Colors.white),
-                    ),
-                    decoration: BoxDecoration(
-                      //borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.black,
-                    ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Center(
+                        child: Text("No groups to show"),
+                      ),
+                    ],
                   ),
-                  onTap: () {
+                ),
+              ),
+              Container(
+                height: 60,
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: InkWell(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Join',
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                          decoration: BoxDecoration(
+                            //borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
 
-                  },
-                ),
-              ),
-              SizedBox(
-                child: Divider(
-                  color: Colors.white,
-                  thickness: 100,
-                ),
-              ),
-              Expanded(
-                child: InkWell(
-                  child:  Container(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'CREATE',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                        },
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      //borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.black,
+                    SizedBox(
+                      child: Container(
+                        color: Colors.white,
+                        height: 60,
+                        width: 0.5,
+                      ),
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => GroupInfo()),
-                    );
-                  },
+                    Expanded(
+                      child: InkWell(
+                        child:  Container(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Create',
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                          decoration: BoxDecoration(
+                            //borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => GroupInfo()),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
-          ),
-        ),
-        elevation: 0,
-      ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: Center(
-                  child: new Text('No groups to show')
-              ),
-            ),
-          ],
+          )
         ),
     );
   }
