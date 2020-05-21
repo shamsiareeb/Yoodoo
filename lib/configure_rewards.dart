@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dialogues.dart';
+import 'package:yoodoo/login_screen.dart';
 
 var rewards = List();
 var yoodoos = List();
@@ -11,6 +14,7 @@ class ConfigureRewards extends StatefulWidget{
 
 class _RewardScreen extends State<ConfigureRewards> {
 
+  final CollectionReference groupsCollection = Firestore.instance.collection('groups');
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -26,7 +30,7 @@ class _RewardScreen extends State<ConfigureRewards> {
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
               onTap: () {
-
+                popupDialog9(context);
               },
               child: Icon(
                   Icons.clear
@@ -37,7 +41,6 @@ class _RewardScreen extends State<ConfigureRewards> {
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
               onTap: () {
-
               },
               child: Icon(
                   Icons.save
@@ -167,5 +170,15 @@ class _RewardScreen extends State<ConfigureRewards> {
         ),
       ),
     );
+  }
+
+  Future initGroup(FirebaseUser user) async{
+
+      return await groupsCollection.document(user.uid).setData({
+        'flag': true,
+        'name': '',
+        'workplace':'',
+        'designation':''
+      });
   }
 }
