@@ -40,7 +40,7 @@ class _RewardScreen extends State<ConfigureRewards> {
 
               },
               child: Icon(
-                  Icons.save
+                  Icons.keyboard_arrow_right
               ),
             ),
           ),
@@ -52,42 +52,40 @@ class _RewardScreen extends State<ConfigureRewards> {
         child: Column(
           children: <Widget>[
             Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: yoodoos.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: Container(
-                          padding: EdgeInsets.all(10.0),
-                          margin: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                flex: 6,
-                                child: Text(rewards[index],
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text(yoodoos[index].toString(),
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),),
-                              ),
-                            ],
-                          ),
+              child: Container(
+                margin: EdgeInsets.fromLTRB(20, 40, 20, 0),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: yoodoos.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: Container(
+                        padding: EdgeInsets.all(10.0),
+                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 6,
+                              child: Text(rewards[index],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Text(yoodoos[index].toString(),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
