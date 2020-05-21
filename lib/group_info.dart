@@ -27,12 +27,6 @@ class _GroupInfoState extends State<GroupInfo> {
   List<DataRow> tiles, row = [];
   int index = 0;
 
-  /*final List<Map<String, String>> listOfColumns = [
-    {"Name": "AAAAAA", "Number": "1", "State": "Yes"},
-    {"Name": "BBBBBB", "Number": "2", "State": "no"},
-    //{"Name": "CCCCCC", "Number": "3", "State": "Yes"}
-  ];*/
-
   @override
 
   Widget build(BuildContext context) {

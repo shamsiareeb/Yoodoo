@@ -124,8 +124,10 @@ class _RewardScreen extends State<ConfigureRewards> {
                       ),
                       onTap: () {
                         if (rewards.isNotEmpty) {
-                          rewards.removeLast();
-                          yoodoos.removeLast();
+                          setState(() {
+                            rewards.removeLast();
+                            yoodoos.removeLast();
+                          });
                         }
                         else {
                           popupDialog15(context);
