@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/dialogues.dart';
-
 import 'configure_rewards.dart';
 
+
+String groupName='', groupDescription = '';
 class GroupInfo extends StatefulWidget {
   @override
   _GroupInfoState createState() => new _GroupInfoState();
@@ -65,6 +66,7 @@ class _GroupInfoState extends State<GroupInfo> {
                     TextFormField(
                       maxLength: 30,
                       validator: blankValidator,
+                      onSaved: (input) => groupName = input,
                       decoration: InputDecoration(
                         counterText: '',
                         hintText: "Max 30 characters",
@@ -95,6 +97,7 @@ class _GroupInfoState extends State<GroupInfo> {
                     TextFormField(
                       maxLength: 60,
                       validator: blankValidator,
+                      onSaved: (input) => groupDescription = input,
                       decoration: InputDecoration(
                         counterText: '',
                         hintText: "Max 60 characters",
@@ -126,6 +129,9 @@ class _GroupInfoState extends State<GroupInfo> {
                         ),
                       ),
                       onTap: (){
+                        if (_formkey.currentState.validate()) {
+                          _formkey.currentState.save();
+                          }
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => ConfigureRewards()),

@@ -460,3 +460,75 @@ void popupDialog15(BuildContext context) {
       barrierDismissible: false
   );
 }
+
+void popupDiscardGroup(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo"),
+                content: Text('Discard this group?'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Yes"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      yoodoos.clear();
+                      rewards.clear();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("No"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
+void popupShowGroupId(BuildContext context, var groupId) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text(groupId),
+                content: Text('Members will use this code to join ' + groupName),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Got it!"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    },
+                  )
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}

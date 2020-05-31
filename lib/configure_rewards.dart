@@ -2,17 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dialogues.dart';
+import 'package:yoodoo/group_info.dart';
+import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/login_screen.dart';
+import 'package:random_string/random_string.dart';
+import 'dart:math' show Random;
+
 
 var rewards = List();
 var yoodoos = List();
+var groupId;
 
 class ConfigureRewards extends StatefulWidget{
-  _RewardScreen createState() => new _RewardScreen();
+  RewardScreen createState() => new RewardScreen();
 }
 
-class _RewardScreen extends State<ConfigureRewards> {
+class RewardScreen extends State<ConfigureRewards> {
 
   final CollectionReference groupsCollection = Firestore.instance.collection('groups');
   Widget build(BuildContext context) {
@@ -30,7 +35,7 @@ class _RewardScreen extends State<ConfigureRewards> {
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
               onTap: () {
-                popupDialog9(context);
+                popupDiscardGroup(context);
               },
               child: Icon(
                   Icons.clear
@@ -41,6 +46,8 @@ class _RewardScreen extends State<ConfigureRewards> {
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
               onTap: () {
+                initGroup(user);//FirebaseUser user imported from login_screen.dart
+                popupShowGroupId(context, groupId);
               },
               child: Icon(
                   Icons.keyboard_arrow_right
@@ -173,12 +180,14 @@ class _RewardScreen extends State<ConfigureRewards> {
   }
 
   Future initGroup(FirebaseUser user) async{
-
-      return await groupsCollection.document(user.uid).setData({
-        'flag': true,
-        'name': '',
-        'workplace':'',
-        'designation':''
-      });
+    groupId = randomAlphaNumeric(10);
+    return await groupsCollection.document(groupId).setData({
+      'owner': user.uid,
+      'rewards': rewards,
+      'yoodoos': yoodoos,
+      'groupCode': groupId,
+      'groupName': groupName,
+      'groupDescription': groupDescription
+    });
   }
 }

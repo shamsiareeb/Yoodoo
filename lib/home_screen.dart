@@ -6,7 +6,7 @@ import 'dart:math' as math;
 import 'package:yoodoo/login_screen.dart';
 import 'package:yoodoo/profile_screen.dart';
 
-String groupname = '';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
