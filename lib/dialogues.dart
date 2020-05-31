@@ -532,3 +532,35 @@ void popupShowGroupId(BuildContext context, var groupId) {
       barrierDismissible: false
   );
 }
+
+void popupJoin(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text('Join a group'),
+                content: Text('Insert textformfield here'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Submit'),
+                    onPressed: () {
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('Cancel'),
+                    onPressed: () {
+                    Navigator.of(context).pop();
+                    },
+                  )
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
