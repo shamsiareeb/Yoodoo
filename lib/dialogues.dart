@@ -6,6 +6,8 @@ import 'package:yoodoo/validators.dart';
 import 'dart:convert';
 import 'package:yoodoo/configure_rewards.dart';
 
+final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
+
 void popupDialog1(BuildContext context) {
   showDialog(
       context: context,
@@ -540,11 +542,25 @@ void popupJoin(BuildContext context) {
         return new WillPopScope(
             onWillPop: () async => false,
             child:AlertDialog(
+              key: _formKey,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
                 title: Text('Join a group'),
-                content: Text('Insert textformfield here'),
+                content: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter group code',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                  ),
+                ),
                 actions: <Widget>[
                   FlatButton(
                     child: Text('Submit'),
@@ -554,7 +570,7 @@ void popupJoin(BuildContext context) {
                   FlatButton(
                     child: Text('Cancel'),
                     onPressed: () {
-                    Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     },
                   )
                 ]
