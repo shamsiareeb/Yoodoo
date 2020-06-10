@@ -183,11 +183,12 @@ class RewardScreen extends State<ConfigureRewards> {
     groupId = randomAlphaNumeric(10);
     return await groupsCollection.document(groupId).setData({
       'owner': user.uid,
-      'rewards': rewards,
-      'yoodoos': yoodoos,
+      'rewards': FieldValue.arrayUnion(rewards),
+      'yoodoos': FieldValue.arrayUnion(yoodoos),
       'groupCode': groupId,
       'groupName': groupName,
-      'groupDescription': groupDescription
+      'groupDescription': groupDescription,
+      'members': FieldValue.arrayUnion([user.uid])
     });
   }
 }

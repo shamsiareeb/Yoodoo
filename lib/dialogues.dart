@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/group_info.dart';
 import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/login_screen.dart';
 import 'package:yoodoo/validators.dart';
 import 'dart:convert';
 import 'package:yoodoo/configure_rewards.dart';
@@ -536,18 +538,22 @@ void popupShowGroupId(BuildContext context, var groupId) {
 }
 
 void popupJoin(BuildContext context) {
+  String code;
   showDialog(
       context: context,
       builder: (context) {
         return new WillPopScope(
             onWillPop: () async => false,
             child:AlertDialog(
-              key: _formKey,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
                 title: Text('Join a group'),
-                content: TextFormField(
+                content: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                  onSaved: (input) => code,
+                  validator: blankValidator,
                   decoration: InputDecoration(
                     hintText: 'Enter group code',
                     hintStyle: TextStyle(color: Colors.grey),
@@ -561,10 +567,15 @@ void popupJoin(BuildContext context) {
                     ),
                   ),
                 ),
+                ),
                 actions: <Widget>[
                   FlatButton(
                     child: Text('Submit'),
-                    onPressed: () {
+                    onPressed: () async{
+                      if(_formKey.currentState.validate()){
+                        _formKey.currentState.save();
+                        joinGroup(code);
+                      }
                     },
                   ),
                   FlatButton(
@@ -579,4 +590,15 @@ void popupJoin(BuildContext context) {
       },
       barrierDismissible: false
   );
+  void joinGroup(String code) async{
+    final CollectionReference groupsCollection = Firestore.instance.collection('groups');
+    try{
+      groupsCollection.document(code).updateData({"members" : FieldValue.arrayUnion([user.uid])}).then((_) {
+        //TODO update UI on homescreen
+      });
+    }
+    catch(e){
+
+          }
+  }
 }

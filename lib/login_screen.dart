@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:yoodoo/configure_rewards.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/signup_screen.dart';
 import 'package:yoodoo/validators.dart';
