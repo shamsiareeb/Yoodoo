@@ -574,8 +574,18 @@ void popupJoin(BuildContext context) {
                     onPressed: () async{
                       if(_formKey.currentState.validate()){
                         _formKey.currentState.save();
-                        joinGroup(code);
-                      }
+                        //joinGroup(code);
+                        //void joinGroup(String code) async{
+                          final CollectionReference groupsCollection = Firestore.instance.collection('groups');
+                          try{
+                            groupsCollection.document(code).updateData({"members" : FieldValue.arrayUnion([user.uid])}).then((_) {
+                              //TODO update UI on homescreen
+                            });
+                          }
+                          catch(e){
+                            popupDialog4(context, e.toString());
+                          }
+                          }
                     },
                   ),
                   FlatButton(
@@ -590,15 +600,4 @@ void popupJoin(BuildContext context) {
       },
       barrierDismissible: false
   );
-  void joinGroup(String code) async{
-    final CollectionReference groupsCollection = Firestore.instance.collection('groups');
-    try{
-      groupsCollection.document(code).updateData({"members" : FieldValue.arrayUnion([user.uid])}).then((_) {
-        //TODO update UI on homescreen
-      });
-    }
-    catch(e){
-
-          }
-  }
 }
