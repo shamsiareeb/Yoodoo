@@ -28,218 +28,220 @@ class _ProfileScreenState extends State<ProfileScreen> {
           fontWeight: FontWeight.w500,
         ),),
       ),
-        body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'First Name',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            TextFormField(
+                              validator: blankValidator,
+                              onSaved: (input) => _name1 = input,
+                              decoration: InputDecoration(
+                                hintText: 'John',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Last Name',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            TextFormField(
+                              validator: blankValidator,
+                              onSaved: (input) => _name2 = input,
+                              decoration: InputDecoration(
+                                hintText: 'Doe',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Workplace',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        validator: blankValidator,
+                        onSaved: (input) => _company = input,
+                        decoration: InputDecoration(
+                          hintText: 'Company Name',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Designation',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        validator: blankValidator,
+                        onSaved: (input) => _designation = input,
+                        decoration: InputDecoration(
+                          hintText: 'Job Title',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Row(
                         children: <Widget>[
-                          Text(
-                            'First Name',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                          Expanded(
+                            child: InkWell(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'CANCEL',
+                                  style: TextStyle(fontSize: 20, color: Colors.white),
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                                  color: Colors.black,
+                                ),
+                              ),
+                              onTap: () {
+                                if (flag == true){
+                                  popupDialog8(context);
+                                }
+                                else {
+                                  popupDialog9(context);
+                                }
+                              },
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            width: 15,
                           ),
-                          TextFormField(
-                            validator: blankValidator,
-                            onSaved: (input) => _name1 = input,
-                            decoration: InputDecoration(
-                              hintText: 'John',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.black),
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          Expanded(
+                            child: InkWell(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'SAVE',
+                                  style: TextStyle(fontSize: 20, color: Colors.white),
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                                  color: Colors.black,
+                                ),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.black),
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              ),
+                              onTap: () async {
+                                if (_formKey.currentState.validate()){
+                                  _formKey.currentState.save();
+                                  if (popupDialog10(context) == true){
+                                    save(_name1,_name2,_company,_designation);
+                                  }
+                                  else{
+                                    Navigator.of(context).pop();
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Last Name',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          TextFormField(
-                            validator: blankValidator,
-                            onSaved: (input) => _name2 = input,
-                            decoration: InputDecoration(
-                              hintText: 'Doe',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.black),
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.black),
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Workplace',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      validator: blankValidator,
-                      onSaved: (input) => _company = input,
-                      decoration: InputDecoration(
-                        hintText: 'Company Name',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Designation',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      validator: blankValidator,
-                      onSaved: (input) => _designation = input,
-                      decoration: InputDecoration(
-                        hintText: 'Job Title',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: InkWell(
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 15),
-                              alignment: Alignment.center,
-                              child: Text(
-                                'CANCEL',
-                                style: TextStyle(fontSize: 20, color: Colors.white),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(5)),
-                                color: Colors.black,
-                              ),
-                            ),
-                            onTap: () {
-                              if (flag == true){
-                                popupDialog8(context);
-                              }
-                              else {
-                                popupDialog9(context);
-                              }
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 15),
-                              alignment: Alignment.center,
-                              child: Text(
-                                'SAVE',
-                                style: TextStyle(fontSize: 20, color: Colors.white),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(5)),
-                                color: Colors.black,
-                              ),
-                            ),
-                            onTap: () async {
-                              if (_formKey.currentState.validate()){
-                                _formKey.currentState.save();
-                                if (popupDialog10(context) == true){
-                                  save(_name1,_name2,_company,_designation);
-                                }
-                                else{
-                                  Navigator.of(context).pop();
-                                }
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
