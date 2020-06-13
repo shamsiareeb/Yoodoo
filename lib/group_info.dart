@@ -132,7 +132,7 @@ class _GroupInfoState extends State<GroupInfo> {
                         if (_formkey.currentState.validate()) {
                           _formkey.currentState.save();
                           }
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => ConfigureRewards()),
                         );

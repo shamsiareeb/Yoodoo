@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/login_screen.dart';
@@ -226,12 +227,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () async {
                                 if (_formKey.currentState.validate()){
                                   _formKey.currentState.save();
-                                  if (popupDialog10(context) == true){
+                                 // if (popupDialog10(context) == true){
                                     save(_name1,_name2,_company,_designation);
-                                  }
-                                  else{
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                                  );
+                                  //}
+                                  /*else{
                                     Navigator.of(context).pop();
-                                  }
+                                  }*/
                                 }
                               },
                             ),
@@ -256,7 +261,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       'flag': false,
       'name': n1,
       'workplace': _company,
-      'designation': _designation
+      'designation': _designation,
+      'groups': FieldValue.arrayUnion([])
     });
   }
 }

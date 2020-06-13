@@ -57,8 +57,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               padding: EdgeInsets.only(right: 25.0),
               child: GestureDetector(
                 onTap: () {
-                  final route = MaterialPageRoute(builder: (BuildContext context) => LoginScreenUI());
-                  Navigator.of(this.context).pushAndRemoveUntil(route, (Route<dynamic> route) => false);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GroupInfo()),
+                  );
                 },
                 child: Icon(
                   Icons.exit_to_app
