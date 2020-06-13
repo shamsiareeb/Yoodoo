@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yoodoo/group_info.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/login_screen.dart';
+import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/validators.dart';
 import 'dart:convert';
 import 'package:yoodoo/configure_rewards.dart';
@@ -67,7 +68,10 @@ void popupDialog3(BuildContext context) {
                   child: Text("Close"),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    Navigator.of(context).pop();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreenUI()),
+                    );
                   },
                 )
               ],
@@ -249,6 +253,7 @@ void popupDialog9(BuildContext context) {
 }
 
 bool popupDialog10(BuildContext context) {
+  bool val;
   showDialog(
       context: context,
       builder: (context) {
@@ -264,13 +269,13 @@ bool popupDialog10(BuildContext context) {
                   FlatButton(
                     child: Text("Yes"),
                     onPressed: () {
-                      return true;
+                      val = true;
                     },
                   ),
                   FlatButton(
                     child: Text("No"),
                     onPressed: () {
-                      return false;
+                      val = false;
                     },
                   )
                 ]
@@ -279,6 +284,7 @@ bool popupDialog10(BuildContext context) {
       },
       barrierDismissible: false
   );
+  return val;
 }
 
 void popupDialog11(BuildContext context) {
@@ -590,7 +596,7 @@ void popupJoin(BuildContext context) {
                               //TODO update UI on homescreen
                             });
                             usersCollection.document(user.uid).updateData({"groups" : FieldValue.arrayUnion([groupId])}).then((_) {
-                              //groups array in users collection should be updated by now
+                              //groups array in users should be updated by now
                             });
                           }
                           catch(e){

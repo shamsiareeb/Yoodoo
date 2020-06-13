@@ -128,13 +128,13 @@ void checkFlag(FirebaseUser user) async {
      flag = (ds['flag']);
      userName = (ds['name']);
      if (flag == true) {
-       Navigator.push(
+       Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => ProfileScreen()),
        );
      }
      else{
-       Navigator.push(
+       Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => HomeScreen()),
        );
@@ -228,7 +228,7 @@ class LoginScreenUI extends StatelessWidget {
         children: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => SignupScreenUI()),
               );
