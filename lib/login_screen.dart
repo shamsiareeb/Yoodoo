@@ -12,6 +12,7 @@ import 'package:yoodoo/profile_screen.dart';
 
 bool flag = false;
 FirebaseUser user;
+String userName;
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -125,6 +126,7 @@ class _LoginForm extends State<LoginScreen>{
 void checkFlag(FirebaseUser user) async {
   usersCollection.document(user.uid).get().then((DocumentSnapshot ds) {
      flag = (ds['flag']);
+     userName = (ds['name']);
      if (flag == true) {
        Navigator.push(
          context,

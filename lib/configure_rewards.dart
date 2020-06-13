@@ -182,7 +182,8 @@ class RewardScreen extends State<ConfigureRewards> {
   Future initGroup(FirebaseUser user) async{
     groupId = randomAlphaNumeric(10);
     return await groupsCollection.document(groupId).setData({
-      'owner': user.uid,
+      'ownerId': user.uid,
+      'ownerName': userName,
       'rewards': FieldValue.arrayUnion(rewards),
       'yoodoos': FieldValue.arrayUnion(yoodoos),
       'groupCode': groupId,
@@ -190,5 +191,6 @@ class RewardScreen extends State<ConfigureRewards> {
       'groupDescription': groupDescription,
       'members': FieldValue.arrayUnion([user.uid])
     });
+    //TODO update homescreen UI here
   }
 }

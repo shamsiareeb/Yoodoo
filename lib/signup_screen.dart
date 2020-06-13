@@ -119,7 +119,8 @@ class _SignupForm extends State<SignupScreen>{
       'flag': true,
       'name': '',
       'workplace':'',
-      'designation':''
+      'designation':'',
+      'groups': FieldValue.arrayUnion([])
     });
   }
 }
