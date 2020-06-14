@@ -15,11 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void onClose() {
-    Navigator.of(context).pushReplacement(new PageRouteBuilder(
+    /*Navigator.of(context).pushReplacement(new PageRouteBuilder(
         maintainState: true,
         opaque: true,
         pageBuilder: (context, _, __) => new LoginScreenUI(),
-    ));
+    ));*/
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreenUI()),
+    );
   }
 
   @override

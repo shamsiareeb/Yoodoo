@@ -103,10 +103,13 @@ class _LoginForm extends State<LoginScreen>{
     try{
       AuthResult authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email , password: pass);
       user = authResult.user;
-      if(user == null)
+      if(user == null) {
+        Navigator.of(context).pop(); //pops popupDialog5
         popupDialog6(context);
+      }
       else
         {
+          Navigator.of(context).pop();//pops popupDialog5
           if(user.isEmailVerified)
             {
               //check if flag is true
@@ -134,6 +137,7 @@ void checkFlag(FirebaseUser user) async {
        );
      }
      else{
+       //Navigator.of(context).pop();
        Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => HomeScreen()),
