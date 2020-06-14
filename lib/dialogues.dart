@@ -527,12 +527,13 @@ void popupShowGroupId(BuildContext context, var groupId) {
                   FlatButton(
                     child: Text("Got it!"),
                     onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();//pops this dialog
+                      Navigator.of(context).pop();//pops the configure rewards screen
+                      Navigator.of(context).pop();//pops the group info screen
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      );//replaces earlier instance of homescreen
                     },
                   )
                 ]
