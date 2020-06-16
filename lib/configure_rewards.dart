@@ -20,6 +20,7 @@ class ConfigureRewards extends StatefulWidget{
 class RewardScreen extends State<ConfigureRewards> {
 
   final CollectionReference groupsCollection = Firestore.instance.collection('groups');
+  final CollectionReference usersCollection = Firestore.instance.collection(user.uid);
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -47,6 +48,7 @@ class RewardScreen extends State<ConfigureRewards> {
             child: GestureDetector(
               onTap: () {
                 initGroup(user);//FirebaseUser user imported from login_screen.dart
+                updateGroupsArrayForUser(user);
                 popupShowGroupId(context, groupId);
               },
               child: Icon(
@@ -192,5 +194,11 @@ class RewardScreen extends State<ConfigureRewards> {
       'members': FieldValue.arrayUnion([user.uid])
     });
     //TODO update homescreen UI here
+  }
+
+  Future updateGroupsArrayForUser(FirebaseUser user) async{
+    return await usersCollection.document(user.uid).updateData({
+      'groups' : FieldValue.arrayUnion([groupId])
+    });
   }
 }
