@@ -9,14 +9,14 @@ var groupOwners = List();
 
 CollectionReference groupsCollection = Firestore.instance.collection('groups');
 
-void loadGroupsData(FirebaseUser user){
+bool loadGroupsData(FirebaseUser user){
 
   usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
     groups = (ds['groups']);
   });
 
   if (groups.length == 0){
-    //TODO display 'no groups to show' on homescreen
+    return false;
   }
   else{
     for (int i = 0; i < groups.length ; i++){
@@ -26,5 +26,6 @@ void loadGroupsData(FirebaseUser user){
         groupOwners.add(ds['ownerName']);
       });
     }
+    return true;
   }
 }
