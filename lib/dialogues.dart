@@ -588,17 +588,8 @@ void popupJoin(BuildContext context) {
                           try{
                             /* updateData has been used because it does not create a new document unlike setData
                                which creates a new firebase document in case it finds that there is no such document in the db */
-                            groupsCollection.document(code).updateData({"members" : FieldValue.arrayUnion([user.uid])}).then((_) {
-                              groupsCollection.document(code).get().then((DocumentSnapshot ds) {
-                                groupName = (ds['groupName']);
-                                groupDescription = (ds['groupDescription']);
-                                String ownerName = (ds['ownerName']);
-                              });
-                              //TODO update UI on homescreen
-                            });
-                            usersCollection.document(user.uid).updateData({"groups" : FieldValue.arrayUnion([groupId])}).then((_) {
-                              //groups array in users should be updated by now
-                            });
+                            groupsCollection.document(code).updateData({"members" : FieldValue.arrayUnion([user.uid])});
+                            usersCollection.document(user.uid).updateData({"groups" : FieldValue.arrayUnion([groupId])});
                           }
                           catch(e){
                             popupDialog4(context, e.toString());
