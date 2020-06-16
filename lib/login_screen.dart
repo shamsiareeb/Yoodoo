@@ -13,6 +13,7 @@ import 'package:yoodoo/profile_screen.dart';
 bool flag = false;
 FirebaseUser user;
 String userName;
+final CollectionReference usersCollection = Firestore.instance.collection('users');
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
