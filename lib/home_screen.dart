@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/group.dart';
 import 'package:yoodoo/group_info.dart';
 import 'dart:math' as math;
 import 'package:yoodoo/login_screen.dart';
@@ -146,7 +147,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         height: 175,
                         width: double.maxFinite,
                         child: new GestureDetector(
-                          onTap: ,
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Group()),);
+                          },
                           child: Card(
                             elevation: 5,
                             child: Container(
