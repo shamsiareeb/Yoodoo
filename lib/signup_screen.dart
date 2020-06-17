@@ -116,7 +116,6 @@ class _SignupForm extends State<SignupScreen>{
   Future initUserData(FirebaseUser user) async{
 
     return await usersCollection.document(user.uid).setData({
-      'flag': true,
       'name': '',
       'workplace':'',
       'designation':'',

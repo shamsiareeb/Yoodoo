@@ -10,9 +10,8 @@ import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/profile_screen.dart';
 
 
-bool flag = false;
-FirebaseUser user;
 String userName;
+FirebaseUser user;
 final CollectionReference usersCollection = Firestore.instance.collection('users');
 
 class LoginScreen extends StatefulWidget{
@@ -129,9 +128,8 @@ class _LoginForm extends State<LoginScreen>{
 }
 void checkFlag(FirebaseUser user) async {
   usersCollection.document(user.uid).get().then((DocumentSnapshot ds) {
-     flag = (ds['flag']);
      userName = (ds['name']);
-     if (flag == true) {
+     if (userName.isEmpty) {
        Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => ProfileScreen()),

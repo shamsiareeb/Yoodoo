@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/configure_rewards.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/validators.dart';
 import 'package:yoodoo/dialogues.dart';
@@ -198,7 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               onTap: () {
-                                if (flag == true){
+                                if (userName.isEmpty){
                                   popupDialog8(context);
                                 }
                                 else {
@@ -256,10 +257,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String n1 = _name1, n2 = _name2;
     n1 = n1.trim();
     n2 = n2.trim();
-    n1 = n1 + ' ' + n2;
+    userName = n1 + ' ' + n2;
     return await usersCollection.document(user.uid).setData({
-      'flag': false,
-      'name': n1,
+      'name': userName,
       'workplace': _company,
       'designation': _designation,
       'groups': FieldValue.arrayUnion([])

@@ -20,7 +20,7 @@ class ConfigureRewards extends StatefulWidget{
 class RewardScreen extends State<ConfigureRewards> {
 
   final CollectionReference groupsCollection = Firestore.instance.collection('groups');
-  final CollectionReference usersCollection = Firestore.instance.collection(user.uid);
+  final CollectionReference usersCollection = Firestore.instance.collection('users');
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -50,6 +50,8 @@ class RewardScreen extends State<ConfigureRewards> {
                 initGroup(user);//FirebaseUser user imported from login_screen.dart
                 updateGroupsArrayForUser(user);
                 popupShowGroupId(context, groupId);
+                rewards.clear();
+                yoodoos.clear();
               },
               child: Icon(
                   Icons.keyboard_arrow_right
@@ -183,6 +185,7 @@ class RewardScreen extends State<ConfigureRewards> {
 
   Future initGroup(FirebaseUser user) async{
     groupId = randomAlphaNumeric(10);
+    print('Username is '+userName);
     return await groupsCollection.document(groupId).setData({
       'ownerId': user.uid,
       'ownerName': userName,
@@ -201,4 +204,5 @@ class RewardScreen extends State<ConfigureRewards> {
       'groups' : FieldValue.arrayUnion([groupId])
     });
   }
+
 }
