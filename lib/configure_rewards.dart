@@ -49,9 +49,9 @@ class RewardScreen extends State<ConfigureRewards> {
               onTap: () {
                 initGroup(user);//FirebaseUser user imported from login_screen.dart
                 updateGroupsArrayForUser(user);
-                popupShowGroupId(context, groupId);
                 rewards.clear();
                 yoodoos.clear();
+                popupShowGroupId(context, groupId);
               },
               child: Icon(
                   Icons.keyboard_arrow_right
