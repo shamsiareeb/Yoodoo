@@ -24,7 +24,7 @@ class _LoginForm extends State<LoginScreen>{
   String _email = '', _password = '', _error = '';
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 60),
+      margin: EdgeInsets.symmetric(vertical: 60),
       child: Form(
         key: _formKey,
         child: Column(
@@ -155,7 +155,7 @@ class LoginScreenUI extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +184,7 @@ class LoginScreenUI extends StatelessWidget {
 
   Widget _title() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      //margin: EdgeInsets.symmetric(horizontal: 5),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
@@ -204,7 +204,7 @@ class LoginScreenUI extends StatelessWidget {
 
   Widget _subtitle() {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 40),
+      margin: EdgeInsets.fromLTRB(5, 5, 0, 40),
         child: RichText(
           textAlign: TextAlign.left,
           text: TextSpan(

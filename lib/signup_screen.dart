@@ -20,7 +20,7 @@ class _SignupForm extends State<SignupScreen>{
 
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 60),
+      margin: EdgeInsets.symmetric(vertical: 60),
       child: Form(
           key: _formKey,
           child: Column(
@@ -133,7 +133,7 @@ class SignupScreenUI extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +163,7 @@ class SignupScreenUI extends StatelessWidget {
 
   Widget _title() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      //margin: EdgeInsets.symmetric(horizontal: 5),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
@@ -183,7 +183,7 @@ class SignupScreenUI extends StatelessWidget {
 
   Widget _subtitle() {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 40),
+      margin: EdgeInsets.fromLTRB(5, 5, 0, 40),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
