@@ -145,76 +145,79 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         padding: EdgeInsets.fromLTRB(10,10,10,0),
                         height: 175,
                         width: double.maxFinite,
-                        child: Card(
-                          elevation: 5,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                top: BorderSide(
-                                  width: 4.0,
-                                  color: Colors.black,
+                        child: new GestureDetector(
+                          onTap: ,
+                          child: Card(
+                            elevation: 5,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    width: 4.0,
+                                    color: Colors.black,
+                                  ),
                                 ),
+                                color: Colors.white,
                               ),
-                              color: Colors.white,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Text(groupNames[index],
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold
-                                        ),),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(groupDescriptions[index],
-                                        style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 20,
-                                        ),),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: Alignment.bottomLeft,
-                                          child: Text('Admin: ',
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17,
-                                              fontStyle: FontStyle.italic,
-                                            ),),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.bottomLeft,
-                                          child: Text(groupOwners[index],
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17,
-                                              fontStyle: FontStyle.italic,
-                                            ),),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Text(groupNames[index],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold
+                                          ),),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(groupDescriptions[index],
+                                          style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 20,
+                                          ),),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text('Admin: ',
+                                              style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 17,
+                                                fontStyle: FontStyle.italic,
+                                              ),),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text(groupOwners[index],
+                                              style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 17,
+                                                fontStyle: FontStyle.italic,
+                                              ),),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
+                        )
                       );
                       },
                   ),
