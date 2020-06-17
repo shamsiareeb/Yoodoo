@@ -185,7 +185,6 @@ class RewardScreen extends State<ConfigureRewards> {
 
   Future initGroup(FirebaseUser user) async{
     groupId = randomAlphaNumeric(10);
-    print('Username is '+userName);
     return await groupsCollection.document(groupId).setData({
       'ownerId': user.uid,
       'ownerName': userName,
