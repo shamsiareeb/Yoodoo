@@ -8,28 +8,18 @@ import 'package:yoodoo/login_screen.dart';
 import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/load_groups.dart';
 
+bool UIflag;
 
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
 
-  //int index = 0;
-  AnimationController _controller;
-  final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
+  int index = 0;
 
-  static const List<IconData> icons = const [Icons.input, Icons.add];
-
-  @override
-  void initState() {
-    _controller = new AnimationController(vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-  }
-
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
           automaticallyImplyLeading: false,
@@ -59,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Padding(
               padding: EdgeInsets.only(right: 25.0),
               child: GestureDetector(
-                onTap: (){loadGroupsData(user)},
+                onTap: () async{
+                  await loadGroupsData(user);
+                },
                 child: Icon(
                   Icons.exit_to_app
                 ),
@@ -125,13 +117,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: <Widget>[
-              Expanded(
+              /*Expanded(
                 child: Center(
                     child: new Text('No groups to show')
                 ),
-              ),
-              /*Expanded(
-                child: loadGroupsData(user) == false ? new Container(
+              ),*/
+              Expanded(
+                child: check == false ? new Container(
                   child: new Center(
                       child: new Text('No groups to show')
                   ),
@@ -141,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: groups.length,
-                    itemBuilder: (context, int index) {
+                    itemBuilder: (context, index) {
                       return Container(
                         padding: EdgeInsets.fromLTRB(10,10,10,0),
                         height: 175,
@@ -225,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       },
                   ),
                 ),
-              ),*/
+              ),
               Container(
                 height: 60,
                 alignment: Alignment.bottomCenter,
@@ -291,15 +283,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
     );
   }
-
-  Widget _empty() {
-    return Container(
-      child: new Center(
-          child: new Text('No groups to show')
-      ),
-    );
-  }
 }
+
+Future<void> defineUI() async{
+  UIflag = await loadGroupsData(user);
+  printArrays();
+}
+void printArrays(){
+  print(groups);
+  print(groupNames);
+  print(groupDescriptions);
+  print(groupOwners);
+  print(UIflag);
+}
+
 
 
       /*new Center(
