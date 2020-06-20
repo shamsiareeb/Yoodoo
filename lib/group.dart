@@ -24,7 +24,7 @@ class _GroupState extends State<Group> {
           Padding(
             padding: EdgeInsets.only(right: 25.0),
             child: GestureDetector(
-              onTap: ,
+              onTap: (){},
               child: Icon(
                 Icons.info
               ),

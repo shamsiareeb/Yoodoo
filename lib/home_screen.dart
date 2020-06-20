@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
-  int index = 0;
+  //int index = 0;
   AnimationController _controller;
   final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
 
@@ -59,12 +59,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Padding(
               padding: EdgeInsets.only(right: 25.0),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => GroupInfo()),
-                  );
-                },
+                onTap: (){loadGroupsData(user)},
                 child: Icon(
                   Icons.exit_to_app
                 ),
@@ -131,6 +126,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           child: Column(
             children: <Widget>[
               Expanded(
+                child: Center(
+                    child: new Text('No groups to show')
+                ),
+              ),
+              /*Expanded(
                 child: loadGroupsData(user) == false ? new Container(
                   child: new Center(
                       child: new Text('No groups to show')
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: groups.length,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (context, int index) {
                       return Container(
                         padding: EdgeInsets.fromLTRB(10,10,10,0),
                         height: 175,
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       },
                   ),
                 ),
-              ),
+              ),*/
               Container(
                 height: 60,
                 alignment: Alignment.bottomCenter,
