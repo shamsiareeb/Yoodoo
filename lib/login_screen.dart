@@ -139,7 +139,7 @@ void checkFlag(FirebaseUser user) async {
        //Navigator.of(context).pop();
        await defineUI();
        Navigator.pushReplacement(
-         this.context,
+         context,
          MaterialPageRoute(builder: (context) => HomeScreen()),
        );
      }

@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),*/
               Expanded(
-                child: check == false ? new Container(
+                child: UIflag == false ? new Container(
                   child: new Center(
                       child: new Text('No groups to show')
                   ),
@@ -287,10 +287,15 @@ Future<void> defineUI() async{
   printArrays();
 }
 void printArrays(){
+  print('groups are:');
   print(groups);
+  print('group names are:');
   print(groupNames);
+  print('group descriptions are:');
   print(groupDescriptions);
+  print('group owners are:');
   print(groupOwners);
+  print('Ui flag is:');
   print(UIflag);
 }
 
