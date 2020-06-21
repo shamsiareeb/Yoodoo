@@ -127,7 +127,7 @@ class _LoginForm extends State<LoginScreen>{
     }
 }
 void checkFlag(FirebaseUser user) async {
-  usersCollection.document(user.uid).get().then((DocumentSnapshot ds) {
+  usersCollection.document(user.uid).get().then((DocumentSnapshot ds) async {
      userName = (ds['name']);
      if (userName.isEmpty) {
        Navigator.pushReplacement(
@@ -137,7 +137,7 @@ void checkFlag(FirebaseUser user) async {
      }
      else{
        //Navigator.of(context).pop();
-       defineUI();
+       await defineUI();
        Navigator.pushReplacement(
          this.context,
          MaterialPageRoute(builder: (context) => HomeScreen()),

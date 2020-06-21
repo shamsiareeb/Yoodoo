@@ -9,15 +9,12 @@ import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/load_groups.dart';
 
 bool UIflag;
-
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  int index = 0;
 
  Widget build(BuildContext context) {
     return new Scaffold(
