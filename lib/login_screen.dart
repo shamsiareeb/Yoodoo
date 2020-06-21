@@ -12,6 +12,7 @@ import 'package:yoodoo/profile_screen.dart';
 
 String userName;
 FirebaseUser user;
+bool passwordVisible;
 final CollectionReference usersCollection = Firestore.instance.collection('users');
 
 class LoginScreen extends StatefulWidget{
@@ -19,9 +20,17 @@ class LoginScreen extends StatefulWidget{
 }
 class _LoginForm extends State<LoginScreen>{
 
+  @override
+  void initState() {
+    passwordVisible = true;
+  }
+
   final CollectionReference usersCollection = Firestore.instance.collection('users');
+
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
+
   String _email = '', _password = '', _error = '';
+
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 60),
@@ -52,6 +61,7 @@ class _LoginForm extends State<LoginScreen>{
         height: 20,
       ),
       TextFormField(
+        obscureText: passwordVisible,
           decoration: InputDecoration(
               hintText: 'Password',
               hintStyle: TextStyle(color: Colors.grey),
@@ -64,8 +74,20 @@ class _LoginForm extends State<LoginScreen>{
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
             ),
             prefixIcon: new Icon(Icons.lock, color: Colors.black,),
+            suffixIcon: IconButton(
+              icon: Icon(
+                passwordVisible
+                ? Icons.visibility
+                    : Icons.visibility_off,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                setState(() {
+                  passwordVisible = !passwordVisible;
+                });
+              },
+            )
           ),
-          obscureText: true,
           validator: pwdValidator,
           onSaved: (input) => _password = input,
       ),
@@ -104,12 +126,10 @@ class _LoginForm extends State<LoginScreen>{
       AuthResult authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email , password: pass);
       user = authResult.user;
       if(user == null) {
-        Navigator.of(context).pop(); //pops popupDialog5
         popupDialog6(context);
       }
       else
         {
-          Navigator.of(context).pop();//pops popupDialog5
           if(user.isEmailVerified)
             {
               //check if flag is true
@@ -130,14 +150,15 @@ void checkFlag(FirebaseUser user) async {
   usersCollection.document(user.uid).get().then((DocumentSnapshot ds) async {
      userName = (ds['name']);
      if (userName.isEmpty) {
+       Navigator.of(context).pop(); //pops popupDialog5
        Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => ProfileScreen()),
        );
      }
      else{
-       //Navigator.of(context).pop();
        await defineUI();
+       Navigator.of(context).pop();//pops popupDialog5
        Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => HomeScreen()),

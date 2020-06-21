@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/dialogues.dart';
 
 class Group extends StatefulWidget{
   @override
@@ -24,7 +25,9 @@ class _GroupState extends State<Group> {
           Padding(
             padding: EdgeInsets.only(right: 25.0),
             child: GestureDetector(
-              onTap: (){},
+              onTap: (){
+                popupDialog15(context);
+              },
               child: Icon(
                 Icons.info
               ),

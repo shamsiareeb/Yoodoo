@@ -21,8 +21,13 @@ void popupDialog1(BuildContext context) {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0)
           ),
-          title: Text("Don't close the app"),
-          content: Text('Signing you up')
+          title: Center(
+            child: SizedBox(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          content: Text('Signing you up',
+            textAlign: TextAlign.center,)
          )
         );
       },
@@ -41,7 +46,11 @@ void popupDialog2(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Don't close the app"),
+                title: Center(
+                  child: SizedBox(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
                 content: Text('Sending verification link to email')
             )
         );
@@ -61,11 +70,20 @@ void popupDialog3(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("YOODOO"),
+                title: Text("Yoodoo",
+                    style: TextStyle(
+                    fontFamily: 'TypoHoop',
+                    fontWeight: FontWeight.w100,
+                    fontSize: 25.0,
+                    color: Colors.black
+                ),),
                 content: Text('Please verify your email to login to the app.'),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("Close"),
+                  child: Text("Close",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),),
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.pushReplacement(
@@ -97,7 +115,10 @@ void popupDialog4(BuildContext context, String error) {
               content: Text(error),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("Close"),
+                  child: Text("Close",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),),
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
@@ -121,8 +142,13 @@ void popupDialog5(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Just a sec"),
-                content: Text('Logging you in')
+                title: Center(
+                  child: SizedBox(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                content: Text('Logging you in',
+                  textAlign: TextAlign.center,),
             )
         );
       },
@@ -188,23 +214,35 @@ void popupDialog8(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Yoodoo"),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
                 content: Text('Cancel profile setup and go back to login screen?'),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Yes"),
+                    child: Text("No",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Yes",
+                    style: TextStyle(
+                      color: Colors.black
+                    ),),
                     onPressed: () {
                       Navigator.of(context).pop();
                       //TODO insert proper log out code
                       Navigator.of(context).pop();
                     },
                   ),
-                  FlatButton(
-                    child: Text("No"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
                 ]
             )
         );
@@ -223,11 +261,29 @@ void popupDialog9(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Yoodoo"),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
                 content: Text('Are you sure?'),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Yes"),
+                    child: Text("No",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Yes",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
@@ -238,12 +294,6 @@ void popupDialog9(BuildContext context) {
 
                     },
                   ),
-                  FlatButton(
-                    child: Text("No"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
                 ]
             )
         );
@@ -263,21 +313,34 @@ bool popupDialog10(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Yoodoo"),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
                 content: Text('Are you sure?'),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Yes"),
+                    child: Text("No",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
+                    onPressed: () {
+                      val = false;
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Yes",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
                     onPressed: () {
                       val = true;
                     },
                   ),
-                  FlatButton(
-                    child: Text("No"),
-                    onPressed: () {
-                      val = false;
-                    },
-                  )
+
                 ]
             )
         );
@@ -297,11 +360,20 @@ void popupDialog11(BuildContext context) {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)
                   ),
-                  title: Text("Yoodoo"),
-                  content: Text("Please enter something!"),
+                  title: Text("Yoodoo",
+                    style: TextStyle(
+                        fontFamily: 'TypoHoop',
+                        fontWeight: FontWeight.w100,
+                        fontSize: 25.0,
+                        color: Colors.black
+                    ),),
+                  content: Text("Values cannot be left blank!"),
                   actions: <Widget>[
                     FlatButton(
-                      child: Text("Got it!"),
+                      child: Text("Got it!",
+                      style: TextStyle(
+                        color: Colors.black
+                      ),),
                       onPressed: () {
                         Navigator.of(context).pop();
                         //Navigator.of(context).pop();
@@ -327,24 +399,30 @@ void popupDialog11(BuildContext context) {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)
             ),
-            title: Text("Step 1. Type the new reward"),
+            title: Text("Step 1. Type a new reward"),
             content: TextField (
               maxLength: 60,
               decoration: InputDecoration(
-                hintText: 'Max 60 characters.',
+                hintText: 'Max 60 characters',
               ),
               controller: c,
             ),
             actions: <Widget>[
               FlatButton(
-                child: Text("Cancel"),
+                child: Text("Cancel",
+                  style: TextStyle(
+                      color: Colors.black
+                  ),),
                 onPressed: () {
                   Navigator.pop(context);
                   //return null;
                 },
               ),
               FlatButton(
-                child: Text("Next"),
+                child: Text("Next",
+                  style: TextStyle(
+                      color: Colors.black
+                  ),),
                 onPressed: () {
                   String input = c.text;
                   input = input.trim();
@@ -387,14 +465,20 @@ void popupDialog13(BuildContext context){
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("Back"),
+              child: Text("Back",
+                style: TextStyle(
+                    color: Colors.black
+                ),),
               onPressed: () {
                 Navigator.pop(context);
                 rewards.removeLast();
               },
             ),
             FlatButton(
-              child: Text("Done"),
+              child: Text("Done",
+                style: TextStyle(
+                    color: Colors.black
+                ),),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pop(context);
@@ -423,11 +507,20 @@ void popupDialog14(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Yoodoo"),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
                 content: Text("Please enter a number between 0 and 10"),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Got it!"),
+                    child: Text("Got it!",
+                    style: TextStyle(
+                      color: Colors.black
+                    ),),
                     onPressed: () {
                       Navigator.of(context).pop();
                       //Navigator.of(context).pop();
@@ -452,11 +545,20 @@ void popupDialog15(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Yoodoo"),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
                 content: Text("No rewards have been set"),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Got it!"),
+                    child: Text("Got it!",
+                    style: TextStyle(
+                      color: Colors.black
+                    ),),
                     onPressed: () {
                       Navigator.of(context).pop();
                       //Navigator.of(context).pop();
@@ -481,11 +583,29 @@ void popupDiscardGroup(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text("Yoodoo"),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
                 content: Text('Discard this group?'),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Yes"),
+                    child: Text("No",
+                    style: TextStyle(
+                      color: Colors.black
+                    ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Yes",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
@@ -497,12 +617,7 @@ void popupDiscardGroup(BuildContext context) {
                       );
                     },
                   ),
-                  FlatButton(
-                    child: Text("No"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
+
                 ]
             )
         );
@@ -521,11 +636,15 @@ void popupShowGroupId(BuildContext context, var groupId) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
-                title: Text(groupId),
+                title: Text(groupId,
+                textAlign: TextAlign.center,),
                 content: Text('Members will use this code to join ' + groupName),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Got it!"),
+                    child: Text("Got it!",
+                    style: TextStyle(
+                      color: Colors.black
+                    ),),
                     onPressed: () {
                       Navigator.of(context).pop();//pops this dialog
                       Navigator.of(context).pop();//pops the configure rewards screen
@@ -577,7 +696,19 @@ void popupJoin(BuildContext context) {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text('Submit'),
+                    child: Text('Cancel',
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('Submit',
+                    style: TextStyle(
+                      color: Colors.black
+                    ),),
                     onPressed: () async{
                       if(_formKey.currentState.validate()){
                         _formKey.currentState.save();
@@ -597,12 +728,7 @@ void popupJoin(BuildContext context) {
                           }
                     },
                   ),
-                  FlatButton(
-                    child: Text('Cancel'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
+
                 ]
             )
         );
