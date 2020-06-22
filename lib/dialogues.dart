@@ -521,6 +521,7 @@ void popupDialog14(BuildContext context) {
                       color: Colors.black
                     ),),
                     onPressed: () {
+                      rewards.removeLast();
                       Navigator.of(context).pop();
                       //Navigator.of(context).pop();
                       //acceptGroupName(context);

@@ -48,11 +48,13 @@ class RewardScreen extends State<ConfigureRewards> {
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
               onTap: () async{
-                initGroup(user);//FirebaseUser user imported from login_screen.dart
-                updateGroupsArrayForUser(user);
+                popupWait(context);
+                await initGroup(user);//FirebaseUser user imported from login_screen.dart
+                await updateGroupsArrayForUser(user);
                 await defineUI();
                 rewards.clear();
                 yoodoos.clear();
+                Navigator.of(context).pop();//pops popupWait()
                 popupShowGroupId(context, groupId);
               },
               child: Icon(
