@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoodoo/dialogues.dart';
+import 'dialogues.dart';
 
 class Group extends StatefulWidget{
   @override

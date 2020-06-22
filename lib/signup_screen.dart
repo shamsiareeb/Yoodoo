@@ -14,7 +14,6 @@ class SignupScreen extends StatefulWidget{
 }
 class _SignupForm extends State<SignupScreen>{
 
-  //final CollectionReference usersCollection = Firestore.instance.collection('users');
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 

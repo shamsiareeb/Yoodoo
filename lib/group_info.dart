@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:yoodoo/validators.dart';
-import 'package:yoodoo/home_screen.dart';
-import 'package:yoodoo/dialogues.dart';
+import 'validators.dart';
 import 'configure_rewards.dart';
 
 

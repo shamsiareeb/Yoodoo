@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoodoo/login_screen.dart';
+import 'login_screen.dart';
 import 'dart:async' show Timer;
 
 class SplashScreen extends StatefulWidget {

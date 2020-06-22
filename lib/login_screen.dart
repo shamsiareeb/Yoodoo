@@ -14,7 +14,6 @@ import 'create_instances.dart';
 String userName;
 FirebaseUser user;
 bool passwordVisible;
-//final CollectionReference usersCollection = Firestore.instance.collection('users');
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -25,8 +24,6 @@ class _LoginForm extends State<LoginScreen>{
   void initState() {
     passwordVisible = true;
   }
-
-  //final CollectionReference usersCollection = Firestore.instance.collection('users');
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:yoodoo/configure_rewards.dart';
-import 'package:yoodoo/home_screen.dart';
-import 'package:yoodoo/validators.dart';
-import 'package:yoodoo/dialogues.dart';
-import 'package:yoodoo/login_screen.dart';
+import 'create_instances.dart';
+import 'home_screen.dart';
+import 'validators.dart';
+import 'dialogues.dart';
+import 'login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -14,7 +14,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  final CollectionReference usersCollection = Firestore.instance.collection('users');
   String _name1, _name2, _designation, _company;
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
