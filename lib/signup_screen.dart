@@ -19,9 +19,12 @@ class _SignupForm extends State<SignupScreen>{
 
   String _email = '', _password = '', _error = '';
 
+  final passwordController = TextEditingController();
+  final confPassController = TextEditingController();
+
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 60),
+      margin: EdgeInsets.symmetric(vertical: 30),
       child: Form(
           key: _formKey,
           child: Column(
@@ -50,6 +53,7 @@ class _SignupForm extends State<SignupScreen>{
               ),
               TextFormField(
                   validator: pwdValidator,
+                  controller: passwordController,
                   onSaved: (input) => _password = input,
                   decoration: InputDecoration(
                       hintText: 'Password',
@@ -63,8 +67,49 @@ class _SignupForm extends State<SignupScreen>{
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     ),
                     prefixIcon: new Icon(Icons.lock, color: Colors.black,),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
+                      )
                   ),
                 obscureText: true
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                  controller: confPassController,
+                  validator: (val){
+                    if(val.isEmpty)
+                      return 'Required';
+                    if(val != passwordController.text)
+                      return 'Passwords do not match';
+                    return null;
+                  },
+                  //onSaved: (input) => _confPass = input,
+                  decoration: InputDecoration(
+                    hintText: 'Confirm Password',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    prefixIcon: new Icon(Icons.lock, color: Colors.black,),
+                  ),
+                  obscureText: true
               ),
               SizedBox(
                 height: 50,
@@ -148,7 +193,7 @@ class SignupScreenUI extends StatelessWidget {
                       SignupScreen(),
                       //submitButton(),
                       Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: SizedBox()
                       ),
                       _loginLabel(context),
