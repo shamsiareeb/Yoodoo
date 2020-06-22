@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoodoo/group_info.dart';
-import 'package:yoodoo/home_screen.dart';
-import 'package:yoodoo/login_screen.dart';
-import 'package:yoodoo/profile_screen.dart';
-import 'package:yoodoo/validators.dart';
-import 'dart:convert';
-import 'package:yoodoo/configure_rewards.dart';
+import 'group_info.dart';
+import 'home_screen.dart';
+import 'login_screen.dart';
+import 'validators.dart';
+import 'configure_rewards.dart';
+import 'create_instances.dart';
 
 final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
@@ -740,8 +739,8 @@ void popupJoin(BuildContext context) {
                         //void joinGroup(String code) async{
                         //Navigator.of(context).pop();//Closes popupJoin()
                         popupWait(context);
-                          CollectionReference groupsCollection = Firestore.instance.collection('groups');
-                          CollectionReference usersCollection = Firestore.instance.collection('users');
+                          //CollectionReference groupsCollection = Firestore.instance.collection('groups');
+                          //CollectionReference usersCollection = Firestore.instance.collection('users');
                           try{
                             /* updateData has been used because it does not create a new document unlike setData
                                which creates a new firebase document in case it finds that there is no such document in the db */

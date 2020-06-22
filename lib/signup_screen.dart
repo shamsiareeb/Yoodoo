@@ -2,17 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:yoodoo/login_screen.dart';
-import 'package:yoodoo/validators.dart';
+import 'validators.dart';
 import 'dialogues.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'create_instances.dart';
+
+import 'login_screen.dart';
 
 class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
 }
 class _SignupForm extends State<SignupScreen>{
 
-  final CollectionReference usersCollection = Firestore.instance.collection('users');
+  //final CollectionReference usersCollection = Firestore.instance.collection('users');
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 

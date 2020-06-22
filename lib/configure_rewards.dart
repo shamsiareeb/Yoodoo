@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoodoo/group_info.dart';
-import 'package:yoodoo/dialogues.dart';
-import 'package:yoodoo/home_screen.dart';
-import 'package:yoodoo/login_screen.dart';
+import 'group_info.dart';
+import 'dialogues.dart';
+import 'home_screen.dart';
+import 'login_screen.dart';
 import 'package:random_string/random_string.dart';
-import 'dart:math' show Random;
+import 'create_instances.dart';
 
 
 var rewards = List();
@@ -20,8 +20,8 @@ class ConfigureRewards extends StatefulWidget{
 
 class RewardScreen extends State<ConfigureRewards> {
 
-  final CollectionReference groupsCollection = Firestore.instance.collection('groups');
-  final CollectionReference usersCollection = Firestore.instance.collection('users');
+  //final CollectionReference groupsCollection = Firestore.instance.collection('groups');
+  //final CollectionReference usersCollection = Firestore.instance.collection('users');
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(

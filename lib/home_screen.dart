@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yoodoo/dialogues.dart';
-import 'package:yoodoo/group.dart';
-import 'package:yoodoo/group_info.dart';
-import 'dart:math' as math;
-import 'package:yoodoo/login_screen.dart';
-import 'package:yoodoo/profile_screen.dart';
-import 'package:yoodoo/load_groups.dart';
+import 'dialogues.dart';
+import 'group.dart';
+import 'group_info.dart';
+import 'login_screen.dart';
+import 'profile_screen.dart';
+import 'load_groups.dart';
 
 bool UIflag;
 class HomeScreen extends StatefulWidget {

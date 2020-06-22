@@ -3,17 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:yoodoo/home_screen.dart';
-import 'package:yoodoo/signup_screen.dart';
-import 'package:yoodoo/validators.dart';
-import 'package:yoodoo/dialogues.dart';
-import 'package:yoodoo/profile_screen.dart';
+import 'home_screen.dart';
+import 'signup_screen.dart';
+import 'validators.dart';
+import 'dialogues.dart';
+import 'profile_screen.dart';
+import 'create_instances.dart';
 
 
 String userName;
 FirebaseUser user;
 bool passwordVisible;
-final CollectionReference usersCollection = Firestore.instance.collection('users');
+//final CollectionReference usersCollection = Firestore.instance.collection('users');
 
 class LoginScreen extends StatefulWidget{
   _LoginForm createState() => new _LoginForm();
@@ -25,7 +26,7 @@ class _LoginForm extends State<LoginScreen>{
     passwordVisible = true;
   }
 
-  final CollectionReference usersCollection = Firestore.instance.collection('users');
+  //final CollectionReference usersCollection = Firestore.instance.collection('users');
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
