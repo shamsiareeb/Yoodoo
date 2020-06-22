@@ -26,7 +26,7 @@ class RewardScreen extends State<ConfigureRewards> {
     return new Scaffold(
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        title: new Text("REWARDS",
+        title: new Text("Rewards",
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
@@ -48,14 +48,19 @@ class RewardScreen extends State<ConfigureRewards> {
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
               onTap: () async{
-                popupWait(context);
-                await initGroup(user);//FirebaseUser user imported from login_screen.dart
-                await updateGroupsArrayForUser(user);
-                await defineUI();
-                rewards.clear();
-                yoodoos.clear();
-                Navigator.of(context).pop();//pops popupWait()
-                popupShowGroupId(context, groupId);
+                if(rewards.length == 0){
+                  popupNoReward(context);
+                }
+                else{
+                  popupWait(context);
+                  await initGroup(user);//FirebaseUser user imported from login_screen.dart
+                  await updateGroupsArrayForUser(user);
+                  await defineUI();
+                  rewards.clear();
+                  yoodoos.clear();
+                  Navigator.of(context).pop();//pops popupWait()
+                  popupShowGroupId(context, groupId);
+                }
               },
               child: Icon(
                   Icons.keyboard_arrow_right

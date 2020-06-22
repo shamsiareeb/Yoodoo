@@ -687,6 +687,36 @@ void popupWait(BuildContext context) {
   );
 }
 
+void popupNoReward(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Woops!"),
+                content: Text('Please enter at least one reward'),
+              actions: <Widget>[
+            FlatButton(
+            child: Text("Close",
+              style: TextStyle(
+                color: Colors.black,
+              ),),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )
+        ],
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
 void popupJoin(BuildContext context) {
   String _code;
   showDialog(
