@@ -663,8 +663,7 @@ void popupShowGroupId(BuildContext context, var groupId) {
   );
 }
 
-void popupJoin(BuildContext context) {
-  String code;
+void popupWait(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -674,11 +673,36 @@ void popupJoin(BuildContext context) {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                 ),
+                title: Center(
+                  child: SizedBox(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                content: Text('Please Wait',
+                  textAlign: TextAlign.center,)
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
+void popupJoin(BuildContext context) {
+  String _code;
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => true,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
                 title: Text('Join a group'),
                 content: Form(
                   key: _formKey,
                   child: TextFormField(
-                  onSaved: (input) => code,
+                  onSaved: (input) => _code = input,
                   validator: blankValidator,
                   decoration: InputDecoration(
                     hintText: 'Enter group code',
@@ -714,13 +738,22 @@ void popupJoin(BuildContext context) {
                         _formKey.currentState.save();
                         //joinGroup(code);
                         //void joinGroup(String code) async{
-                          final CollectionReference groupsCollection = Firestore.instance.collection('groups');
-                          final CollectionReference usersCollection = Firestore.instance.collection('users');
+                        //Navigator.of(context).pop();//Closes popupJoin()
+                        popupWait(context);
+                          CollectionReference groupsCollection = Firestore.instance.collection('groups');
+                          CollectionReference usersCollection = Firestore.instance.collection('users');
                           try{
                             /* updateData has been used because it does not create a new document unlike setData
                                which creates a new firebase document in case it finds that there is no such document in the db */
-                            groupsCollection.document(code).updateData({"members" : FieldValue.arrayUnion([user.uid])});
-                            usersCollection.document(user.uid).updateData({"groups" : FieldValue.arrayUnion([groupId])});
+                            await groupsCollection.document(_code).updateData({
+                              'members' : FieldValue.arrayUnion([user.uid])
+                            });
+                            await usersCollection.document(user.uid).updateData({
+                              'groups' : FieldValue.arrayUnion([_code])
+                            });
+                            await defineUI();
+                            Navigator.of(context).pop();//closes popupWait()
+                            Navigator.of(context).pop();//closes popupJoin()
                           }
                           catch(e){
                             popupDialog4(context, e.toString());
@@ -733,6 +766,6 @@ void popupJoin(BuildContext context) {
             )
         );
       },
-      barrierDismissible: false
+      barrierDismissible: true
   );
 }

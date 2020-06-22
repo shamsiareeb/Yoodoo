@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/group_info.dart';
 import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/login_screen.dart';
 import 'package:random_string/random_string.dart';
 import 'dart:math' show Random;
@@ -46,9 +47,10 @@ class RewardScreen extends State<ConfigureRewards> {
           Padding(
             padding: EdgeInsets.only(right: 30.0),
             child: GestureDetector(
-              onTap: () {
+              onTap: () async{
                 initGroup(user);//FirebaseUser user imported from login_screen.dart
                 updateGroupsArrayForUser(user);
+                await defineUI();
                 rewards.clear();
                 yoodoos.clear();
                 popupShowGroupId(context, groupId);
@@ -195,7 +197,6 @@ class RewardScreen extends State<ConfigureRewards> {
       'groupDescription': groupDescription,
       'members': FieldValue.arrayUnion([user.uid])
     });
-    //TODO update homescreen UI here
   }
 
   Future updateGroupsArrayForUser(FirebaseUser user) async{
