@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/home_screen.dart';
 import 'login_screen.dart';
 import 'dart:async' show Timer;
 
@@ -11,7 +13,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    new Timer(const Duration(seconds: 2), onClose);
+    FirebaseAuth.instance.currentUser().then((currentUser) {
+      if(currentUser != null) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),);
+      }
+      else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreenUI()),
+        );
+      }
+    });
+    //new Timer(const Duration(seconds: 2), onClose);
   }
 
   void onClose() {

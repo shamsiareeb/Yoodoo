@@ -6,6 +6,7 @@ import 'group_info.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
 import 'load_groups.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 bool UIflag;
 class HomeScreen extends StatefulWidget {
@@ -14,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  Future <void> _signOut()  async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreenUI()));
+    return null;
+  }
 
  Widget build(BuildContext context) {
     return new Scaffold(
@@ -45,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.only(right: 25.0),
               child: GestureDetector(
-                onTap: () async{
-                  await loadGroupsData(user);
+                onTap: () {
+                  _signOut();
                 },
                 child: Icon(
                   Icons.exit_to_app
@@ -61,11 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: <Widget>[
-              /*Expanded(
-                child: Center(
-                    child: new Text('No groups to show')
-                ),
-              ),*/
               Expanded(
                 child: UIflag == false ? new Container(
                   child: new Center(

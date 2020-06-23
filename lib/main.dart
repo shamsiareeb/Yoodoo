@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/splash_screen.dart';
 import 'login_screen.dart';
 import 'package:flutter/services.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         accentColor: Colors.black,
       ),
-      home:LoginScreenUI(),
+      home:SplashScreen(),
     );
   }
 }
