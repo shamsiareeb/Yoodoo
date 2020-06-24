@@ -11,12 +11,10 @@ class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => new _ProfileScreenState();
 }
-
 class _ProfileScreenState extends State<ProfileScreen> {
 
   String _name1, _name2, _designation, _company;
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
-
   @override
 
   Widget build(BuildContext context) {

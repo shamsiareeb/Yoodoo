@@ -15,6 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     FirebaseAuth.instance.currentUser().then((currentUser) {
       if(currentUser != null) {
+        user = currentUser;
+        defineUI();
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen()),);
