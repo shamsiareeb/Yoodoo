@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dialogues.dart';
 import 'group.dart';
@@ -9,6 +8,8 @@ import 'load_groups.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 bool UIflag;
+var containerKey;
+List keys = new List();
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
@@ -82,16 +83,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: groups.length,
                     itemBuilder: (context, index) {
-                      return Container(
+                      return GestureDetector(
+                          onTap: (){
+                            print(index);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Group()),);
+                          },
+                      child: Container(
                         padding: EdgeInsets.fromLTRB(10,10,10,0),
                         height: 175,
                         width: double.maxFinite,
                         child: Card(
                             elevation: 5,
                             child: InkWell(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Group()),);
-                              },
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border(
@@ -161,7 +164,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             )
                           ),
-                        );
+                        )
+                      );
                       },
                   ),
                 ),
@@ -235,6 +239,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Future<void> defineUI() async{
   UIflag = await loadGroupsData(user);
+  for(int i = 0; i < groups.length; i++){
+    keys.add(new UniqueKey());
+  }
   printArrays();
 }
 void printArrays(){
@@ -249,7 +256,6 @@ void printArrays(){
   print('Ui flag is:');
   print(UIflag);
 }
-
 
 
       /*new Center(

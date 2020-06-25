@@ -92,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             TextFormField(
                               validator: blankValidator,
-                              onSaved: (input) => _name2 = input,
+                              //onSaved: (input) => _name2 = input,
                               decoration: InputDecoration(
                                 hintText: 'Doe',
                                 hintStyle: TextStyle(color: Colors.grey),

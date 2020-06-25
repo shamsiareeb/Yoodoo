@@ -28,7 +28,6 @@ class _LoginForm extends State<LoginScreen>{
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
   String _email = '', _password = '', _error = '';
-
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 60),
