@@ -11,7 +11,7 @@ import 'profile_screen.dart';
 import 'create_instances.dart';
 
 
-String userName;
+String userName, company, designation;
 FirebaseUser user;
 bool passwordVisible;
 
@@ -147,6 +147,9 @@ class _LoginForm extends State<LoginScreen>{
 void checkFlag(FirebaseUser user) async {
   usersCollection.document(user.uid).get().then((DocumentSnapshot ds) async {
      userName = (ds['name']);
+     company = (ds['']);
+     designation = (ds['']);
+
      if (userName.isEmpty) {
        Navigator.of(context).pop(); //pops popupDialog5
        Navigator.pushReplacement(

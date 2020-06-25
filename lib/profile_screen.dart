@@ -13,7 +13,7 @@ class ProfileScreen extends StatefulWidget {
 }
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  String _name1, _name2, _designation, _company;
+  //String _name1, _name2, _designation, _company;
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
   @override
 
@@ -53,8 +53,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 5,
                             ),
                             TextFormField(
+                              initialValue: userName,
                               validator: blankValidator,
-                              onSaved: (input) => _name1 = input,
+                              onSaved: (input) => userName = input,
                               decoration: InputDecoration(
                                 hintText: 'John',
                                 hintStyle: TextStyle(color: Colors.grey),
@@ -127,8 +128,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 5,
                       ),
                       TextFormField(
+                        initialValue: company,
                         validator: blankValidator,
-                        onSaved: (input) => _company = input,
+                        onSaved: (input) => company = input,
                         decoration: InputDecoration(
                           hintText: 'Company Name',
                           hintStyle: TextStyle(color: Colors.grey),
@@ -161,8 +163,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 5,
                       ),
                       TextFormField(
+                        initialValue: designation,
                         validator: blankValidator,
-                        onSaved: (input) => _designation = input,
+                        onSaved: (input) => designation = input,
                         decoration: InputDecoration(
                           hintText: 'Job Title',
                           hintStyle: TextStyle(color: Colors.grey),
@@ -226,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 if (_formKey.currentState.validate()){
                                   _formKey.currentState.save();
                                  // if (popupDialog10(context) == true){
-                                    save(_name1,_name2,_company,_designation);
+                                    save(userName, company, designation);
                                     await defineUI();
                                   Navigator.pushReplacement(
                                     context,
@@ -251,13 +254,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
     );
   }
-  Future save(_name1,_name2,_company,_designation) async{
-    String n1 = _name1, n2 = _name2;
-    n1 = n1.trim();
-    n2 = n2.trim();
-    userName = n1 + ' ' + n2;
+  Future save(_userName, _company, _designation) async{
+    //String n1 = _name1, n2 = _name2;
+    //n1 = n1.trim();
+    //n2 = n2.trim();
+    //userName = n1 + ' ' + n2;
+    _userName = _userName.trim();
     return await usersCollection.document(user.uid).setData({
-      'name': userName,
+      'name': _userName,
       'workplace': _company,
       'designation': _designation,
       'groups': FieldValue.arrayUnion([])
