@@ -36,77 +36,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'First Name',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              initialValue: userName,
-                              validator: blankValidator,
-                              onSaved: (input) => userName = input,
-                              decoration: InputDecoration(
-                                hintText: 'John',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: new BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: new BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                              ),
-                            ),
-                          ],
+                      Text(
+                        'Full Name',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
                         ),
                       ),
                       SizedBox(
-                        width: 15,
+                        height: 5,
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Last Name',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              validator: blankValidator,
-                              //onSaved: (input) => _name2 = input,
-                              decoration: InputDecoration(
-                                hintText: 'Doe',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: new BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: new BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                              ),
-                            ),
-                          ],
+                      TextFormField(
+                        initialValue: userName,
+                        validator: blankValidator,
+                        onSaved: (input) => userName = input,
+                        decoration: InputDecoration(
+                          hintText: 'John Doe',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
                         ),
                       ),
                     ],

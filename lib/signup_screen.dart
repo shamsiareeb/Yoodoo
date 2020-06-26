@@ -14,6 +14,11 @@ class SignupScreen extends StatefulWidget{
 }
 class _SignupForm extends State<SignupScreen>{
 
+  @override
+  void initState() {
+    passwordVisible = true;
+  }
+
 
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
@@ -81,7 +86,7 @@ class _SignupForm extends State<SignupScreen>{
                         },
                       )
                   ),
-                obscureText: true
+                obscureText: passwordVisible,
               ),
               SizedBox(
                 height: 20,
