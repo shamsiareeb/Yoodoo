@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(currentUser != null) {
         user = currentUser;
         popupWait(context);
-        await defineUI();
+        await defineHomescreenUI();
         Navigator.of(context).pop();
         Navigator.pushReplacement(
             context,

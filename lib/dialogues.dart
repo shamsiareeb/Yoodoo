@@ -781,7 +781,7 @@ void popupJoin(BuildContext context) {
                             await usersCollection.document(user.uid).updateData({
                               'groups' : FieldValue.arrayUnion([_code])
                             });
-                            await defineUI();
+                            await defineHomescreenUI();
                             Navigator.of(context).pop();//closes popupWait()
                             Navigator.of(context).pop();//closes popupJoin()
                           }

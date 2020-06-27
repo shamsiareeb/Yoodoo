@@ -55,7 +55,7 @@ class RewardScreen extends State<ConfigureRewards> {
                   popupWait(context);
                   await initGroup(user);//FirebaseUser user imported from login_screen.dart
                   await updateGroupsArrayForUser(user);
-                  await defineUI();
+                  await defineHomescreenUI();
                   rewards.clear();
                   yoodoos.clear();
                   Navigator.of(context).pop();//pops popupWait()

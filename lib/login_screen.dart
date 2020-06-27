@@ -157,7 +157,7 @@ void checkFlag(FirebaseUser user) async {
        );
      }
      else{
-       await defineUI();
+       await defineHomescreenUI();
        Navigator.of(context).pop();//pops popupDialog5
        Navigator.pushReplacement(
          context,

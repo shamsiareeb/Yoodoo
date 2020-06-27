@@ -187,7 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   _formKey.currentState.save();
                                  // if (popupDialog10(context) == true){
                                     save(userName, company, designation);
-                                    await defineUI();
+                                    await defineHomescreenUI();
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(builder: (context) => HomeScreen()),
