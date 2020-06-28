@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/create_instances.dart';
+import 'package:yoodoo/load_tasks.dart';
 import 'dialogues.dart';
-import 'group.dart';
+import 'taskboard.dart';
 import 'group_info.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
@@ -11,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 bool UIflag;
 bool ownerFlag;
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
@@ -85,10 +87,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: groups.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                          onTap: (){
-                            defineTaskboardUI(index);
+                          onTap: () async {
+
+                            popupWait(context);
+                            await defineTaskboardUI(index);
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Group()),);
-                          },
+
+                            },
                       child: Container(
                         padding: EdgeInsets.fromLTRB(10,10,10,0),
                         height: 175,
@@ -256,16 +261,8 @@ void printArrays(){
 }
 
 Future <void> defineTaskboardUI(int index) async {
-  String ownerId;
-  await groupsCollection.document(groups[index]).get().then((DocumentSnapshot ds) {
-    ownerId = (ds['ownerId']);
-  });
-  if(user.uid == ownerId){
-    ownerFlag = true;
-  }
-  else{
-    ownerFlag = false;
-  }
+  await checkGroupOwner(index);
+  await loadTasksData(index);
 }
 
 

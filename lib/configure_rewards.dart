@@ -202,7 +202,10 @@ class RewardScreen extends State<ConfigureRewards> {
       'groupCode': groupId,
       'groupName': groupName,
       'groupDescription': groupDescription,
-      'members': FieldValue.arrayUnion([user.uid])
+      'members': FieldValue.arrayUnion([user.uid]),
+      'taskNames': FieldValue.arrayUnion(null),
+      'taskDescriptions': FieldValue.arrayUnion(null),
+      'taskPriorities': FieldValue.arrayUnion(null),
     });
   }
 
