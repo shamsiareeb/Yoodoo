@@ -10,7 +10,7 @@ import 'profile_screen.dart';
 import 'load_groups.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-bool UIflag;
+bool uiFlag;
 bool ownerFlag;
 
 class HomeScreen extends StatefulWidget {
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: <Widget>[
               Expanded(
-                child: UIflag == false ? new Container(
+                child: uiFlag == false ? new Container(
                   child: new Center(
                       child: new Text('No groups to show')
                   ),
@@ -91,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             popupWait(context);
                             await defineTaskboardUI(index);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Group()),);
+                            Navigator.of(context).pop();//pops popupWait()
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Taskboard()),);
 
                             },
                       child: Container(
@@ -244,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 Future<void> defineHomescreenUI() async{
-  UIflag = await loadGroupsData(user);
+  uiFlag = await loadGroupsData(user);
   printArrays();
 }
 void printArrays(){
@@ -257,7 +258,7 @@ void printArrays(){
   print('group owners are:');
   print(groupOwners);
   print('Ui flag is:');
-  print(UIflag);
+  print(uiFlag);
 }
 
 Future <void> defineTaskboardUI(int index) async {

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'dialogues.dart';
 
-class Group extends StatefulWidget{
+class Taskboard extends StatefulWidget{
   @override
-  _GroupState createState() => new _GroupState();
+  _TaskboardState createState() => new _TaskboardState();
 }
 
-class _GroupState extends State<Group> {
+class _TaskboardState extends State<Taskboard> {
 
   Widget build(BuildContext context) {
     return new Scaffold(

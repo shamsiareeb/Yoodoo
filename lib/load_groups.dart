@@ -22,7 +22,6 @@ Future <bool> loadGroupsData(FirebaseUser user) async {
 Future<bool> calcArrayLength() async{
 
   if (groups.length == 0){
-    //print('No groups to show');
     return false;
   }
   else{
