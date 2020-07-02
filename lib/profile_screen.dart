@@ -212,11 +212,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
   Future save(_userName, _company, _designation) async{
-    //String n1 = _name1, n2 = _name2;
-    //n1 = n1.trim();
-    //n2 = n2.trim();
-    //userName = n1 + ' ' + n2;
     _userName = _userName.trim();
+    userName = _userName;
     return await usersCollection.document(user.uid).setData({
       'name': _userName,
       'workplace': _company,

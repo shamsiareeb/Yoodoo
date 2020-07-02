@@ -20,8 +20,6 @@ class ConfigureRewards extends StatefulWidget{
 
 class RewardScreen extends State<ConfigureRewards> {
 
-  //final CollectionReference groupsCollection = Firestore.instance.collection('groups');
-  //final CollectionReference usersCollection = Firestore.instance.collection('users');
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -203,9 +201,9 @@ class RewardScreen extends State<ConfigureRewards> {
       'groupName': groupName,
       'groupDescription': groupDescription,
       'members': FieldValue.arrayUnion([user.uid]),
-      'taskNames': FieldValue.arrayUnion(null),
-      'taskDescriptions': FieldValue.arrayUnion(null),
-      'taskPriorities': FieldValue.arrayUnion(null),
+      'taskNames': FieldValue.arrayUnion([]),
+      'taskDescriptions': FieldValue.arrayUnion([]),
+      'taskPriorities': FieldValue.arrayUnion([]),
     });
   }
 

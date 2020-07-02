@@ -120,7 +120,7 @@ void popupDialog4(BuildContext context, String error) {
                     ),),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    Navigator.of(context).pop();
+                    //Navigator.of(context).pop();
                   },
                 )
               ],
@@ -191,7 +191,7 @@ void popupDialog7(BuildContext context) {
                     child: Text("Close"),
                     onPressed: () {
                       Navigator.of(context).pop();
-                      Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
                     },
                   )
                 ]
