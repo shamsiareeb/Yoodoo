@@ -41,7 +41,7 @@ class _GroupInfoState extends State<GroupInfo> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
           child: Form(
             key: _formkey,
             child: Column(

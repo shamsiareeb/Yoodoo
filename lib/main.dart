@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/splash_screen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         accentColor: Colors.black,
       ),
-      home:SplashScreen(),
+      home:CreateTask(),
     );
   }
 }
