@@ -135,7 +135,7 @@ class _SignupForm extends State<SignupScreen>{
                 onTap: () async {
                   if (_formKey.currentState.validate()){
                     _formKey.currentState.save();
-                    popupDialog1(context);
+                    popupDisplaySigningYouUp(context);
                     signUp(_email, _password);
                   }
                 },
@@ -150,9 +150,9 @@ class _SignupForm extends State<SignupScreen>{
         AuthResult authResult = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email , password: pass);
         FirebaseUser user = authResult.user;
         initUserData(user);
-        popupDialog2(context);
+        popupDisplaySendingVerification(context);
         user.sendEmailVerification();
-        popupDialog3(context);
+        popupVerifyEmailPrompt(context);
         //user.sendEmailVerification();
         //Navigator.push(
         //    context,
@@ -160,7 +160,7 @@ class _SignupForm extends State<SignupScreen>{
       }
       catch(e){
         setState(() => _error = e.message);
-        popupDialog4(context, _error);
+        popupDisplayError(context, _error);
       }
     }
 

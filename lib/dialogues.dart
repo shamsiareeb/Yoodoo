@@ -10,7 +10,7 @@ import 'create_instances.dart';
 
 final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
-void popupDialog1(BuildContext context) {
+void popupDisplaySigningYouUp(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -34,7 +34,7 @@ void popupDialog1(BuildContext context) {
   );
 }
 
-void popupDialog2(BuildContext context) {
+void popupDisplaySendingVerification(BuildContext context) {
   Navigator.of(context).pop();
   showDialog(
       context: context,
@@ -58,7 +58,7 @@ void popupDialog2(BuildContext context) {
   );
 }
 
-void popupDialog3(BuildContext context) {
+void popupVerifyEmailPrompt(BuildContext context) {
   Navigator.of(context).pop();
   showDialog(
       context: context,
@@ -99,7 +99,7 @@ void popupDialog3(BuildContext context) {
   );
 }
 
-void popupDialog4(BuildContext context, String error) {
+void popupDisplayError(BuildContext context, String error) {
   Navigator.of(context).pop();//closes last dialogue box
   showDialog(
       context: context,
@@ -131,7 +131,7 @@ void popupDialog4(BuildContext context, String error) {
   );
 }
 
-void popupDialog5(BuildContext context) {
+void popupDisplayLoggingYouIn(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -155,7 +155,7 @@ void popupDialog5(BuildContext context) {
   );
 }
 
-void popupDialog6(BuildContext context) {
+void popupDisplayNoSuchUser(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -166,15 +166,26 @@ void popupDialog6(BuildContext context) {
                     borderRadius: BorderRadius.circular(5.0)
                 ),
                 title: Text("Woops!"),
-                content: Text('No such user was found')
+                content: Text('No such user was found'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Close", 
+                    style: TextStyle(
+                    color: Colors.black,
+                    ),), 
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    },
+                )
+              ],
             )
         );
-      },
+        },
       barrierDismissible: false
   );
 }
 
-void popupDialog7(BuildContext context) {
+void popupDisplayEmailError(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -203,7 +214,7 @@ void popupDialog7(BuildContext context) {
 }
 
 
-void popupDialog8(BuildContext context) {
+void popupCancelSetup(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -250,7 +261,7 @@ void popupDialog8(BuildContext context) {
   );
 }
 
-void popupDialog9(BuildContext context) {
+void popupInputYesNo(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -301,7 +312,7 @@ void popupDialog9(BuildContext context) {
   );
 }
 
-bool popupDialog10(BuildContext context) {
+/*bool popupDialog10(BuildContext context) {
   bool val;
   showDialog(
       context: context,
@@ -347,9 +358,9 @@ bool popupDialog10(BuildContext context) {
       barrierDismissible: false
   );
   return val;
-}
+}*/
 
-void popupDialog11(BuildContext context) {
+void popupBlankWarning(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
@@ -382,12 +393,12 @@ void popupDialog11(BuildContext context) {
                   ]
               )
           );
-        },
+          }, 
         barrierDismissible: false
     );
-  }
+}
 
-  void popupDialog12(BuildContext context) {
+  void popupInputReward(BuildContext context) {
     TextEditingController c = new TextEditingController();
     showDialog(
       context: context,
@@ -426,12 +437,12 @@ void popupDialog11(BuildContext context) {
                   String input = c.text;
                   input = input.trim();
                   if(input.length == 0){
-                    popupDialog11(context);
+                    popupBlankWarning(context);
                     //return null;
                   }
                   else{
                      rewards.add(c.text);
-                     popupDialog13(context);
+                     popupInputYoodoos(context);
                   }
                 },
               )
@@ -442,7 +453,7 @@ void popupDialog11(BuildContext context) {
     );
   }
 
-void popupDialog13(BuildContext context){
+void popupInputYoodoos(BuildContext context){
   TextEditingController c = new TextEditingController();
   showDialog(
     context: context,
@@ -485,7 +496,7 @@ void popupDialog13(BuildContext context){
                   yoodoos.add(int.parse(c.text));
                 }
                 else{
-                  popupDialog14(context);
+                  popupYoodooRangeError(context);
                 }
               },
             )
@@ -496,7 +507,7 @@ void popupDialog13(BuildContext context){
   );
 }
 
-void popupDialog14(BuildContext context) {
+void popupYoodooRangeError(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -535,7 +546,7 @@ void popupDialog14(BuildContext context) {
   );
 }
 
-void popupDialog15(BuildContext context) {
+void popupNoRewardsWarning(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
@@ -786,7 +797,7 @@ void popupJoin(BuildContext context) {
                             Navigator.of(context).pop();//closes popupJoin()
                           }
                           catch(e){
-                            popupDialog4(context, e.toString());
+                            popupDisplayError(context, e.toString());
                           }
                           }
                     },

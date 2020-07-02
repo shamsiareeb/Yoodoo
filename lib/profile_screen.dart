@@ -157,10 +157,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               onTap: () {
                                 if (userName.isEmpty){
-                                  popupDialog8(context);
+                                  popupCancelSetup(context);
                                 }
                                 else {
-                                  popupDialog9(context);
+                                  popupInputYesNo(context);
                                 }
                               },
                             ),

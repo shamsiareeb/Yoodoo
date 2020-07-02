@@ -27,7 +27,7 @@ class _TaskboardState extends State<Taskboard> {
                padding: EdgeInsets.only(right: 25.0),
                child: GestureDetector(
                  onTap: (){
-                   popupDialog15(context);
+                   popupNoRewardsWarning(context);
                  },
                  child: Icon(
                      Icons.add
@@ -38,7 +38,7 @@ class _TaskboardState extends State<Taskboard> {
                padding: EdgeInsets.only(right: 25.0),
                child: GestureDetector(
                  onTap: (){
-                   popupDialog15(context);
+                   popupNoRewardsWarning(context);
                  },
                  child: Icon(
                      Icons.info
@@ -51,7 +51,7 @@ class _TaskboardState extends State<Taskboard> {
             padding: EdgeInsets.only(right: 25.0),
             child: GestureDetector(
               onTap: (){
-                popupDialog15(context);
+                popupNoRewardsWarning(context);
               },
               child: Icon(
                 Icons.info

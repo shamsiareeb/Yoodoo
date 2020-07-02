@@ -107,7 +107,7 @@ class _LoginForm extends State<LoginScreen>{
                 onTap: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    popupDialog5(context);
+                    popupDisplayLoggingYouIn(context);
                     logIn(_email, _password);
                   }
                 }
@@ -123,7 +123,7 @@ class _LoginForm extends State<LoginScreen>{
       AuthResult authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email , password: pass);
       user = authResult.user;
       if(user == null) {
-        popupDialog6(context);
+        popupDisplayNoSuchUser(context);
       }
       else
         {
@@ -134,13 +134,13 @@ class _LoginForm extends State<LoginScreen>{
             }
           else
             {
-              popupDialog7(context);
+              popupDisplayEmailError(context);
             }
         }
     }
     catch(e){
       setState(() => _error = e.message);
-      popupDialog4(context, _error);
+      popupDisplayError(context, _error);
     }
 }
 void checkFlag(FirebaseUser user) async {

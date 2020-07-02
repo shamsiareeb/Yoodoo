@@ -148,7 +148,7 @@ class RewardScreen extends State<ConfigureRewards> {
                           });
                         }
                         else {
-                          popupDialog15(context);
+                          popupNoRewardsWarning(context);
                         }
                       },
                     ),
@@ -177,7 +177,7 @@ class RewardScreen extends State<ConfigureRewards> {
                         ),
                       ),
                       onTap: () {
-                        popupDialog12(context);
+                        popupInputReward(context);
                       },
                     ),
                   ),
