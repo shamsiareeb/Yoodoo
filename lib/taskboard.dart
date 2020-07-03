@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/home_screen.dart';
@@ -9,6 +11,8 @@ class Taskboard extends StatefulWidget{
 }
 
 class _TaskboardState extends State<Taskboard> {
+
+  int number = 5;
 
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -61,10 +65,48 @@ class _TaskboardState extends State<Taskboard> {
         ],
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: <Widget>[
+            Container(
+              //margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+              height: MediaQuery.of(context).size.height*0.85,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: number,
+                itemBuilder: (context, index){
+                  return Container(
+                    padding: EdgeInsets.fromLTRB(10,10,10,0),
+                    width: MediaQuery.of(context).size.width*0.8,
+                    child: Card(
+                      elevation: 5,
+                        child: GestureDetector(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 3.0,
+                                color: Colors.redAccent,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                          ),
+                        ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+      /*body: Container(
         child: new Center(
             child: new Text('No tasks to show')
         ),
-      ),
+      ),*/
     );
   }
 }

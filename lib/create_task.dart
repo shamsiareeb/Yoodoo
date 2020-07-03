@@ -138,16 +138,21 @@ class _CreateTaskState extends State<CreateTask> {
                                     width: 1.5,
                                   ),
                                 ),
-                                child: Text('High Priority (8 Yoodoos)'),
+                                child: Row(
+                                  children: <Widget>[
+                                    Radio(
+                                      activeColor: Colors.redAccent,
+                                      value: radioValues.high,
+                                      groupValue: _values,
+                                      onChanged: (radioValues value) {
+                                        setState(() { _values = value; });
+                                      },
+                                    ),
+                                    Text('High Priority (8 Yoodoos)'),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          leading: Radio(
-                            value: radioValues.high,
-                            groupValue: _values,
-                            onChanged: (radioValues value) {
-                              setState(() { _values = value; });
-                            },
                           ),
                         ),
                         ListTile(
@@ -163,16 +168,22 @@ class _CreateTaskState extends State<CreateTask> {
                                     width: 1.5,
                                   ),
                                 ),
-                                child: Text('Medium Priority (4 Yoodoos)'),
+                                child: Row(
+                                  children: <Widget>[
+                                    //Text('Medium Priority (4 Yoodoos)'),
+                                    Radio(
+                                      activeColor: Colors.orangeAccent,
+                                      value: radioValues.medium,
+                                      groupValue: _values,
+                                      onChanged: (radioValues value) {
+                                        setState(() { _values = value; });
+                                      },
+                                    ),
+                                    Text('Medium Priority (4 Yoodoos)'),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          leading: Radio(
-                            value: radioValues.medium,
-                            groupValue: _values,
-                            onChanged: (radioValues value) {
-                              setState(() { _values = value; });
-                            },
                           ),
                         ),
                         ListTile(
@@ -188,16 +199,21 @@ class _CreateTaskState extends State<CreateTask> {
                                     width: 1.5,
                                   ),
                                 ),
-                                child: Text('Low Priority (1 Yoodoos)'),
+                                child: Row(
+                                  children: <Widget>[
+                                    Radio(
+                                      activeColor: Colors.greenAccent,
+                                      value: radioValues.low,
+                                      groupValue: _values,
+                                      onChanged: (radioValues value) {
+                                        setState(() { _values = value; });
+                                      },
+                                    ),
+                                    Text('Low Priority (1 Yoodoo)'),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          leading: Radio(
-                            value: radioValues.low,
-                            groupValue: _values,
-                            onChanged: (radioValues value) {
-                              setState(() { _values = value; });
-                            },
                           ),
                         ),
                       ],

@@ -4,6 +4,7 @@ import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/splash_screen.dart';
+import 'package:yoodoo/taskboard.dart';
 import 'login_screen.dart';
 import 'package:flutter/services.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         accentColor: Colors.black,
       ),
-      home:CreateTask(),
+      home:Taskboard(),
     );
   }
 }
