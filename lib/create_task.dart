@@ -1,6 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/create_instances.dart';
+import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/load_tasks.dart';
+import 'package:yoodoo/taskboard.dart';
 import 'package:yoodoo/validators.dart';
+import 'home_screen.dart';
+import 'load_groups.dart';
 
 class CreateTask extends StatefulWidget{
 
@@ -8,11 +15,11 @@ class CreateTask extends StatefulWidget{
   _CreateTaskState createState() => new _CreateTaskState();
 }
 
-enum radioValues { high, medium, low }
-
 class _CreateTaskState extends State<CreateTask> {
 
-  radioValues _values = radioValues.low;
+  List radioValues = [2, 4, 8];// low, medium, high priorities
+  int _value;// used to store task priority
+  String _taskName = "", _taskDescription = "";
 
   final GlobalKey<FormState>_formkey = GlobalKey<FormState>();
 
@@ -30,8 +37,13 @@ class _CreateTaskState extends State<CreateTask> {
           Padding(
             padding: EdgeInsets.only(right: 25.0),
             child: GestureDetector(
-              onTap: () {
-
+              onTap: () async {
+                popupWait(context);
+                await createTask();
+                Navigator.of(context).pop();// pops popupWait
+                Navigator.of(context).pop();// pops CreateTaskScreen
+                loadTasksData(groupIndex);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Taskboard()),);
               },
               child: Icon(
                 Icons.navigate_next
@@ -62,6 +74,7 @@ class _CreateTaskState extends State<CreateTask> {
                       height: 15,
                     ),
                     TextFormField(
+                      onSaved: (input) => _taskName = input,
                       maxLength: 30,
                       maxLines: 1,
                       validator: blankValidator,
@@ -93,6 +106,7 @@ class _CreateTaskState extends State<CreateTask> {
                       height: 15,
                     ),
                     TextFormField(
+                      onSaved: (input) => _taskDescription = input,
                       maxLength: 140,
                       maxLines: 5,
                       validator: blankValidator,
@@ -142,10 +156,10 @@ class _CreateTaskState extends State<CreateTask> {
                                   children: <Widget>[
                                     Radio(
                                       activeColor: Colors.redAccent,
-                                      value: radioValues.high,
-                                      groupValue: _values,
-                                      onChanged: (radioValues value) {
-                                        setState(() { _values = value; });
+                                      value: radioValues[2],
+                                      groupValue: _value,
+                                      onChanged: (value) {
+                                        setState(() { _value = value; });
                                       },
                                     ),
                                     Text('High Priority (8 Yoodoos)'),
@@ -173,10 +187,10 @@ class _CreateTaskState extends State<CreateTask> {
                                     //Text('Medium Priority (4 Yoodoos)'),
                                     Radio(
                                       activeColor: Colors.orangeAccent,
-                                      value: radioValues.medium,
-                                      groupValue: _values,
-                                      onChanged: (radioValues value) {
-                                        setState(() { _values = value; });
+                                      value: radioValues[1],
+                                      groupValue: _value,
+                                      onChanged: (value) {
+                                        setState(() { _value = value; });
                                       },
                                     ),
                                     Text('Medium Priority (4 Yoodoos)'),
@@ -203,10 +217,10 @@ class _CreateTaskState extends State<CreateTask> {
                                   children: <Widget>[
                                     Radio(
                                       activeColor: Colors.greenAccent,
-                                      value: radioValues.low,
-                                      groupValue: _values,
-                                      onChanged: (radioValues value) {
-                                        setState(() { _values = value; });
+                                      value: radioValues[0],
+                                      groupValue: _value,
+                                      onChanged: (value) {
+                                        setState(() { _value = value; });
                                       },
                                     ),
                                     Text('Low Priority (1 Yoodoo)'),
@@ -226,5 +240,14 @@ class _CreateTaskState extends State<CreateTask> {
         ),
       ),
     );
+  }
+  Future <void> createTask() async{
+    await groupsCollection.document(groups[groupIndex]).setData({
+      'taskNames': FieldValue.arrayUnion([_taskName]),
+      'taskDescriptions': FieldValue.arrayUnion([_taskDescription]),
+      'taskPriorities': FieldValue.arrayUnion([_value]),
+      'taskAcceptors': FieldValue.arrayUnion([null]),
+      'taskStatus': FieldValue.arrayUnion([0]),
+    });
   }
 }

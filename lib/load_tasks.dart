@@ -7,6 +7,8 @@ import 'login_screen.dart';
 var tasks = new List();
 var taskDescriptions = new List();
 var taskPriorities = new List();
+var taskAcceptors = new List();
+var taskStatus = new List();
 
 Future <void> checkGroupOwner(int index) async{
   String ownerId;
@@ -25,10 +27,14 @@ Future <void> loadTasksData(int index) async{
   tasks.clear();
   taskDescriptions.clear();
   taskPriorities.clear();
+  taskAcceptors.clear();
+  taskStatus.clear();
   await groupsCollection.document(groups[index]).get().then((DocumentSnapshot ds) {
     tasks = (ds['taskNames']);
     taskDescriptions = (ds['taskDescriptions']);
     taskPriorities = (ds['taskPriorities']);
+    taskAcceptors = (ds['taskAcceptors']);
+    taskStatus = (ds['taskStatus']);
   });
 }
 

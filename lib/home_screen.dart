@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 bool uiFlag;
 bool ownerFlag;
+int groupIndex;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -89,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return GestureDetector(
                           onTap: () async {
 
+                            groupIndex = index;
                             popupWait(context);
                             await defineTaskboardUI(index);
                             Navigator.of(context).pop();//pops popupWait()
