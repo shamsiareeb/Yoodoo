@@ -204,6 +204,8 @@ class RewardScreen extends State<ConfigureRewards> {
       'taskNames': FieldValue.arrayUnion([]),
       'taskDescriptions': FieldValue.arrayUnion([]),
       'taskPriorities': FieldValue.arrayUnion([]),
+      'taskAcceptors': FieldValue.arrayUnion([]),
+      'taskStatus': FieldValue.arrayUnion([]),
     });
   }
 
