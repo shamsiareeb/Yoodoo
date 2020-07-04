@@ -94,6 +94,46 @@ class _TaskboardState extends State<Taskboard> {
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
                             ),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0, bottom: 10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text("Someone please go to the bank and collect a cheque",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text('There is a cancelled cheque at the SBI, GB Marg branch with the name of '
+                                          '"Mohammad Areeb Shamsi". I am a little tied up so I cant pick it up. Can '
+                                          'someone please pick it up for me?',
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 16,
+                                      ),),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Align(
+                                          alignment: Alignment.bottomRight,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                     ),

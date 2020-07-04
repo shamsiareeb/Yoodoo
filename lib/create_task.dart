@@ -75,12 +75,12 @@ class _CreateTaskState extends State<CreateTask> {
                     ),
                     TextFormField(
                       onSaved: (input) => _taskName = input,
-                      maxLength: 30,
+                      maxLength: 50,
                       maxLines: 1,
                       validator: blankValidator,
                       decoration: InputDecoration(
                         counterText: '',
-                        hintText: "Max 30 characters",
+                        hintText: "Max 50 characters",
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: OutlineInputBorder(
                           borderSide: new BorderSide(color: Colors.black),
@@ -145,25 +145,32 @@ class _CreateTaskState extends State<CreateTask> {
                             width: double.maxFinite,
                             child: Card(
                               elevation: 5,
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.redAccent,
-                                    width: 1.5,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Radio(
-                                      activeColor: Colors.redAccent,
-                                      value: radioValues[2],
-                                      groupValue: _value,
-                                      onChanged: (value) {
-                                        setState(() { _value = value; });
-                                      },
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _value = radioValues[2];
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.redAccent,
+                                      width: 1.5,
                                     ),
-                                    Text('High Priority (8 Yoodoos)'),
-                                  ],
+                                  ),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        activeColor: Colors.redAccent,
+                                        value: radioValues[2],
+                                        groupValue: _value,
+                                        onChanged: (value) {
+                                          setState(() { _value = value; });
+                                        },
+                                      ),
+                                      Text('High Priority (8 Yoodoos)'),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -175,26 +182,32 @@ class _CreateTaskState extends State<CreateTask> {
                             width: double.maxFinite,
                             child: Card(
                               elevation: 5,
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.orangeAccent,
-                                    width: 1.5,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    //Text('Medium Priority (4 Yoodoos)'),
-                                    Radio(
-                                      activeColor: Colors.orangeAccent,
-                                      value: radioValues[1],
-                                      groupValue: _value,
-                                      onChanged: (value) {
-                                        setState(() { _value = value; });
-                                      },
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _value = radioValues[1];
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.orangeAccent,
+                                      width: 1.5,
                                     ),
-                                    Text('Medium Priority (4 Yoodoos)'),
-                                  ],
+                                  ),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        activeColor: Colors.orangeAccent,
+                                        value: radioValues[1],
+                                        groupValue: _value,
+                                        onChanged: (value) {
+                                          setState(() { _value = value; });
+                                        },
+                                      ),
+                                      Text('Medium Priority (4 Yoodoos)'),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -206,25 +219,32 @@ class _CreateTaskState extends State<CreateTask> {
                             width: double.maxFinite,
                             child: Card(
                               elevation: 5,
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.greenAccent,
-                                    width: 1.5,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Radio(
-                                      activeColor: Colors.greenAccent,
-                                      value: radioValues[0],
-                                      groupValue: _value,
-                                      onChanged: (value) {
-                                        setState(() { _value = value; });
-                                      },
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _value = radioValues[0];
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.greenAccent,
+                                      width: 1.5,
                                     ),
-                                    Text('Low Priority (1 Yoodoo)'),
-                                  ],
+                                  ),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        activeColor: Colors.greenAccent,
+                                        value: radioValues[0],
+                                        groupValue: _value,
+                                        onChanged: (value) {
+                                          setState(() { _value = value; });
+                                        },
+                                      ),
+                                      Text('Low Priority (1 Yoodoo)'),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
