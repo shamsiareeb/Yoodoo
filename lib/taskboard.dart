@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'dialogues.dart';
 
@@ -31,7 +32,8 @@ class _TaskboardState extends State<Taskboard> {
                padding: EdgeInsets.only(right: 25.0),
                child: GestureDetector(
                  onTap: (){
-                   popupNoRewardsWarning(context);
+                   Navigator.push(context, MaterialPageRoute (builder: (context) => CreateTask()),
+                   );
                  },
                  child: Icon(
                      Icons.add
