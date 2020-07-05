@@ -93,7 +93,7 @@ class _TaskboardState extends State<Taskboard> {
                           child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(
-                                width: 3.0,
+                                width: 5.0,
                                 color: tpc[index]
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -129,6 +129,34 @@ class _TaskboardState extends State<Taskboard> {
                                       children: <Widget>[
                                         Align(
                                           alignment: Alignment.bottomRight,
+                                          child: Container(
+                                            height: 35,
+                                            width: 100,
+                                            decoration: BoxDecoration(
+                                              color: Colors.lightGreen,
+                                              borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Icon(
+                                                    Icons.arrow_downward,
+                                                    color: Colors.white,
+                                                  ),
+                                                  Text('Accept',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
