@@ -17,11 +17,11 @@ class CreateTask extends StatefulWidget{
 
 class _CreateTaskState extends State<CreateTask> {
 
-  List radioValues = [Colors.greenAccent, Colors.orangeAccent, Colors.redAccent];// low, medium, high priorities
+  List radioValues = ["Colors.greenAccent", "Colors.orangeAccent", "Colors.redAccent"];// low, medium, high priorities
   var _value;// used to store task priority
   String _taskName = "", _taskDescription = "";
 
-  final GlobalKey<FormState>_formkey = GlobalKey<FormState>();
+  GlobalKey<FormState>_formkey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -38,8 +38,11 @@ class _CreateTaskState extends State<CreateTask> {
             padding: EdgeInsets.only(right: 25.0),
             child: GestureDetector(
               onTap: () async {
+                if (_formkey.currentState.validate()){
+                  _formkey.currentState.save();
+                }
                 popupWait(context);
-                await createTask();
+                await createTheTask();
                 await loadTasksData(groupIndex);
                 Navigator.of(context).pop();// pops popupWait
                 Navigator.of(context).pop();// pops CreateTaskScreen
@@ -261,13 +264,13 @@ class _CreateTaskState extends State<CreateTask> {
       ),
     );
   }
-  Future <void> createTask() async{
+  Future <void> createTheTask() async{
     await groupsCollection.document(groups[groupIndex]).updateData({
       'taskNames': FieldValue.arrayUnion([_taskName]),
       'taskDescriptions': FieldValue.arrayUnion([_taskDescription]),
       'taskPriorities': FieldValue.arrayUnion([_value]),
-      'taskAcceptors': FieldValue.arrayUnion([null]),
-      'taskStatus': FieldValue.arrayUnion([0]),
+      'taskAcceptors': FieldValue.arrayUnion(["000"]),//000 stands for null
+      'taskStatus': FieldValue.arrayUnion([0]),// 0 stands for null, 1 for accepted, 2 for claimed reward
     });
   }
 }

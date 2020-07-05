@@ -13,7 +13,7 @@ class Taskboard extends StatefulWidget{
 class _TaskboardState extends State<Taskboard> {
 
   //int number = tasks.length;
-
+  int index = 0;
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -70,7 +70,7 @@ class _TaskboardState extends State<Taskboard> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
-            tasks.length == 0?new Container(
+            tasks.length == 0 ? new Container(
               child: new Center(
                   child: new Text('No tasks to show')
               ),
@@ -94,7 +94,7 @@ class _TaskboardState extends State<Taskboard> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: 3.0,
-                                color: taskPriorities[index]
+                                color: tpc[index]
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
                             ),

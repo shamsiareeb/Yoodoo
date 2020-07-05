@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:yoodoo/load_groups.dart';
 import 'home_screen.dart';
 import 'create_instances.dart';
@@ -9,6 +11,7 @@ var taskDescriptions = new List();
 var taskPriorities = new List();
 var taskAcceptors = new List();
 var taskStatus = new List();
+List<MaterialAccentColor> tpc= new List<MaterialAccentColor>();
 
 Future <void> checkGroupOwner(int index) async{
   String ownerId;
@@ -36,5 +39,19 @@ Future <void> loadTasksData(int index) async{
     taskAcceptors = (ds['taskAcceptors']);
     taskStatus = (ds['taskStatus']);
   });
-}
+  if(taskPriorities.isNotEmpty){
+    for (int i = 0; i < taskPriorities.length; i++){
+      print(i);
+      if(taskPriorities[i] == "Colors.greenAccent") {
+        tpc.add(Colors.greenAccent);
 
+      }
+      else if(taskPriorities[i] == "Colors.orangeAccent") {
+        tpc.add(Colors.orangeAccent);
+      }
+      else {
+        tpc.add(Colors.redAccent);
+      }
+    }
+  }
+}
