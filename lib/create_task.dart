@@ -18,7 +18,7 @@ class CreateTask extends StatefulWidget{
 class _CreateTaskState extends State<CreateTask> {
 
   List radioValues = [Colors.greenAccent, Colors.orangeAccent, Colors.redAccent];// low, medium, high priorities
-  int _value;// used to store task priority
+  var _value;// used to store task priority
   String _taskName = "", _taskDescription = "";
 
   final GlobalKey<FormState>_formkey = GlobalKey<FormState>();
@@ -262,7 +262,7 @@ class _CreateTaskState extends State<CreateTask> {
     );
   }
   Future <void> createTask() async{
-    await groupsCollection.document(groups[groupIndex]).setData({
+    await groupsCollection.document(groups[groupIndex]).updateData({
       'taskNames': FieldValue.arrayUnion([_taskName]),
       'taskDescriptions': FieldValue.arrayUnion([_taskDescription]),
       'taskPriorities': FieldValue.arrayUnion([_value]),
