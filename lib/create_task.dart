@@ -17,7 +17,7 @@ class CreateTask extends StatefulWidget{
 
 class _CreateTaskState extends State<CreateTask> {
 
-  List radioValues = [2, 4, 8];// low, medium, high priorities
+  List radioValues = [Colors.greenAccent, Colors.orangeAccent, Colors.redAccent];// low, medium, high priorities
   int _value;// used to store task priority
   String _taskName = "", _taskDescription = "";
 
@@ -40,9 +40,9 @@ class _CreateTaskState extends State<CreateTask> {
               onTap: () async {
                 popupWait(context);
                 await createTask();
+                await loadTasksData(groupIndex);
                 Navigator.of(context).pop();// pops popupWait
                 Navigator.of(context).pop();// pops CreateTaskScreen
-                loadTasksData(groupIndex);
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Taskboard()),);
               },
               child: Icon(

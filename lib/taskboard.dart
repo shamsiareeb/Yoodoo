@@ -1,9 +1,8 @@
-//import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/load_tasks.dart';
 import 'dialogues.dart';
 
 class Taskboard extends StatefulWidget{
@@ -13,7 +12,7 @@ class Taskboard extends StatefulWidget{
 
 class _TaskboardState extends State<Taskboard> {
 
-  int number = 5;
+  //int number = tasks.length;
 
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -71,6 +70,11 @@ class _TaskboardState extends State<Taskboard> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
+            tasks.length == 0?new Container(
+              child: new Center(
+                  child: new Text('No tasks to show')
+              ),
+            ):
             Container(
               //margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
@@ -78,7 +82,7 @@ class _TaskboardState extends State<Taskboard> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: number,
+                itemCount: tasks.length,
                 itemBuilder: (context, index){
                   return Container(
                     padding: EdgeInsets.fromLTRB(10,10,10,0),
@@ -90,7 +94,7 @@ class _TaskboardState extends State<Taskboard> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: 3.0,
-                                color: Colors.redAccent,
+                                color: taskPriorities[index]
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
                             ),
@@ -103,7 +107,7 @@ class _TaskboardState extends State<Taskboard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Expanded(
-                                      child: Text("Someone please go to the bank and collect a cheque",
+                                      child: Text(tasks[index],
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -115,9 +119,7 @@ class _TaskboardState extends State<Taskboard> {
                                     ),
                                     Expanded(
                                       flex: 3,
-                                      child: Text('There is a cancelled cheque at the SBI, GB Marg branch with the name of '
-                                          '"Mohammad Areeb Shamsi". I am a little tied up so I cant pick it up. Can '
-                                          'someone please pick it up for me?',
+                                      child: Text(taskDescriptions[index],
                                       style: TextStyle(
                                         color: Colors.black54,
                                         fontSize: 16,
