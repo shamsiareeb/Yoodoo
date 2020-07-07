@@ -265,9 +265,9 @@ class _CreateTaskState extends State<CreateTask> {
     );
   }
   Future <void> createTheTask() async{
-    String uid = randomString(20);
+    String uid = randomString(10);
     await groupsCollection.document(groups[groupIndex]).updateData({
-      'taskuid': FieldValue.arrayUnion([uid]),
+      'taskuids': FieldValue.arrayUnion([uid]),
     });
     CollectionReference tasksCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
     return await tasksCollection.document(uid).setData({
