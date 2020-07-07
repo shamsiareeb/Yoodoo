@@ -40,25 +40,27 @@ Future <void> loadTasksData(int index) async {
     await groupsCollection.document(groups[index]).get().then((
         DocumentSnapshot ds) {
       tasks = (ds['taskuids']);
+      print(tasks);
     });
     if (tasks.length != 0) {
       CollectionReference tasksCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
       for (int i = 0; i < tasks.length; i++) {
         await tasksCollection.document(tasks[i]).get().then((
             DocumentSnapshot ds){
-          taskNames[i] = (ds['taskName']);
-          taskDescriptions[i] = (ds['taskDescription']);
-          taskPriorities[i] = (ds['taskPriority']);
-          taskAcceptors[i] = (ds['taskAcceptor']);
-          taskStatuses[i] = (ds['taskStatus']);
-          if(taskPriorities[i] == "Colors.redAccent")
-            tpc[i] = Colors.redAccent;
-          else if (taskPriorities[i] == "Colors.orangeAccent")
-            tpc[i] = Colors.orangeAccent;
+          taskNames.add((ds['taskName']));
+          taskDescriptions.add((ds['taskDescription']));
+          taskPriorities.add((ds['taskPriority']));
+          taskAcceptors.add((ds['taskAcceptor']));
+          taskStatuses.add((ds['taskStatus']));
+          if(taskPriorities.elementAt(i) == "Colors.redAccent")
+            tpc.add(Colors.redAccent);
+          else if (taskPriorities.elementAt(i) == "Colors.orangeAccent")
+            tpc.add(Colors.orangeAccent);
           else
-            tpc[i] = Colors.greenAccent;
+            tpc.add(Colors.greenAccent);
         });
       }
+      print(tpc);
     }
     else{
       print(tasks);
