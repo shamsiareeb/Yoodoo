@@ -265,7 +265,7 @@ class _CreateTaskState extends State<CreateTask> {
     );
   }
   Future <void> createTheTask() async{
-    String uid = randomString(10);
+    String uid = randomAlphaNumeric(10);
     await groupsCollection.document(groups[groupIndex]).updateData({
       'taskuids': FieldValue.arrayUnion([uid]),
     });

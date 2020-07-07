@@ -29,10 +29,12 @@ Future <void> checkGroupOwner(int index) async{
 Future <void> loadTasksData(int index) async {
   try {
     tasks.clear();
+    taskNames.clear();
     taskDescriptions.clear();
     taskPriorities.clear();
     taskAcceptors.clear();
     taskStatuses.clear();
+    tpc.clear();
   }
   catch(NoSuchMethodError) {
     print('Array contains nothing');

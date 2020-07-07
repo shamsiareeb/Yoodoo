@@ -107,7 +107,7 @@ class _TaskboardState extends State<Taskboard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Expanded(
-                                      child: Text(tasks[index],
+                                      child: Text(taskNames[index],
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
