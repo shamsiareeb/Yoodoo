@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:random_string/random_string.dart';
 import 'package:yoodoo/create_instances.dart';
 import 'package:yoodoo/dialogues.dart';
-import 'package:yoodoo/load_tasks.dart';
 import 'package:yoodoo/taskboard.dart';
 import 'package:yoodoo/validators.dart';
 import 'home_screen.dart';
@@ -43,7 +43,7 @@ class _CreateTaskState extends State<CreateTask> {
                 }
                 popupWait(context);
                 await createTheTask();
-                await loadTasksData(groupIndex);
+                await defineTaskboardUI(groupIndex);
                 Navigator.of(context).pop();// pops popupWait
                 Navigator.of(context).pop();// pops CreateTaskScreen
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Taskboard()),);
@@ -265,12 +265,17 @@ class _CreateTaskState extends State<CreateTask> {
     );
   }
   Future <void> createTheTask() async{
+    String uid = randomString(20);
     await groupsCollection.document(groups[groupIndex]).updateData({
-      'taskNames': FieldValue.arrayUnion([_taskName]),
-      'taskDescriptions': FieldValue.arrayUnion([_taskDescription]),
-      'taskPriorities': FieldValue.arrayUnion([_value]),
-      'taskAcceptors': FieldValue.arrayUnion(["000"]),//000 stands for null
-      'taskStatus': FieldValue.arrayUnion([0]),// 0 stands for null, 1 for accepted, 2 for claimed reward
+      'taskuid': FieldValue.arrayUnion([uid]),
     });
+    CollectionReference tasksCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
+    return await tasksCollection.document(uid).setData({
+      'taskName': _taskName,
+      'taskDescription': _taskDescription,
+      'taskPriority': _value,
+      'taskAcceptor': "000",//000 stands for null
+      'taskStatus': 0,// 0 stands for null, 1 for accepted, 2 for claimed reward
+      });
   }
 }

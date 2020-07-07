@@ -192,7 +192,7 @@ class RewardScreen extends State<ConfigureRewards> {
 
   Future initGroup(FirebaseUser user) async{
     groupId = randomAlphaNumeric(10);
-    return await groupsCollection.document(groupId).setData({
+    await groupsCollection.document(groupId).setData({
       'ownerId': user.uid,
       'ownerName': userName,
       'rewards': FieldValue.arrayUnion(rewards),
@@ -201,12 +201,10 @@ class RewardScreen extends State<ConfigureRewards> {
       'groupName': groupName,
       'groupDescription': groupDescription,
       'members': FieldValue.arrayUnion([user.uid]),
-      'taskNames': FieldValue.arrayUnion([]),
-      'taskDescriptions': FieldValue.arrayUnion([]),
-      'taskPriorities': FieldValue.arrayUnion([]),
-      'taskAcceptors': FieldValue.arrayUnion([]),
-      'taskStatus': FieldValue.arrayUnion([]),
+      'taskuids': FieldValue.arrayUnion([])
     });
+    //CollectionReference tasksCollection = Firestore.instance.collection('groups/tasks');
+    //tasksCollection.document().
   }
 
   Future updateGroupsArrayForUser(FirebaseUser user) async{

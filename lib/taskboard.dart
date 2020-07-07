@@ -13,7 +13,7 @@ class Taskboard extends StatefulWidget{
 class _TaskboardState extends State<Taskboard> {
 
   //int number = tasks.length;
-  int index = 0;
+  int index;
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(

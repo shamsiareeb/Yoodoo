@@ -13,7 +13,6 @@ class ProfileScreen extends StatefulWidget {
 }
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  //String _name1, _name2, _designation, _company;
   final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
   @override
 

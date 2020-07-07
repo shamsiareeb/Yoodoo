@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'login_screen.dart';
+import 'create_instances.dart';
 import 'dart:async' show Timer;
 
 class SplashScreen extends StatefulWidget {
@@ -18,11 +20,15 @@ class _SplashScreenState extends State<SplashScreen> {
       if(currentUser != null) {
         user = currentUser;
         popupWait(context);
-        await defineHomescreenUI();
-        Navigator.of(context).pop();
-        Navigator.pushReplacement(
+        usersCollection.document(user.uid).get().then((
+            DocumentSnapshot ds) async {
+          userName = (ds['name']);
+          await defineHomescreenUI();
+          Navigator.of(context).pop();
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen()),);
+        });
       }
       else {
         Navigator.pushReplacement(
