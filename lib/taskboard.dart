@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/create_instances.dart';
 import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/load_tasks.dart';
 import 'dialogues.dart';
+import 'load_groups.dart';
+import 'login_screen.dart';
 
 class Taskboard extends StatefulWidget{
   @override
@@ -137,8 +141,11 @@ class _TaskboardState extends State<Taskboard> {
                                               borderRadius: BorderRadius.all(Radius.circular(45.0)),
                                             ),
                                             child: GestureDetector(
-                                              onTap: (){
-
+                                              onTap: () async {
+                                                popupWait(context);
+                                                await updateTaskAttributes(index);
+                                                await addToMyTasks(index);
+                                                Navigator.of(context).pop();//pops popupWait
                                               },
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -180,5 +187,19 @@ class _TaskboardState extends State<Taskboard> {
         ),
       ),*/
     );
+  }
+  Future <void> updateTaskAttributes(int index) async{
+    CollectionReference taskCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
+    await taskCollection.document(tasks[index]).updateData({
+      'taskStatus': 1,
+      'taskAcceptor': user.uid
+    });
+  }
+
+  Future <void> addToMyTasks(int index){
+    String taskPath = 'groups/'+ groups[groupIndex]+'/'+tasks[index];
+    usersCollection.document(user.uid).updateData({
+      'myTasks': FieldValue.arrayUnion([taskPath])
+    });
   }
 }

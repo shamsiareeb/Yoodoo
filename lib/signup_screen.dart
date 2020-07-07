@@ -170,7 +170,8 @@ class _SignupForm extends State<SignupScreen>{
       'name': '',
       'workplace':'',
       'designation':'',
-      'groups': FieldValue.arrayUnion([])
+      'groups': FieldValue.arrayUnion([]),
+      'myTasks': FieldValue.arrayUnion([])
     });
   }
 }
