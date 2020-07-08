@@ -275,7 +275,60 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                 ),
                 Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  margin: EdgeInsets.fromLTRB(0,20,0,0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                          onTap: () {
 
+                          },
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(10,10,10,0),
+                            height: 100,
+                            width: double.maxFinite,
+                            child: Card(
+                                elevation: 5,
+                                child: InkWell(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 3.0,
+                                        color: Colors.redAccent,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 20.0, top: 25.0, right: 20.0, bottom: 10.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: Text('Task Name',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold
+                                                ),),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                            ),
+                          )
+                      );
+                    },
+                  ),
                 ),
               ],
           ),
