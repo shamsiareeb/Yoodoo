@@ -26,7 +26,7 @@ Future <void> checkGroupOwner(int index) async{
   }
 }
 
-Future <void> loadTasksData(int index) async {
+Future <void> loadTasksOfGroup(int index) async {
   try {
     tasks.clear();
     taskNames.clear();

@@ -20,6 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+var myTasks = new List();
+var myTaskNames = new List();
+var myTaskPriorities = new List();
+List<MaterialAccentColor> mytpc= new List<MaterialAccentColor>();
 
   Future <void> _signOut()  async{
     await FirebaseAuth.instance.signOut();
@@ -281,11 +285,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: 5,
+                    itemCount: myTasks.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                           onTap: () {
-
                           },
                           child: Container(
                             padding: EdgeInsets.fromLTRB(10,10,10,0),
@@ -298,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 3.0,
-                                        color: Colors.redAccent,
+                                        color: mytpc.elementAt(index),
                                       ),
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                     ),
@@ -311,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Expanded(
-                                              child: Text('Task Name',
+                                              child: Text(myTaskNames.elementAt(index),
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
@@ -335,6 +338,32 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
     );
   }
+
+  Future <void> loadMyTasks() async{
+    myTasks.clear();
+    myTaskNames.clear();
+    myTaskPriorities.clear();
+    await usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
+      myTasks = (ds['myTasks']);
+    });
+    if(myTasks.isNotEmpty){
+      for (int i = 0; i<myTasks.length; i++){
+        int x = myTasks.elementAt(i).lastIndexOf('/');
+        String path = myTasks.elementAt(i).substring(0, x);
+        CollectionReference taskCollection = Firestore.instance.collection(path);
+        await taskCollection.document(myTasks.elementAt(i).substring(x+1)).get().then((DocumentSnapshot ds){
+          myTaskNames.add(ds['taskNames']);
+          myTaskPriorities.add(ds['taskPriorities']);
+          if(myTaskPriorities.elementAt(i) == "Colors.redAccent")
+            mytpc.add(Colors.redAccent);
+          else if(myTaskPriorities.elementAt(i) == "Colors.orangeAccent")
+            mytpc.add(Colors.orangeAccent);
+          else
+            mytpc.add(Colors.greenAccent);
+        });
+      }
+    }
+  }
 }
 
 Future<void> defineHomescreenUI() async{
@@ -356,7 +385,7 @@ void printArrays(){
 
 Future <void> defineTaskboardUI(int index) async {
   await checkGroupOwner(index);
-  await loadTasksData(index);
+  await loadTasksOfGroup(index);
 }
 
 
