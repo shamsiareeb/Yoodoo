@@ -9,6 +9,7 @@ import 'package:yoodoo/load_tasks.dart';
 import 'dialogues.dart';
 import 'load_groups.dart';
 import 'login_screen.dart';
+import 'home_screen.dart';
 
 class Taskboard extends StatefulWidget{
   @override
@@ -141,6 +142,7 @@ class _TaskboardState extends State<Taskboard> {
                                                 popupWait(context);
                                                 await updateTaskAttributes(index);
                                                 await addToMyTasks(index);
+                                                await loadMyTasks();
                                                 Navigator.of(context).pop();//pops popupWait
                                               },
                                               child: Row(
