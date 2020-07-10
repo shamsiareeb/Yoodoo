@@ -204,7 +204,7 @@ class _TaskboardState extends State<Taskboard> {
   }
 
   Future <void> addToMyTasks(int index) async{
-    String taskPath = 'groups/'+ groups[groupIndex]+'/tasks'+tasks[index];
+    String taskPath = ('groups/'+ groups[groupIndex]+'/tasks/'+tasks[index]);
     await usersCollection.document(user.uid).updateData({
       'myTasks': FieldValue.arrayUnion([taskPath])
     });
