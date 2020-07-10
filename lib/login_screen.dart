@@ -158,6 +158,7 @@ void checkFlag(FirebaseUser user) async {
      }
      else{
        await defineHomescreenUI();
+       await loadMyTasks();
        Navigator.of(context).pop();//pops popupDialog5
        Navigator.pushReplacement(
          context,

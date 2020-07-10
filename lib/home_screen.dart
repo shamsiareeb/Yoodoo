@@ -28,7 +28,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin{
 
   TabController _tabController;
-
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
@@ -373,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                     border: Border.all(
                                       width: 3.0,
                                       color: //Colors.redAccent,
-                                      mytpc.elementAt(index),
+                                      mytpc[index],
                                     ),
                                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                   ),
@@ -386,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Expanded(
-                                            child: Text(myTaskNames.elementAt(index),
+                                            child: Text(myTaskNames[index],
                                               overflow: TextOverflow.ellipsis,
                                               //myTaskNames.elementAt(index),
                                               style: TextStyle(
@@ -736,14 +735,15 @@ Future <void> loadMyTasks() async{
   await usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
     myTasks = (ds['myTasks']);
   });
+  print('My tasks array is $myTasks');
   if(myTasks.isNotEmpty){
     for (int i = 0; i<myTasks.length; i++){
       int x = myTasks.elementAt(i).lastIndexOf('/');
       String path = myTasks.elementAt(i).substring(0, x);
       CollectionReference taskCollection = Firestore.instance.collection(path);
       await taskCollection.document(myTasks.elementAt(i).substring(x+1)).get().then((DocumentSnapshot ds){
-        myTaskNames.add(ds['taskNames']);
-        myTaskPriorities.add(ds['taskPriorities']);
+        myTaskNames.add(ds['taskName']);
+        myTaskPriorities.add(ds['taskPriority']);
         if(myTaskPriorities.elementAt(i) == "Colors.redAccent")
           mytpc.add(Colors.redAccent);
         else if(myTaskPriorities.elementAt(i) == "Colors.orangeAccent")

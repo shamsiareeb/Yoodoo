@@ -26,9 +26,10 @@ class _SplashScreenState extends State<SplashScreen> {
           userName = (ds['name']);
           await defineHomescreenUI();
           //Navigator.of(context).pop();
+          await loadMyTasks();
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),);
+            MaterialPageRoute(builder: (context) => HomeScreen()));
         });
       }
       else {
