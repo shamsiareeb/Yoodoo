@@ -94,7 +94,7 @@ class _TaskboardState extends State<Taskboard> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: 5.0,
-                                color: tpc[index]
+                                color: tpc.reversed.elementAt(index)
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
                             ),
@@ -107,7 +107,7 @@ class _TaskboardState extends State<Taskboard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Expanded(
-                                      child: Text(taskNames[index],
+                                      child: Text(taskNames.reversed.elementAt(index),
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -119,7 +119,7 @@ class _TaskboardState extends State<Taskboard> {
                                     ),
                                     Expanded(
                                       flex: 3,
-                                      child: Text(taskDescriptions[index],
+                                      child: Text(taskDescriptions.reversed.elementAt(index),
                                       style: TextStyle(
                                         color: Colors.black54,
                                         fontSize: 16,

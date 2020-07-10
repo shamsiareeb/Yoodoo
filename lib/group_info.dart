@@ -129,11 +129,11 @@ class _GroupInfoState extends State<GroupInfo> {
                       onTap: (){
                         if (_formkey.currentState.validate()) {
                           _formkey.currentState.save();
-                          }
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ConfigureRewards()),
-                        );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ConfigureRewards()),
+                          );
+                        }
                       },
                     )
             ],
