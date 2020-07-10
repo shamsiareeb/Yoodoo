@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/create_instances.dart';
 import 'package:yoodoo/create_task.dart';
+import 'package:yoodoo/group_details.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/load_tasks.dart';
 import 'dialogues.dart';
@@ -29,38 +30,31 @@ class _TaskboardState extends State<Taskboard> {
           ),
         ),
         actions: <Widget>[
-         ownerFlag == true ? new Row(
-           children: <Widget>[
              Padding(
                padding: EdgeInsets.only(right: 25.0),
                child: GestureDetector(
                  onTap: (){
-                   Navigator.push(context, MaterialPageRoute (builder: (context) => CreateTask()),
+                   Navigator.push(context,
+                     MaterialPageRoute (builder: (context) => CreateTask()),
                    );
                  },
-                 child: Icon(
-                     Icons.add
+                 child: Align(
+                   alignment: Alignment.center,
+                   child: Text('CLAIM REWARDS',
+                     style: TextStyle(
+                       fontWeight: FontWeight.bold,
+                     ),
+                   ),
                  ),
                ),
              ),
-              Padding(
-               padding: EdgeInsets.only(right: 25.0),
-               child: GestureDetector(
-                 onTap: (){
-                   popupNoRewardsWarning(context);
-                 },
-                 child: Icon(
-                     Icons.info
-                 ),
-               ),
-             ),
-           ],
-         ) :
           Padding(
             padding: EdgeInsets.only(right: 25.0),
             child: GestureDetector(
               onTap: (){
-                popupNoRewardsWarning(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => GroupDetails()));
               },
               child: Icon(
                 Icons.info
@@ -75,6 +69,8 @@ class _TaskboardState extends State<Taskboard> {
         child: Column(
           children: <Widget>[
             tasks.length == 0 ? new Container(
+              height: MediaQuery.of(context).size.height*0.8,
+              width: MediaQuery.of(context).size.width,
               child: new Center(
                   child: new Text('No tasks to show')
               ),
@@ -89,7 +85,7 @@ class _TaskboardState extends State<Taskboard> {
                 itemCount: tasks.length,
                 itemBuilder: (context, index){
                   return Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,0),
+                    padding: EdgeInsets.fromLTRB(10,75,10,75),
                     width: MediaQuery.of(context).size.width*0.8,
                     child: Card(
                       elevation: 5,
@@ -105,7 +101,7 @@ class _TaskboardState extends State<Taskboard> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0, bottom: 10.0),
+                                padding: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0, bottom: 20.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,10 +150,11 @@ class _TaskboardState extends State<Taskboard> {
                                                     Icons.arrow_downward,
                                                     color: Colors.white,
                                                   ),
-                                                  Text('Accept',
+                                                  Text('ACCEPT',
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 16,
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ],
@@ -177,10 +174,20 @@ class _TaskboardState extends State<Taskboard> {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
+      floatingActionButton: ownerFlag == true ? new FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+            MaterialPageRoute (builder: (context) => CreateTask()),
+          );
+        },
+        child: Icon(
+          Icons.add,
+        ),
+      ): new Container(),
       /*body: Container(
         child: new Center(
             child: new Text('No tasks to show')

@@ -17,7 +17,7 @@ class CreateTask extends StatefulWidget{
 
 class _CreateTaskState extends State<CreateTask> {
 
-  List radioValues = ["Colors.greenAccent", "Colors.orangeAccent", "Colors.redAccent"];// low, medium, high priorities
+  List radioValues = ["Colors.green", "Colors.orangeAccent", "Colors.redAccent"];// low, medium, high priorities
   var _value;// used to store task priority
   String _taskName = "", _taskDescription = "";
 
@@ -26,7 +26,7 @@ class _CreateTaskState extends State<CreateTask> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: new Text("Create Task",
         style: TextStyle(
           fontWeight: FontWeight.w500,
@@ -231,14 +231,14 @@ class _CreateTaskState extends State<CreateTask> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.greenAccent,
+                                    border: Border.all(color: Colors.green,
                                       width: 1.5,
                                     ),
                                   ),
                                   child: Row(
                                     children: <Widget>[
                                       Radio(
-                                        activeColor: Colors.greenAccent,
+                                        activeColor: Colors.green,
                                         value: radioValues[0],
                                         groupValue: _value,
                                         onChanged: (value) {

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/group_info.dart';
+import 'package:yoodoo/home_screen.dart';
 
 class GroupDetails extends StatefulWidget {
   @override
   _GroupDetailsState createState() => _GroupDetailsState();
 }
 
-class _GroupDetailsState extends State {
+class _GroupDetailsState extends State<GroupDetails> {
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +25,49 @@ class _GroupDetailsState extends State {
         child: Container(
           child: Column(
             children: <Widget>[
+              ownerFlag == true ?
+              new Container(
+                padding: EdgeInsets.all(18.0),
+                alignment: Alignment.centerLeft,
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Unique ID",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Card(
+                      elevation: 5,
+                      child: Container(
+                        padding: EdgeInsets.only(top: 21, bottom: 15),
+                        height: 75,
+                        width: MediaQuery.of(context).size.width,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text('The unique ID of this group will be shown here',
+                            style: TextStyle(
+                                //fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'AzoSans-Black',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ):
+              new Container(),
+              /*SizedBox(
+                height: 10,
+              ),*/
               Container(
                 padding: EdgeInsets.all(18.0),
                 alignment: Alignment.centerLeft,
@@ -41,12 +86,18 @@ class _GroupDetailsState extends State {
                       height: 15,
                     ),
                     Container(
+                      padding: EdgeInsets.all(10),
                       height: 75,
+                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
                         ),
                       ),
+                      child: Text('The description of a particular group will be shown here.',
+                      style: TextStyle(
+                        fontSize: 16
+                      ),),
                     ),
                   ],
                 ),
@@ -63,26 +114,32 @@ class _GroupDetailsState extends State {
                       child: Card(
                         elevation: 5,
                         child: Container(
-                          padding: EdgeInsets.only(top: 21, bottom: 15),
+                          padding: EdgeInsets.all(15),
                           height: MediaQuery.of(context).size.width*0.25,
                           width: MediaQuery.of(context).size.width*0.4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text('My Yoodoos',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text('Yoodoo Balance',
+                                  style: TextStyle(
+                                    //fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('8',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text('8',
+                                  style: TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold
+                                  ),
                                 ),
                               ),
                             ],
@@ -104,7 +161,7 @@ class _GroupDetailsState extends State {
                             children: <Widget>[
                               Text('Skips Remaining',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  //fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -113,7 +170,7 @@ class _GroupDetailsState extends State {
                               ),
                               Text('3',
                                 style: TextStyle(
-                                    fontSize: 30,
+                                    fontSize: 26,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
@@ -146,7 +203,7 @@ class _GroupDetailsState extends State {
                       height: 15,
                     ),
                     Container(
-                      height: 200,
+                      height: 250,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,

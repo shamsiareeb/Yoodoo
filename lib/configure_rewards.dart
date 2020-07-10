@@ -72,15 +72,50 @@ class RewardScreen extends State<ConfigureRewards> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+              child: Card(
+                elevation: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black12,
+                  ),
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 3,
+                        child: Text('Reward',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('Yoodoos',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.fromLTRB(20, 40, 20, 0),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: yoodoos.length,
                   itemBuilder: (context, index) {
                     return Card(
+                      elevation: 5,
                       child: Container(
                         padding: EdgeInsets.all(10.0),
                         margin: EdgeInsets.symmetric(vertical: 10.0),

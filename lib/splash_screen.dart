@@ -19,12 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
     FirebaseAuth.instance.currentUser().then((currentUser) async{
       if(currentUser != null) {
         user = currentUser;
-        popupWait(context);
+        new Timer(const Duration(seconds: 3), onClose);
+        //popupWait(context);
         usersCollection.document(user.uid).get().then((
             DocumentSnapshot ds) async {
           userName = (ds['name']);
           await defineHomescreenUI();
-          Navigator.of(context).pop();
+          //Navigator.of(context).pop();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen()),);
@@ -59,25 +60,35 @@ class _SplashScreenState extends State<SplashScreen> {
             fit: StackFit.expand,
             children: <Widget>[
               Container(
+                padding: EdgeInsets.symmetric(vertical: 175),
                 decoration: BoxDecoration(color: Colors.white),
-                child: Center(
-                  child: _myWidget(context),
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 5,
+                      child: Center(
+                        child: Text('Yoodoo',
+                          style: TextStyle(
+                            fontSize: 50.0,
+                            fontFamily: 'TypoHoop',
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: SizedBox(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: SizedBox(),
+                    )
+                  ],
                 ),
               )
             ]
         )
     );
   }
-}
-
-Widget _myWidget(BuildContext context) {
-  String myString = 'Yoodoo';
-  print(myString);
-  return Text(
-    myString,
-    style: TextStyle(
-      fontSize: 50.0,
-      fontFamily: 'TypoHoop',
-    ),
-  );
 }
