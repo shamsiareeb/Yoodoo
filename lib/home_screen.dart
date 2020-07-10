@@ -15,6 +15,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 bool uiFlag;
 bool ownerFlag;
 int groupIndex;
+var myTasks = new List();
+var myTaskNames = new List();
+var myTaskPriorities = new List();
+List<MaterialAccentColor> mytpc= new List<MaterialAccentColor>();
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -30,12 +34,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
-
-var myTasks = new List();
-var myTaskNames = new List();
-var myTaskPriorities = new List();
-
-List<MaterialAccentColor> mytpc= new List<MaterialAccentColor>();
 
   Future <void> _signOut()  async{
     await FirebaseAuth.instance.signOut();
@@ -706,30 +704,30 @@ List<MaterialAccentColor> mytpc= new List<MaterialAccentColor>();
         ),
     );
   }*/
+}
 
-  Future <void> loadMyTasks() async{
-    myTasks.clear();
-    myTaskNames.clear();
-    myTaskPriorities.clear();
-    await usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
-      myTasks = (ds['myTasks']);
-    });
-    if(myTasks.isNotEmpty){
-      for (int i = 0; i<myTasks.length; i++){
-        int x = myTasks.elementAt(i).lastIndexOf('/');
-        String path = myTasks.elementAt(i).substring(0, x);
-        CollectionReference taskCollection = Firestore.instance.collection(path);
-        await taskCollection.document(myTasks.elementAt(i).substring(x+1)).get().then((DocumentSnapshot ds){
-          myTaskNames.add(ds['taskNames']);
-          myTaskPriorities.add(ds['taskPriorities']);
-          if(myTaskPriorities.elementAt(i) == "Colors.redAccent")
-            mytpc.add(Colors.redAccent);
-          else if(myTaskPriorities.elementAt(i) == "Colors.orangeAccent")
-            mytpc.add(Colors.orangeAccent);
-          else
-            mytpc.add(Colors.greenAccent);
-        });
-      }
+Future <void> loadMyTasks() async{
+  myTasks.clear();
+  myTaskNames.clear();
+  myTaskPriorities.clear();
+  await usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
+    myTasks = (ds['myTasks']);
+  });
+  if(myTasks.isNotEmpty){
+    for (int i = 0; i<myTasks.length; i++){
+      int x = myTasks.elementAt(i).lastIndexOf('/');
+      String path = myTasks.elementAt(i).substring(0, x);
+      CollectionReference taskCollection = Firestore.instance.collection(path);
+      await taskCollection.document(myTasks.elementAt(i).substring(x+1)).get().then((DocumentSnapshot ds){
+        myTaskNames.add(ds['taskNames']);
+        myTaskPriorities.add(ds['taskPriorities']);
+        if(myTaskPriorities.elementAt(i) == "Colors.redAccent")
+          mytpc.add(Colors.redAccent);
+        else if(myTaskPriorities.elementAt(i) == "Colors.orangeAccent")
+          mytpc.add(Colors.orangeAccent);
+        else
+          mytpc.add(Colors.greenAccent);
+      });
     }
   }
 }
