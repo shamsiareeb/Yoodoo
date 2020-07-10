@@ -160,7 +160,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               child: new Text('No groups to show')
                           ),
                         ) : new Container(
-                          //margin: EdgeInsets.fromLTRB(0,20,0,0),
+                          //height: MediaQuery.of(context).size.height,
+                          margin: EdgeInsets.fromLTRB(0,0,0,0),
                           child: ListView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
@@ -267,6 +268,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Expanded(
+                              flex: 2,
                               child: InkWell(
                                 child: Container(
                                   padding: EdgeInsets.symmetric(vertical: 15),
@@ -294,6 +296,27 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               ),
                             ),
                             Expanded(
+                              flex: 1,
+                              child: Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                ),
+                                child: Icon(
+                                  Icons.notifications,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              child: Container(
+                                color: Colors.white,
+                                height: 60,
+                                width: 0.5,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
                               child: InkWell(
                                 child:  Container(
                                   padding: EdgeInsets.symmetric(vertical: 15),
@@ -329,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: 5,//myTasks.length,
+                  itemCount: myTasks.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                         onTap: () {
@@ -349,8 +372,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       width: 3.0,
-                                      color: Colors.redAccent,
-                                      //mytpc.elementAt(index),
+                                      color: //Colors.redAccent,
+                                      mytpc.elementAt(index),
                                     ),
                                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                   ),
@@ -363,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Expanded(
-                                            child: Text('The quick brown fox jumped over the lazy dog',
+                                            child: Text(myTaskNames.elementAt(index),
                                               overflow: TextOverflow.ellipsis,
                                               //myTaskNames.elementAt(index),
                                               style: TextStyle(
