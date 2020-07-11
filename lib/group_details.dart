@@ -65,9 +65,9 @@ class _GroupDetailsState extends State<GroupDetails> {
                 ),
               ):
               new Container(),
-              /*SizedBox(
+              SizedBox(
                 height: 10,
-              ),*/
+              ),
               Container(
                 padding: EdgeInsets.all(18.0),
                 alignment: Alignment.centerLeft,
@@ -106,6 +106,41 @@ class _GroupDetailsState extends State<GroupDetails> {
                 height: 20,
               ),
               Container(
+                height: 125,
+                padding: EdgeInsets.all(18.0),
+                child: Card(
+                  elevation: 5,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 21, bottom: 15),
+                    height: 75,
+                    width: MediaQuery.of(context).size.width,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Your yoodoo balance for this group is: ',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'AzoSans-Black',
+                            ),
+                          ),
+                          Text('8',
+                            style: TextStyle(
+                              //fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'AzoSans-Black',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              /*Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -115,8 +150,8 @@ class _GroupDetailsState extends State<GroupDetails> {
                         elevation: 5,
                         child: Container(
                           padding: EdgeInsets.all(15),
-                          height: MediaQuery.of(context).size.width*0.25,
-                          width: MediaQuery.of(context).size.width*0.4,
+                          height: 75,
+                          width: MediaQuery.of(context).size.width,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -181,7 +216,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
               SizedBox(
                 height: 20,
               ),
@@ -203,7 +238,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                       height: 15,
                     ),
                     Container(
-                      height: 250,
+                      height: 300,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -217,12 +252,27 @@ class _GroupDetailsState extends State<GroupDetails> {
                         shrinkWrap: true,
                         itemCount: 10,
                         itemBuilder: (context, index){
-                          return Container(
-                            padding: EdgeInsets.all(15),
-                            child: Text('Member Name',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
+                          return ListTile(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                            trailing: ownerFlag == true ? new GestureDetector(
+                              onTap: (){
+
+                              },
+                              child: Container(
+                                child: Icon(
+                                  Icons.do_not_disturb,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ): Container(),
+                            title: Container(
+                              //padding: EdgeInsets.all(15),
+                              child: Text('Member Name',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
                             ),
                           );
                         },

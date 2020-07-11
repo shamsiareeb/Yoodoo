@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     FirebaseAuth.instance.currentUser().then((currentUser) async{
       if(currentUser != null) {
         user = currentUser;
-        new Timer(const Duration(seconds: 3), onClose);
+        //new Timer(const Duration(seconds: 3), onClose);
         //popupWait(context);
         usersCollection.document(user.uid).get().then((
             DocumentSnapshot ds) async {

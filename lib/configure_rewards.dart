@@ -84,19 +84,19 @@ class RewardScreen extends State<ConfigureRewards> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 3,
+                        flex: 4,
                         child: Text('Reward',
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Text('Yoodoos',
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

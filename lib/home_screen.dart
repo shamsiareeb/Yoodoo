@@ -58,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 pinned: true,
                 //snap: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
+                  //centerTitle: true,
+                  titlePadding: EdgeInsets.fromLTRB(25, 20, 25, 12),
                   title: new Text('Yoodoo',
                     style: TextStyle(
                         fontFamily: 'TypoHoop',
@@ -67,21 +68,35 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         color: Colors.white
                     ),),
                 ),
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 25.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProfileScreen()),
-                      );
-                    },
-                    child: Icon(
-                        Icons.person
+                actions: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: 25.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProfileScreen()),
+                        );
+                      },
+                      child: Icon(
+                          Icons.notifications,
+                      ),
                     ),
                   ),
-                ),
-                actions: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: 25.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProfileScreen()),
+                        );
+                      },
+                      child: Icon(
+                          Icons.person
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(right: 25.0),
                     child: GestureDetector(
@@ -267,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Expanded(
-                              flex: 2,
+                              //flex: 2,
                               child: InkWell(
                                 child: Container(
                                   padding: EdgeInsets.symmetric(vertical: 15),
@@ -295,27 +310,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               ),
                             ),
                             Expanded(
-                              flex: 1,
-                              child: Container(
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
-                                child: Icon(
-                                  Icons.notifications,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Container(
-                                color: Colors.white,
-                                height: 60,
-                                width: 0.5,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
+                              //flex: 2,
                               child: InkWell(
                                 child:  Container(
                                   padding: EdgeInsets.symmetric(vertical: 15),

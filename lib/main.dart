@@ -4,6 +4,7 @@ import 'package:yoodoo/configure_rewards.dart';
 import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/group_details.dart';
 import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/notifications_page.dart';
 import 'package:yoodoo/profile_screen.dart';
 import 'package:yoodoo/splash_screen.dart';
 import 'package:yoodoo/task_details.dart';
