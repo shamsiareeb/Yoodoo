@@ -222,6 +222,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
+Future <void> loadProfileDeatails() async{
+  usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
+
+  });
+}
+
 /*class ProfileScreenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(

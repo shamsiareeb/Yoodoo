@@ -24,6 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
         usersCollection.document(user.uid).get().then((
             DocumentSnapshot ds) async {
           userName = (ds['name']);
+          company = (ds['workplace']);
+          designation = (ds['designation']);
           await defineHomescreenUI();
           //Navigator.of(context).pop();
           await loadMyTasks();
