@@ -200,8 +200,8 @@ class _TaskboardState extends State<Taskboard> {
   Future <void> updateTaskAttributes(int index) async{
     CollectionReference taskCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
     await taskCollection.document(tasks[index]).updateData({
-      'taskStatus': 1,
-      'taskAcceptor': user.uid
+      'taskStatus': 1,// 1 for accepted
+      'taskAcceptor': userName
     });
   }
 

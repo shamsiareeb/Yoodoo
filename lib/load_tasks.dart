@@ -62,9 +62,13 @@ Future <void> loadTasksOfGroup(int index) async {
             tpc.add(Colors.greenAccent);
         });
       }
+      print(taskNames);
+      print(taskDescriptions);
+      print(taskAcceptors);
+      print(taskStatuses);
       print(tpc);
     }
     else{
-      print(tasks);
+      print(tasks);// for unit testing
     }
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:yoodoo/group_info.dart';
 import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/load_groups.dart';
 
 class GroupDetails extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                         width: MediaQuery.of(context).size.width,
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text('The unique ID of this group will be shown here',
+                          child: Text(groups[groupIndex],
                             style: TextStyle(
                                 //fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -94,7 +95,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                           color: Colors.black,
                         ),
                       ),
-                      child: Text('The description of a particular group will be shown here.',
+                      child: Text(groupDescriptions[groupIndex],
                       style: TextStyle(
                         fontSize: 16
                       ),),
