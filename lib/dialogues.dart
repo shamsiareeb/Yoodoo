@@ -787,7 +787,7 @@ void popupJoin(BuildContext context) {
                             /* updateData has been used because it does not create a new document unlike setData
                                which creates a new firebase document in case it finds that there is no such document in the db */
                             await groupsCollection.document(_code).updateData({
-                              'members' : FieldValue.arrayUnion([user.uid])
+                              'members' : FieldValue.arrayUnion([userName])
                             });
                             await usersCollection.document(user.uid).updateData({
                               'groups' : FieldValue.arrayUnion([_code]),

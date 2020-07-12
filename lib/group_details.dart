@@ -251,7 +251,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                         ),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: (allGroupMembers[groupIndex]).length,
                         itemBuilder: (context, index){
                           return ListTile(
                             contentPadding: EdgeInsets.symmetric(horizontal: 30),
@@ -268,7 +268,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                             ): Container(),
                             title: Container(
                               //padding: EdgeInsets.all(15),
-                              child: Text('Member Name',
+                              child: Text(allGroupMembers[groupIndex].elementAt(index),
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 18,
