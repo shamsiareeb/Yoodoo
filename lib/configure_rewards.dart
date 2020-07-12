@@ -244,8 +244,8 @@ class RewardScreen extends State<ConfigureRewards> {
 
   Future updateGroupsArrayForUser(FirebaseUser user) async{
     return await usersCollection.document(user.uid).updateData({
-      'groups' : FieldValue.arrayUnion([groupId])
+      'groups' : FieldValue.arrayUnion([groupId]),
+      'myYoodoos' : FieldValue.arrayUnion([0]) //individual yoodoos of user for group
     });
   }
-
 }

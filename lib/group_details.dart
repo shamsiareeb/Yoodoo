@@ -128,7 +128,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                               fontFamily: 'AzoSans-Black',
                             ),
                           ),
-                          Text('8',
+                          Text(myYoodoos[groupIndex],
                             style: TextStyle(
                               //fontSize: 16,
                               fontWeight: FontWeight.bold,

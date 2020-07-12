@@ -790,7 +790,8 @@ void popupJoin(BuildContext context) {
                               'members' : FieldValue.arrayUnion([user.uid])
                             });
                             await usersCollection.document(user.uid).updateData({
-                              'groups' : FieldValue.arrayUnion([_code])
+                              'groups' : FieldValue.arrayUnion([_code]),
+                              'myYoodoos' : FieldValue.arrayUnion([0])
                             });
                             await defineHomescreenUI();
                             Navigator.of(context).pop();//closes popupWait()

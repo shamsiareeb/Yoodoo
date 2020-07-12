@@ -6,6 +6,7 @@ var groups = List(); // stores IDs of groups which the user is a member of
 var groupNames = List();
 var groupDescriptions = List();
 var groupOwners = List();
+var myYoodoos = List();
 bool check;
 
 Future <bool> loadGroupsData(FirebaseUser user) async {
@@ -15,6 +16,7 @@ Future <bool> loadGroupsData(FirebaseUser user) async {
   groupDescriptions.clear();
   await usersCollection.document(user.uid).get().then((DocumentSnapshot ds) {
     groups = (ds['groups']);
+    myYoodoos = (ds['myYoodoos']);
   });
   return await calcArrayLength();
 }
