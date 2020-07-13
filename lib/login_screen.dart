@@ -9,6 +9,7 @@ import 'validators.dart';
 import 'dialogues.dart';
 import 'profile_screen.dart';
 import 'create_instances.dart';
+import 'package:flutter/services.dart';
 
 
 String userName, company, designation;
@@ -36,58 +37,66 @@ class _LoginForm extends State<LoginScreen>{
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Email ID',
-            hintStyle: TextStyle(color: Colors.grey),
-            enabledBorder: OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.black),
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.black),
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            ),
-            prefixIcon: new Icon(Icons.email, color: Colors.black,),
-        ),
-          validator: emailValidator,
-          keyboardType: TextInputType.emailAddress,
-          onSaved: (input) => _email = input,
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      TextFormField(
-        obscureText: passwordVisible,
-          decoration: InputDecoration(
-              hintText: 'Password',
-              hintStyle: TextStyle(color: Colors.grey),
-              enabledBorder: OutlineInputBorder(
-                borderSide: new BorderSide(color: Colors.black),
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15))
               ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.black),
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            ),
-            prefixIcon: new Icon(Icons.lock, color: Colors.black,),
-            suffixIcon: IconButton(
-              icon: Icon(
-                passwordVisible
-                ? Icons.visibility
-                    : Icons.visibility_off,
-                color: Colors.black,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Email ID',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  prefixIcon: new Icon(Icons.email, color: Colors.black,),
+                ),
+                validator: emailValidator,
+                keyboardType: TextInputType.emailAddress,
+                onSaved: (input) => _email = input,
               ),
-              onPressed: () {
-                setState(() {
-                  passwordVisible = !passwordVisible;
-                });
-              },
-            )
-          ),
-          validator: pwdValidator,
-          onSaved: (input) => _password = input,
-      ),
+            ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15))
+                ),
+                child: TextFormField(
+                  obscureText: passwordVisible,
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      prefixIcon: new Icon(Icons.lock, color: Colors.black,),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
+                      )
+                  ),
+                  validator: pwdValidator,
+                  onSaved: (input) => _password = input,
+                ),
+              ),
               SizedBox(
                 height: 50,
               ),
@@ -97,11 +106,14 @@ class _LoginForm extends State<LoginScreen>{
                   alignment: Alignment.center,
                   child: Text(
                     'LOG IN',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300),
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: Colors.green.shade500,
                   ),
                 ),
                 onTap: () async {
@@ -171,7 +183,11 @@ void checkFlag(FirebaseUser user) async {
 
 class LoginScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFFE1E1E1),
+    ));
     return Scaffold(
+      backgroundColor: Color(0xFFE1E1E1),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -216,7 +232,7 @@ class LoginScreenUI extends StatelessWidget {
                 text: 'Welcome Back!',
                 style: TextStyle(
                   fontSize: 45,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w300,
                   color: Colors.black,
                 ),
               ),
@@ -236,7 +252,7 @@ class LoginScreenUI extends StatelessWidget {
                   text: 'It\'s good to see you again.',
                   style: TextStyle(
                     fontSize: 23,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w300,
                     color: Colors.black,
                   ),
                 ),
@@ -264,7 +280,7 @@ class LoginScreenUI extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w400),
             ),
           )
         ],

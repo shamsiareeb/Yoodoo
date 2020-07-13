@@ -22,12 +22,18 @@ class RewardScreen extends State<ConfigureRewards> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black
+        ),
         automaticallyImplyLeading: false,
-        title: new Text("Rewards",
+        title: new Text("Add Rewards",
           style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
+            fontSize: 22.0,
+            fontWeight: FontWeight.w400,
+            color: Colors.black
           ),
         ),
         actions: <Widget>[
@@ -66,159 +72,168 @@ class RewardScreen extends State<ConfigureRewards> {
             ),
           ),
         ],
+        backgroundColor: Colors.white,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: Card(
-                elevation: 5,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black12,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                decoration: BoxDecoration(
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                child: ListTile(
+                  leading: Text('Reward',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black,
+                    ),
                   ),
-                  padding: EdgeInsets.all(10.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 4,
-                        child: Text('Reward',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text('Yoodoos',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+                  trailing: Text('Yoodoos',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ListView.builder(
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                  ),
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => Divider(
+                    color: Colors.black,
+                  ),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: yoodoos.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 5,
-                      child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              flex: 6,
-                              child: Text(rewards[index],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text(yoodoos[index].toString(),
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),),
-                            ),
-                          ],
-                        ),
+                    return Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                      //margin: EdgeInsets.symmetric(vertical: 10.0),
+                      child: ListTile(
+                        leading: Text(rewards[index],
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),),
+                        trailing: Text(yoodoos[index].toString(),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),),
                       ),
                     );
                   },
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.only(bottom: 10),
+        alignment: Alignment.bottomCenter,
+        height: 60,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: InkWell(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.black,
+                  ),
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  alignment: Alignment.center,
+                  child:Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.remove,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        'Delete Reward',
+                        style: TextStyle(
+                          //fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  if (rewards.isNotEmpty) {
+                    setState(() {
+                      rewards.removeLast();
+                      yoodoos.removeLast();
+                    });
+                  }
+                  else {
+                    popupNoRewardsWarning(context);
+                  }
+                },
+              ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              //margin: EdgeInsets.symmetric(horizontal: 40, vertical: 50),
-              //padding: EdgeInsets.symmetric(vertical: 60),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                color: Colors.black,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: InkWell(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Delete Reward',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500,
-                              color: Colors.white),
-                        ),
-                        decoration: BoxDecoration(
-                          //borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.black,
-                        ),
+            Expanded(
+              child: InkWell(
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: Colors.white,
                       ),
-                      onTap: () {
-                        if (rewards.isNotEmpty) {
-                          setState(() {
-                            rewards.removeLast();
-                            yoodoos.removeLast();
-                          });
-                        }
-                        else {
-                          popupNoRewardsWarning(context);
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    child: Container(
-                      color: Colors.white,
-                      height: 60,
-                      width: 0.5,
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Add Reward',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500,
-                              color: Colors.white),
-                        ),
-                        decoration: BoxDecoration(
-                          //borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.black,
-                        ),
+                      SizedBox(
+                        width: 10,
                       ),
-                      onTap: () {
-                        popupInputReward(context);
-                      },
-                    ),
+                      Text(
+                        'Add Reward',
+                        style: TextStyle(
+                          //fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
+                    ],
                   ),
-                ],
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () {
+                  popupInputReward(context);
+                },
               ),
-            )
+            ),
           ],
         ),
       ),

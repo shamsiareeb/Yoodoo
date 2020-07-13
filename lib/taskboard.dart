@@ -6,10 +6,11 @@ import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/group_details.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/load_tasks.dart';
-import 'dialogues.dart';
-import 'load_groups.dart';
-import 'login_screen.dart';
-import 'home_screen.dart';
+import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/load_groups.dart';
+import 'package:yoodoo/login_screen.dart';
+import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/claim_rewards.dart';
 
 class Taskboard extends StatefulWidget{
   @override
@@ -22,30 +23,46 @@ class _TaskboardState extends State<Taskboard> {
   int index;
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
         automaticallyImplyLeading: true,
         title: new Text("Taskboard",
           style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
+            fontSize: 22.0,
+            fontWeight: FontWeight.w400,
+            color: Colors.black
           ),
         ),
+        backgroundColor: Colors.white,
         actions: <Widget>[
              Padding(
                padding: EdgeInsets.only(right: 25.0),
                child: GestureDetector(
                  onTap: (){
                    Navigator.push(context,
-                     MaterialPageRoute (builder: (context) => CreateTask()),
+                     MaterialPageRoute (builder: (context) => ClaimRewardsPage()),
                    );
                  },
-                 child: Align(
-                   alignment: Alignment.center,
-                   child: Text('CLAIM REWARDS',
-                     style: TextStyle(
-                       fontWeight: FontWeight.bold,
+                 child: Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   children: [
+                     Text('CLAIM',
+                       style: TextStyle(
+                         fontWeight: FontWeight.w400,
+                         color: Colors.black,
+                       ),
                      ),
-                   ),
+                     Text('REWARDS',
+                       style: TextStyle(
+                         fontWeight: FontWeight.w400,
+                         color: Colors.black,
+                       ),
+                     ),
+                   ],
                  ),
                ),
              ),
@@ -77,8 +94,7 @@ class _TaskboardState extends State<Taskboard> {
               ),
             ):
             Container(
-              //margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+              padding: EdgeInsets.fromLTRB(0, 50, 0, 16),
               height: MediaQuery.of(context).size.height*0.85,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -86,92 +102,135 @@ class _TaskboardState extends State<Taskboard> {
                 itemCount: tasks.length,
                 itemBuilder: (context, index){
                   return Container(
-                    padding: EdgeInsets.fromLTRB(10,75,10,75),
+                    padding: EdgeInsets.fromLTRB(16,75,5,75),
                     width: MediaQuery.of(context).size.width*0.8,
-                    child: Card(
-                      elevation: 5,
-                        child: GestureDetector(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 5.0,
-                                color: tpc.reversed.elementAt(index)
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0, bottom: 20.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                    child: GestureDetector(
+                      child: Container(
+
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              width: 2,
+                              color: tpc.reversed.elementAt(index)
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20.0, top: 50.0, right: 20.0, bottom: 20.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  child: Text(taskNames.reversed.elementAt(index),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w400,
+                                    ),),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  //flex: 3,
+                                  child: Text(taskDescriptions.reversed.elementAt(index),
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 16,
+                                    ),),
+                                ),
+                                Expanded(
+                                  child: SizedBox(),
+                                ),
+                                Row(
                                   children: <Widget>[
-                                    Expanded(
-                                      child: Text(taskNames.reversed.elementAt(index),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(taskDescriptions.reversed.elementAt(index),
-                                      style: TextStyle(
-                                        color: Colors.black54,
-                                        fontSize: 16,
-                                      ),),
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Container(
-                                            height: 35,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                              color: Colors.lightGreen,
-                                              borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                                            ),
-                                            child: GestureDetector(
-                                              onTap: () async {
-                                                popupWait(context);
-                                                await updateTaskAttributes(index);
-                                                await addToMyTasks(index);
-                                                await loadMyTasks();
-                                                Navigator.of(context).pop();//pops popupWait
-                                              },
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Icon(
-                                                    Icons.arrow_downward,
-                                                    color: Colors.white,
-                                                  ),
-                                                  Text('ACCEPT',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                    ownerFlag == true ? new Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Container(
+                                        height: 35,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                                          border: Border.all(
+                                            color: Colors.orange,
+                                            width: 1.0,
                                           ),
                                         ),
-                                      ],
+                                        child: GestureDetector(
+                                          onTap: (){
+
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              /*Icon(
+                                                Icons.arrow_downward,
+                                                color: Colors.white,
+                                              ),*/
+                                              Text('ALLOCATE',
+                                                style: TextStyle(
+                                                  color: Colors.orange,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ) : Expanded(
+                                      child: SizedBox(),
+                                    ),
+                                    Expanded(
+                                      child: SizedBox(),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Container(
+                                        height: 35,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            popupWait(context);
+                                            await updateTaskAttributes(index);
+                                            await addToMyTasks(index);
+                                            await loadMyTasks();
+                                            Navigator.of(context).pop();//pops popupWait
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              /*Icon(
+                                                Icons.arrow_downward,
+                                                color: Colors.white,
+                                              ),*/
+                                              Text('ACCEPT',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
+                      ),
                     ),
                   );
                 },

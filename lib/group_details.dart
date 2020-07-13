@@ -13,22 +13,29 @@ class _GroupDetailsState extends State<GroupDetails> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black
+        ),
         automaticallyImplyLeading: true,
         title: new Text('Group Details',
           style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
+            fontSize: 22.0,
+            fontWeight: FontWeight.w400,
+            color: Colors.black
           ),
         ),
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Container(
+          margin: EdgeInsets.only(bottom: 30),
           child: Column(
             children: <Widget>[
               ownerFlag == true ?
               new Container(
-                padding: EdgeInsets.all(18.0),
+                margin: EdgeInsets.all(18.0),
                 alignment: Alignment.centerLeft,
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -37,40 +44,53 @@ class _GroupDetailsState extends State<GroupDetails> {
                     Text(
                       "Unique ID",
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        padding: EdgeInsets.only(top: 21, bottom: 15),
-                        height: 75,
-                        width: MediaQuery.of(context).size.width,
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(groups[groupIndex],
-                            style: TextStyle(
-                                //fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'AzoSans-Black',
-                            ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 18.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(17))
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      //height: 75,
+                      width: MediaQuery.of(context).size.width,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(groups[groupIndex],
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'AzoSans-Black',
                           ),
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      thickness: 0.5,
+                      indent: 25,
+                      endIndent: 25,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ):
-              new Container(),
-              SizedBox(
-                height: 10,
+              new Container(
+                //height: 0,
               ),
               Container(
-                padding: EdgeInsets.all(18.0),
+                margin: EdgeInsets.symmetric(horizontal: 18.0),
                 alignment: Alignment.centerLeft,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -79,150 +99,90 @@ class _GroupDetailsState extends State<GroupDetails> {
                     Text(
                       "Group Description",
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
-                      height: 75,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      //height: 75,
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                      ),
                       child: Text(groupDescriptions[groupIndex],
                       style: TextStyle(
-                        fontSize: 16
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
                       ),),
+                    ),
+                    SizedBox(
+                      height: 28,
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      thickness: 0.5,
+                      indent: 25,
+                      endIndent: 25,
+                    ),
+                    SizedBox(
+                      height: 28,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
               Container(
-                height: 125,
-                padding: EdgeInsets.all(18.0),
-                child: Card(
-                  elevation: 5,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 21, bottom: 15),
-                    height: 75,
-                    width: MediaQuery.of(context).size.width,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Your yoodoo balance for this group is: ',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'AzoSans-Black',
-                            ),
-                          ),
-                          Text('8',
-                            style: TextStyle(
-                              //fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'AzoSans-Black',
-                            ),
-                          ),
-                        ],
+                margin: EdgeInsets.symmetric(horizontal: 18.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(17))
+                ),
+                padding: EdgeInsets.symmetric(vertical: 15),
+                width: MediaQuery.of(context).size.width,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Your yoodoo balance for this group is',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'AzoSans-Black',
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text('8',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'AzoSans-Black',
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              /*Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: Card(
-                        elevation: 5,
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          height: 75,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text('Yoodoo Balance',
-                                  style: TextStyle(
-                                    //fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text('8',
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Card(
-                        elevation: 5,
-                        child: Container(
-                          padding: EdgeInsets.only(top: 21, bottom: 15),
-                          height: MediaQuery.of(context).size.width*0.25,
-                          width: MediaQuery.of(context).size.width*0.4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Skips Remaining',
-                                style: TextStyle(
-                                  //fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text('3',
-                                style: TextStyle(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),*/
               SizedBox(
-                height: 20,
+                height: 28,
               ),
               Container(
-                padding: EdgeInsets.all(18.0),
+                margin: EdgeInsets.symmetric(horizontal: 18.0),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 0.5,
+                  indent: 25,
+                  endIndent: 25,
+                ),
+              ),
+              SizedBox(
+                height: 28,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 18.0),
                 alignment: Alignment.centerLeft,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -231,22 +191,24 @@ class _GroupDetailsState extends State<GroupDetails> {
                     Text(
                       "Group Members",
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
                     Container(
-                      height: 300,
+                      padding: EdgeInsets.symmetric(vertical: 15),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                       child: ListView.separated(
+                          physics: NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) => Divider(
+                          indent: 25,
+                          endIndent: 25,
                           color: Colors.black,
                         ),
                         scrollDirection: Axis.vertical,

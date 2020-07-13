@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/create_instances.dart';
 import 'package:yoodoo/load_tasks.dart';
+import 'package:yoodoo/notifications_page.dart';
 import 'package:yoodoo/task_details.dart';
 import 'dialogues.dart';
 import 'taskboard.dart';
@@ -44,126 +45,131 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(
-        length: 2,
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                automaticallyImplyLeading: false,
-                titleSpacing: 25.0,
-                backgroundColor: Colors.black,
-                primary: true,
-                floating: false,
-                pinned: true,
-                //snap: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  //centerTitle: true,
-                  titlePadding: EdgeInsets.fromLTRB(25, 20, 25, 12),
-                  title: new Text('Yoodoo',
-                    style: TextStyle(
-                        fontFamily: 'TypoHoop',
-                        fontWeight: FontWeight.w100,
-                        fontSize: 25.0,
-                        color: Colors.white
-                    ),),
-                ),
-                actions: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(right: 25.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfileScreen()),
-                        );
-                      },
-                      child: Icon(
+      backgroundColor: Color(0xFFE1E1E1),
+      body: SafeArea(
+        child: DefaultTabController(
+          length: 2,
+          child: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  titleSpacing: 25.0,
+                  backgroundColor: Colors.white,
+                  primary: true,
+                  floating: false,
+                  pinned: false,
+                  //snap: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    //centerTitle: true,
+                    titlePadding: EdgeInsets.fromLTRB(25, 15, 25, 12),
+                    title: new Text('Yoodoo',
+                      style: TextStyle(
+                          fontFamily: 'TypoHoop',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 25.0,
+                          color: Colors.black
+                      ),),
+                  ),
+                  actions: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(right: 25.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NotificationsPage()),
+                          );
+                        },
+                        child: Icon(
                           Icons.notifications,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 25.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfileScreen()),
-                        );
-                      },
-                      child: Icon(
-                          Icons.person
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 25.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        _signOut();
-                      },
-                      child: Icon(
-                          Icons.exit_to_app
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SliverPersistentHeader(
-                delegate: _SliverAppBarDelegate(
-                  TabBar(
-                    indicator: BoxDecoration(
-                      color: Colors.black,
-                      border: Border.all(
-                          color: Colors.white,
-                          width: 4
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    ),
-                    //labelColor: Colors.black,
-                    unselectedLabelColor: Colors.black,
-                    indicatorColor: Colors.white,
-                    indicatorWeight: 2,
-                    tabs: <Widget>[
-                      Tab(
-                        child: Container(
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(Icons.group),
-                              SizedBox(width: 10),
-                              Text('My Groups'),
-                              SizedBox(height: 10),
-                            ],
-                          ),
+                          color: Colors.black,
                         ),
                       ),
-                      Tab(
-                        child: Container(
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(Icons.work),
-                              SizedBox(width: 10),
-                              Text('My Tasks'),
-                              SizedBox(height: 10),
-                            ],
-                          ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 25.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProfileScreen()),
+                          );
+                        },
+                        child: Icon(
+                            Icons.person,
+                          color: Colors.black,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 25.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          _signOut();
+                        },
+                        child: Icon(
+                            Icons.exit_to_app,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                pinned: false,
-              ),
-            ];
-          },
-          body: TabBarView(
-            children: <Widget>[
-              Container(
+                SliverPersistentHeader(
+                  delegate: _SliverAppBarDelegate(
+                    TabBar(
+                      indicator: BoxDecoration(
+                        color: Color(0xFFE1E1E1),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(25.0),
+                          topLeft: Radius.circular(25.0),
+                        ),
+                      ),
+                      labelColor: Colors.black,
+                      unselectedLabelColor: Colors.black,
+                      indicatorColor: Colors.white,
+                      indicatorWeight: 2,
+                      tabs: <Widget>[
+                        Tab(
+                          child: Container(
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(Icons.group),
+                                SizedBox(width: 10),
+                                Text('My Groups',
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(Icons.work),
+                                SizedBox(width: 10),
+                                Text('My Tasks'),
+                                SizedBox(height: 10),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  pinned: true,
+                ),
+              ];
+            },
+            body: TabBarView(
+              children: <Widget>[
+                Container(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
@@ -175,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           ),
                         ) : new Container(
                           //height: MediaQuery.of(context).size.height,
-                          margin: EdgeInsets.fromLTRB(0,0,0,0),
+                          margin: EdgeInsets.fromLTRB(10,10,10,10),
                           child: ListView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
@@ -192,78 +198,65 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.fromLTRB(10,10,10,0),
+                                  padding: EdgeInsets.fromLTRB(10,10,10,5),
                                   height: 175,
                                   width: double.maxFinite,
-                                  child: Card(
-                                    elevation: 5,
-                                    child: Container(
-                                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            width: 5.0,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        color: Colors.white,
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 20.0, top: 10.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Expanded(
-                                                flex: 1,
-                                                child: Text(groupNames[index],
-                                                  overflow: TextOverflow.visible,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 18,
-                                                      fontWeight: FontWeight.bold
-                                                  ),),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: Text(groupDescriptions[index],
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                    fontSize: 15,
-                                                  ),),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Row(
-                                                children: <Widget>[
-                                                  Align(
-                                                    alignment: Alignment.bottomLeft,
-                                                    child: Text('Admin: ',
-                                                      style: TextStyle(
-                                                        color: Colors.black54,
-                                                        //fontSize: 16,
-                                                        fontStyle: FontStyle.italic,
-                                                      ),),
-                                                  ),
-                                                  Align(
-                                                    alignment: Alignment.bottomLeft,
-                                                    child: Text(groupOwners[index],
-                                                      style: TextStyle(
-                                                        color: Colors.black54,
-                                                        //fontSize: 17,
-                                                        fontStyle: FontStyle.italic,
-                                                      ),),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                  child: Container(
+                                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      color: Colors.white,
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(groupNames[index],
+                                              overflow: TextOverflow.visible,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400
+                                              ),),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(groupDescriptions[index],
+                                              style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 15,
+                                              ),),
+
+                                            Expanded(
+                                              child: SizedBox(),
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Align(
+                                                  alignment: Alignment.bottomLeft,
+                                                  child: Text('Admin: ',
+                                                    style: TextStyle(
+                                                      color: Colors.black54,
+                                                      //fontSize: 16,
+                                                      fontStyle: FontStyle.italic,
+                                                    ),),
+                                                ),
+                                                Align(
+                                                  alignment: Alignment.bottomLeft,
+                                                  child: Text(groupOwners[index],
+                                                    style: TextStyle(
+                                                      color: Colors.black54,
+                                                      //fontSize: 17,
+                                                      fontStyle: FontStyle.italic,
+                                                    ),),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -276,7 +269,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ),
                       Container(
                         height: 60,
+                        margin: EdgeInsets.only(bottom: 10),
                         alignment: Alignment.bottomCenter,
+                        color: Colors.transparent,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -285,15 +280,31 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               //flex: 2,
                               child: InkWell(
                                 child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15),
                                   padding: EdgeInsets.symmetric(vertical: 15),
                                   alignment: Alignment.center,
-                                  child: Text(
-                                    'Join',
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                                        color: Colors.white),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.group_add,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      Text(
+                                        'Join Group',
+                                        style: TextStyle(
+                                          //fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      ),
+                                    ],
                                   ),
                                   decoration: BoxDecoration(
-                                    //borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    borderRadius: BorderRadius.all(Radius.circular(20)),
                                     color: Colors.black,
                                   ),
                                 ),
@@ -302,26 +313,35 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 },
                               ),
                             ),
-                            SizedBox(
-                              child: Container(
-                                color: Colors.white,
-                                height: 60,
-                                width: 0.5,
-                              ),
-                            ),
                             Expanded(
                               //flex: 2,
                               child: InkWell(
                                 child:  Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15),
                                   padding: EdgeInsets.symmetric(vertical: 15),
                                   alignment: Alignment.center,
-                                  child: Text(
-                                    'Create',
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                                        color: Colors.white),
+                                  child:Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.create,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'Create Group',
+                                        style: TextStyle(
+                                          //fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      ),
+                                    ],
                                   ),
                                   decoration: BoxDecoration(
-                                    //borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    borderRadius: BorderRadius.all(Radius.circular(20)),
                                     color: Colors.black,
                                   ),
                                 ),
@@ -337,331 +357,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         ),
                       ),
                     ],
-                  )
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                //margin: EdgeInsets.fromLTRB(0,20,0,0),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: myTasks.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => TaskDetails()),
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(10,10,10,0),
-                          height: 75,
-                          width: double.maxFinite,
-                          child: Card(
-                              elevation: 5,
-                              child: InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      width: 3.0,
-                                      color: //Colors.redAccent,
-                                      mytpc[index],
-                                    ),
-                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0, bottom: 10.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Text(myTaskNames[index],
-                                              overflow: TextOverflow.ellipsis,
-                                              //myTaskNames.elementAt(index),
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold
-                                              ),),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                          ),
-                        )
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
- /*Widget build(BuildContext context) {
-    return new DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: new AppBar(
-            automaticallyImplyLeading: false,
-            titleSpacing: 25.0,
-            title: new Text('Yoodoo',
-              style: TextStyle(
-                  fontFamily: 'TypoHoop',
-                  fontWeight: FontWeight.w100,
-                  fontSize: 25.0,
-                  color: Colors.white
-              ),),
-            actions: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 25.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProfileScreen()),
-                    );
-                  },
-                  child: Icon(
-                      Icons.person
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 25.0),
-                child: GestureDetector(
-                  onTap: () {
-                    _signOut();
-                  },
-                  child: Icon(
-                      Icons.exit_to_app
-                  ),
-                ),
-              ),
-            ],
-            backgroundColor: Colors.black,
-            bottom: TabBar(
-              tabs: <Widget>[
-                Container(
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.group),
-                      SizedBox(width: 10),
-                      Text('My Groups'),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.work),
-                      SizedBox(width: 10),
-                      Text('My Tasks'),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          body: TabBarView(
-              children: <Widget>[
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: uiFlag == false ? new Container(
-                            child: new Center(
-                                child: new Text('No groups to show')
-                            ),
-                          ) : new Container(
-                            margin: EdgeInsets.fromLTRB(0,20,0,0),
-                            child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: groups.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                    onTap: () async {
-
-                                      groupIndex = index;
-                                      popupWait(context);
-                                      await defineTaskboardUI(index);
-                                      Navigator.of(context).pop();//pops popupWait()
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Taskboard()),);
-
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.fromLTRB(10,10,10,0),
-                                      height: 175,
-                                      width: double.maxFinite,
-                                      child: Card(
-                                          elevation: 5,
-                                          child: Container(
-                                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                                            decoration: BoxDecoration(
-                                              border: Border(
-                                                top: BorderSide(
-                                                  width: 4.0,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                              color: Colors.white,
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 20.0, top: 10.0),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(groupNames[index],
-                                                        overflow: TextOverflow.visible,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 24,
-                                                            fontWeight: FontWeight.bold
-                                                        ),),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(groupDescriptions[index],
-                                                        style: TextStyle(
-                                                          color: Colors.black54,
-                                                          fontSize: 18,
-                                                        ),),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      children: <Widget>[
-                                                        Align(
-                                                          alignment: Alignment.bottomLeft,
-                                                          child: Text('Admin: ',
-                                                            style: TextStyle(
-                                                              color: Colors.black54,
-                                                              fontSize: 16,
-                                                              fontStyle: FontStyle.italic,
-                                                            ),),
-                                                        ),
-                                                        Align(
-                                                          alignment: Alignment.bottomLeft,
-                                                          child: Text(groupOwners[index],
-                                                            style: TextStyle(
-                                                              color: Colors.black54,
-                                                              fontSize: 17,
-                                                              fontStyle: FontStyle.italic,
-                                                            ),),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                      ),
-                                    ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 60,
-                          alignment: Alignment.bottomCenter,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: InkWell(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 15),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Join',
-                                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      //borderRadius: BorderRadius.all(Radius.circular(5)),
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    popupJoin(context);
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                child: Container(
-                                  color: Colors.white,
-                                  height: 60,
-                                  width: 0.5,
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  child:  Container(
-                                    padding: EdgeInsets.symmetric(vertical: 15),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Create',
-                                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      //borderRadius: BorderRadius.all(Radius.circular(5)),
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => GroupInfo()),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  margin: EdgeInsets.fromLTRB(0,20,0,0),
+                  //margin: EdgeInsets.fromLTRB(0,20,0,0),
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: 5,//myTasks.length,
+                    itemCount: myTasks.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                           onTap: () {
@@ -672,44 +377,39 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           },
                           child: Container(
                             padding: EdgeInsets.fromLTRB(10,10,10,0),
-                            height: 100,
+                            height: 75,
                             width: double.maxFinite,
-                            child: Card(
-                                elevation: 5,
-                                child: InkWell(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 3.0,
-                                        color: Colors.redAccent,
-                                        //mytpc.elementAt(index),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  width: 1.5,
+                                  color: //Colors.redAccent,
+                                  mytpc[index],
+                                ),
+                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              ),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20.0, top: 19.0, right: 20.0, bottom: 10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Text(myTaskNames[index],
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w400
+                                          ),),
                                       ),
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                    ),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 20.0, top: 25.0, right: 20.0, bottom: 10.0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Text('The quick brown fox jumped over the lazy dog',
-                                                overflow: TextOverflow.ellipsis,
-                                                //myTaskNames.elementAt(index),
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold
-                                                ),),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    ],
                                   ),
-                                )
+                                ),
+                              ),
                             ),
                           )
                       );
@@ -717,10 +417,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),
               ],
+            ),
           ),
         ),
+      ),
     );
-  }*/
+  }
 }
 
 Future <void> loadMyTasks() async{
@@ -786,6 +488,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
+      color: Color(0xFFFFFFFF),
       child: _tabBar,
     );
   }

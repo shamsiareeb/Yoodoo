@@ -18,13 +18,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
+        backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
+        iconTheme: IconThemeData(
+            color: Colors.black
+        ),
         automaticallyImplyLeading: false,
-        title: new Text('PROFILE',
+        title: new Text('My Profile',
         style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.w500,
+            fontSize: 22.0,
+            fontWeight: FontWeight.w400,
+            color: Colors.black
         ),),
+        backgroundColor: Colors.white,
       ),
         body: SingleChildScrollView(
           child: Container(
@@ -41,27 +48,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Text(
                         'Full Name',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 24,
+                          color: Colors.black
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
-                      TextFormField(
-                        initialValue: userName,
-                        validator: blankValidator,
-                        onSaved: (input) => userName = input,
-                        decoration: InputDecoration(
-                          hintText: 'John Doe',
-                          hintStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                        child: TextFormField(
+                          initialValue: userName,
+                          validator: blankValidator,
+                          onSaved: (input) => userName = input,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            hintText: 'John Doe',
+                            hintStyle: TextStyle(color: Colors.grey),
                           ),
                         ),
                       ),
@@ -76,27 +88,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Text(
                         'Workplace',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 24,
+                          color: Colors.black
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
-                      TextFormField(
-                        initialValue: company,
-                        validator: blankValidator,
-                        onSaved: (input) => company = input,
-                        decoration: InputDecoration(
-                          hintText: 'Company Name',
-                          hintStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                        child: TextFormField(
+                          initialValue: company,
+                          validator: blankValidator,
+                          onSaved: (input) => company = input,
+                          decoration: InputDecoration(
+                            hintText: 'Company Name',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
                           ),
                         ),
                       ),
@@ -111,32 +128,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Text(
                         'Designation',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 24,
+                          color: Colors.black
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
-                      TextFormField(
-                        initialValue: designation,
-                        validator: blankValidator,
-                        onSaved: (input) => designation = input,
-                        decoration: InputDecoration(
-                          hintText: 'Job Title',
-                          hintStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                        child: TextFormField(
+                          initialValue: designation,
+                          validator: blankValidator,
+                          onSaved: (input) => designation = input,
+                          decoration: InputDecoration(
+                            hintText: 'Job Title',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 100,
+                        height: 75,
                       ),
                       Row(
                         children: <Widget>[
@@ -147,11 +169,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   'CANCEL',
-                                  style: TextStyle(fontSize: 20, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w300
+                                  ),
                                 ),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                                  color: Colors.black,
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                  color: Colors.transparent,
+                                  border: Border.all(
+                                    color: Colors.red
+                                  ),
                                 ),
                               ),
                               onTap: () {
@@ -174,11 +203,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   'SAVE',
-                                  style: TextStyle(fontSize: 20, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w300),
                                 ),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                                  color: Colors.black,
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                  color: Colors.green
                                 ),
                               ),
                               onTap: () async {

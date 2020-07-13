@@ -10,12 +10,17 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE1E1E1),
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
         automaticallyImplyLeading: true,
         title: Text('Notifications',
           style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
+            fontSize: 22.0,
+            fontWeight: FontWeight.w300,
+            color: Colors.black
           ),
         ),
         actions: [
@@ -25,49 +30,53 @@ class _NotificationsPageState extends State<NotificationsPage> {
               padding: EdgeInsets.only(right: 25),
               child: Text('CLEAR ALL',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
           ),
         ],
+        backgroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            separatorBuilder: (context, index) => Divider(
-              color: Colors.black,
-            ),
-            itemCount: 10,
-            itemBuilder: (context, index){
-              return ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                trailing: new GestureDetector(
-                  onTap: (){
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: ListView.separated(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          separatorBuilder: (context, index) => Divider(
+            indent: 25,
+            endIndent: 25,
+            color: Colors.black,
+          ),
+          itemCount: 10,
+          itemBuilder: (context, index){
+            return ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              trailing: new GestureDetector(
+                onTap: (){
 
-                  },
-                  child: Container(
-                    child: Icon(
-                      Icons.clear,
-                    ),
+                },
+                child: Container(
+                  child: Icon(
+                    Icons.clear,
+                    //color: Colors.red,
                   ),
                 ),
-                title: new Container(
-                  //height: double.maxFinite,
-                  child: Text('This is a notification, lets see to what extent it goes. And what if I extend it a bit more?',
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                      fontSize: 18,
-                      ),
-                    ),
+              ),
+              title: new Container(
+                //height: double.maxFinite,
+                child: Text('This is a notification, lets see to what extent it goes. And what if I extend it a bit more?',
+                  overflow: TextOverflow.visible,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400
                   ),
-                );
-              },
-          ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

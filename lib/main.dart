@@ -11,26 +11,34 @@ import 'package:yoodoo/task_details.dart';
 import 'package:yoodoo/taskboard.dart';
 import 'login_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:yoodoo/app_theme.dart';
+import 'package:yoodoo/app_state_notifier.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+    ));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Yoodoo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.black,
         accentColor: Colors.black,
       ),
-      home:SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }

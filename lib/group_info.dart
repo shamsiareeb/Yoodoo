@@ -30,18 +30,24 @@ class _GroupInfoState extends State<GroupInfo> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
-        automaticallyImplyLeading: false,
-        title: new Text("ADD GROUP",
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        automaticallyImplyLeading: true,
+        title: new Text("Create Group",
         style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.w500,
+          fontSize: 22.0,
+          fontWeight: FontWeight.w400,
+          color: Colors.black
         ),
         ),
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
           child: Form(
             key: _formkey,
             child: Column(
@@ -54,28 +60,32 @@ class _GroupInfoState extends State<GroupInfo> {
                     Text(
                       "Group's Name",
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    TextFormField(
-                      maxLength: 30,
-                      validator: blankValidator,
-                      onSaved: (input) => groupName = input,
-                      decoration: InputDecoration(
-                        counterText: '',
-                        hintText: "Max 30 characters",
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: TextFormField(
+                        maxLength: 30,
+                        validator: blankValidator,
+                        onSaved: (input) => groupName = input,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          counterText: '',
+                          hintText: "Max 30 characters",
+                          hintStyle: TextStyle(color: Colors.grey),
                         ),
                       ),
                     ),
@@ -85,28 +95,33 @@ class _GroupInfoState extends State<GroupInfo> {
                     Text(
                       "Short Description",
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w300,
                         ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    TextFormField(
-                      maxLength: 60,
-                      validator: blankValidator,
-                      onSaved: (input) => groupDescription = input,
-                      decoration: InputDecoration(
-                        counterText: '',
-                        hintText: "Max 60 characters",
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: TextFormField(
+                        maxLength: 60,
+                        maxLines: 2,
+                        validator: blankValidator,
+                        onSaved: (input) => groupDescription = input,
+                        decoration: InputDecoration(
+                          counterText: '',
+                          hintText: "Max 60 characters",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
                         ),
                       ),
                     ),
@@ -119,11 +134,17 @@ class _GroupInfoState extends State<GroupInfo> {
                         alignment: Alignment.center,
                         child: Text(
                           'NEXT',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300),
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.black,
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       onTap: (){

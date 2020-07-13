@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'validators.dart';
-import 'dialogues.dart';
+import 'package:yoodoo/validators.dart';
+import 'package:yoodoo/dialogues.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'create_instances.dart';
-
-import 'login_screen.dart';
+import 'package:yoodoo/create_instances.dart';
+import 'package:flutter/services.dart';
+import 'package:yoodoo/login_screen.dart';
 
 class SignupScreen extends StatefulWidget{
   _SignupForm createState() => new _SignupForm();
@@ -35,43 +35,50 @@ class _SignupForm extends State<SignupScreen>{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              TextFormField(
-                validator: emailValidator,
-                onSaved: (input) => _email = input,
-                decoration: InputDecoration(
-                    hintText: 'Email ID',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  prefixIcon: new Icon(Icons.email, color: Colors.black,),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15))
                 ),
-                keyboardType: TextInputType.emailAddress
+                child: TextFormField(
+                    validator: emailValidator,
+                    onSaved: (input) => _email = input,
+                    decoration: InputDecoration(
+                      hintText: 'Email ID',
+                      hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      prefixIcon: new Icon(Icons.email, color: Colors.black,),
+                    ),
+                    keyboardType: TextInputType.emailAddress
+                ),
               ),
               SizedBox(
                 height: 20,
               ),
-              TextFormField(
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15))
+                ),
+                child: TextFormField(
                   validator: pwdValidator,
                   controller: passwordController,
                   onSaved: (input) => _password = input,
                   decoration: InputDecoration(
                       hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    prefixIcon: new Icon(Icons.lock, color: Colors.black,),
+                      hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      prefixIcon: new Icon(Icons.lock, color: Colors.black,),
                       suffixIcon: IconButton(
                         icon: Icon(
                           passwordVisible
@@ -86,35 +93,39 @@ class _SignupForm extends State<SignupScreen>{
                         },
                       )
                   ),
-                obscureText: passwordVisible,
+                  obscureText: passwordVisible,
+                ),
               ),
               SizedBox(
                 height: 20,
               ),
-              TextFormField(
-                  controller: confPassController,
-                  validator: (val){
-                    if(val.isEmpty)
-                      return 'Required';
-                    if(val != passwordController.text)
-                      return 'Passwords do not match';
-                    return null;
-                  },
-                  //onSaved: (input) => _confPass = input,
-                  decoration: InputDecoration(
-                    hintText: 'Confirm Password',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15))
+                ),
+                child: TextFormField(
+                    controller: confPassController,
+                    validator: (val){
+                      if(val.isEmpty)
+                        return 'Required';
+                      if(val != passwordController.text)
+                        return 'Passwords do not match';
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Confirm Password',
+                      hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      prefixIcon: new Icon(Icons.lock, color: Colors.black,),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    prefixIcon: new Icon(Icons.lock, color: Colors.black,),
-                  ),
-                  obscureText: true
+                    obscureText: true
+                ),
               ),
               SizedBox(
                 height: 50,
@@ -125,11 +136,14 @@ class _SignupForm extends State<SignupScreen>{
                   alignment: Alignment.center,
                   child: Text(
                     'SIGN UP',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300),
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: Colors.green.shade500,
                   ),
                 ),
                 onTap: () async {
@@ -178,7 +192,11 @@ class _SignupForm extends State<SignupScreen>{
 
 class SignupScreenUI extends StatelessWidget {
   Widget build(BuildContext context){
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFFE1E1E1),
+    ));
     return Scaffold(
+        backgroundColor: Color(0xFFE1E1E1),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height,
@@ -224,7 +242,7 @@ class SignupScreenUI extends StatelessWidget {
                 text: 'Let\'s get started!',
                 style: TextStyle(
                   fontSize: 45,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w300,
                   color: Colors.black,
                 ),
               ),
@@ -244,7 +262,7 @@ class SignupScreenUI extends StatelessWidget {
                 text: 'We are excited to see you here.',
                 style: TextStyle(
                   fontSize: 23,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w300,
                   color: Colors.black,
                 ),
               ),
@@ -272,7 +290,7 @@ class SignupScreenUI extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w400),
             ),
           )
         ],
