@@ -16,19 +16,22 @@ Future <bool> loadGroupsData(FirebaseUser user) async {
   groupNames.clear();
   groupOwners.clear();
   groupDescriptions.clear();
-  await usersCollection.document(user.uid).get().then((DocumentSnapshot ds) {
-    groups = (ds['groups']);
-    myYoodoos = (ds['myYoodoos']);
+  await usersCollection.document(user.uid).get().then((DocumentSnapshot ds) async {
+    Map <String,int> groupsNyoodoos = new Map();
+    groupsNyoodoos = (ds['groups&yoodoos']);
+    if(groupsNyoodoos != null){
+      groupsNyoodoos.keys.forEach((f) => groups.add((f)));
+      groupsNyoodoos.keys.forEach((f) => myYoodoos.add((f)));
+      return await calcArrayLength();
+    }
+    else{
+      return false;
+    }
   });
-  return await calcArrayLength();
 }
 
 Future<bool> calcArrayLength() async{
 
-  if (groups.length == 0){
-    return false;
-  }
-  else{
     for (int i = 0; i < groups.length ; i++){
       await groupsCollection.document(groups[i]).get().then((DocumentSnapshot ds){
         groupNames.add(ds['groupName']);
@@ -38,7 +41,6 @@ Future<bool> calcArrayLength() async{
         allGroupMembers.add(individualGroupMembers.last);
       });
     }
+    return true;
   }
-  return true;
-}
 
