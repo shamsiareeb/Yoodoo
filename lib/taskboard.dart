@@ -9,7 +9,6 @@ import 'package:yoodoo/load_tasks.dart';
 import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/load_groups.dart';
 import 'package:yoodoo/login_screen.dart';
-import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/claim_rewards.dart';
 
 class Taskboard extends StatefulWidget{

@@ -180,11 +180,13 @@ class _SignupForm extends State<SignupScreen>{
 
   Future initUserData(FirebaseUser user) async{
 
+    Map <String, int> groupNYoodoos = new Map();
+
     return await usersCollection.document(user.uid).setData({
       'name': '',
       'workplace':'',
       'designation':'',
-      'groups': FieldValue.arrayUnion([]),
+      'groups&yoodoos': groupNYoodoos,
       'myTasks': FieldValue.arrayUnion([])
     });
   }

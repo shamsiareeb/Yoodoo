@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/load_tasks.dart';
 import 'group_info.dart';
 import 'home_screen.dart';
 import 'login_screen.dart';
@@ -809,5 +810,48 @@ void popupJoin(BuildContext context) {
         );
       },
       barrierDismissible: true
+  );
+}
+
+void popupRejectTask(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)
+              ),
+              title: Text("Are you sure?"),
+              content: Text('Rejecting a task will incur a panalty on your Yoodoo balance!'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Yes",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),),
+                  onPressed: () async{
+                    popupWait(context);
+                    await usersCollection.document(user.uid).updateData({
+                      //'myTasks': FieldValue.arrayRemove(tasks[index]),
+                      //'myYoodoos': //TODO delete task from users and update task attributes in groups
+                    });
+                  },
+                ),
+                FlatButton(
+                  child: Text("No",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            )
+        );
+      },
+      barrierDismissible: false
   );
 }

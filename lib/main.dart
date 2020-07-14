@@ -12,7 +12,6 @@ import 'package:yoodoo/taskboard.dart';
 import 'login_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:yoodoo/app_theme.dart';
 import 'package:yoodoo/app_state_notifier.dart';
 
 void main() {
