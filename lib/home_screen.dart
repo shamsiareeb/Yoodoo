@@ -433,7 +433,7 @@ Future <void> loadMyTasks() async{
     myTasks = (ds['myTasks']);
   });
   print('My tasks array is $myTasks');
-  if(myTasks.isNotEmpty){
+  if(myTasks != null){
     for (int i = 0; i<myTasks.length; i++){
       int x = myTasks.elementAt(i).lastIndexOf('/');
       String path = myTasks.elementAt(i).substring(0, x);
