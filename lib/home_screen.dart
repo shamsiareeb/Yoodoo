@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.initState();
   }
 
-  Future <void> _signOut()  async{
+  Future <void> signOut()  async{
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
         context,
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       padding: EdgeInsets.only(right: 25.0),
                       child: GestureDetector(
                         onTap: () {
-                          _signOut();
+                          signOut();
                         },
                         child: Icon(
                             Icons.exit_to_app,
@@ -360,61 +360,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  //margin: EdgeInsets.fromLTRB(0,20,0,0),
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: myTasks.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => TaskDetails()),
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(10,10,10,0),
-                            height: 75,
-                            width: double.maxFinite,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                  width: 1.5,
-                                  color: //Colors.redAccent,
-                                  mytpc[index],
-                                ),
-                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                              ),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 19.0, right: 20.0, bottom: 10.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Text(myTaskNames[index],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w400
-                                          ),),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                      );
-                    },
-                  ),
+                  child: _buildChild(),
                 ),
               ],
             ),
@@ -422,6 +368,76 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ),
       ),
     );
+  }
+
+  Widget _buildChild() {
+    if (myTasks == null) {
+      return Container(
+        height: MediaQuery.of(context).size.height,
+        child: new Center(
+            child: new Text('No tasks to show'),
+        ),
+      );
+    }
+    else {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        //margin: EdgeInsets.fromLTRB(0,20,0,0),
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: myTasks.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TaskDetails()),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(10,10,10,0),
+                  height: 75,
+                  width: double.maxFinite,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        width: 1.5,
+                        color: //Colors.redAccent,
+                        mytpc[index],
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0, top: 19.0, right: 20.0, bottom: 10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(myTaskNames[index],
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400
+                                ),),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+            );
+          },
+        ),
+      );
+    }
   }
 }
 
@@ -498,26 +514,3 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return false;
   }
 }
-
-
-      /*new Center(
-            child: new Text('No groups to show')
-        )*/
-        /*Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
-          height: MediaQuery.of(context).size.height,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: numbers.length, itemBuilder: (context, index) {
-            return Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Card(
-                color: Colors.lightBlueAccent,
-                //shadowColor: Colors.black,
-                child: Container(
-                  child: Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 36.0),)),
-                ),
-              ),
-            );
-          }),
-        ),*/

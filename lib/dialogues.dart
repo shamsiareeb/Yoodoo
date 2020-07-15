@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoodoo/load_tasks.dart';
@@ -249,10 +250,9 @@ void popupCancelSetup(BuildContext context) {
                       color: Colors.black
                     ),),
                     onPressed: () {
+                      signOut(context);
                       Navigator.of(context).pop();
-                      //TODO insert proper log out code
-                      Navigator.of(context).pop();
-                    },
+                    }
                   ),
                 ]
             )
@@ -855,3 +855,11 @@ void popupRejectTask(BuildContext context) {
       barrierDismissible: false
   );
 }
+
+  Future <void> signOut(BuildContext context)  async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreenUI()));
+    return null;
+  }

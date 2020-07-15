@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
         iconTheme: IconThemeData(
@@ -35,12 +35,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
         body: SingleChildScrollView(
           child: Container(
+            height: MediaQuery.of(context).size.height*0.8,
+            width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,17 +218,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () async {
                                 if (_formKey.currentState.validate()){
                                   _formKey.currentState.save();
-                                 // if (popupDialog10(context) == true){
                                     save(userName, company, designation);
                                     await defineHomescreenUI();
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(builder: (context) => HomeScreen()),
                                   );
-                                  //}
-                                  /*else{
-                                    Navigator.of(context).pop();
-                                  }*/
                                 }
                               },
                             ),
