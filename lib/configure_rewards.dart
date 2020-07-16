@@ -11,8 +11,8 @@ import 'package:random_string/random_string.dart';
 import 'create_instances.dart';
 
 
-var rewards = List();
-var yoodoos = List();
+List <String> rewards = List();
+List <int> yoodoos = List();
 var groupId;
 
 class ConfigureRewards extends StatefulWidget{
@@ -59,7 +59,7 @@ class RewardScreen extends State<ConfigureRewards> {
                 else{
                   popupWait(context);
                   await initGroup(user);//FirebaseUser user imported from login_screen.dart
-                  await updateGroupsArrayForUser(user);
+                  await updateGnYmapForUser(user);
                   await defineHomescreenUI();
                   rewards.clear();
                   yoodoos.clear();
@@ -187,7 +187,7 @@ class RewardScreen extends State<ConfigureRewards> {
                   ),
                 ),
                 onTap: () {
-                  if (rewards.isNotEmpty) {
+                  if (rewards.isNotEmpty || rewards!=null) {
                     setState(() {
                       rewards.removeLast();
                       yoodoos.removeLast();
@@ -243,11 +243,13 @@ class RewardScreen extends State<ConfigureRewards> {
 
   Future initGroup(FirebaseUser user) async{
     groupId = randomAlphaNumeric(10);
+    Map <String, int> Reward_Yoodoos = new Map.fromIterables(rewards, yoodoos);
     await groupsCollection.document(groupId).setData({
       'ownerId': user.uid,
       'ownerName': userName,
-      'rewards': FieldValue.arrayUnion(rewards),
-      'yoodoos': FieldValue.arrayUnion(yoodoos),
+      'rewards&yoodoos': Reward_Yoodoos,
+      //'rewards': FieldValue.arrayUnion(rewards),
+      //'yoodoos': FieldValue.arrayUnion(yoodoos),
       'groupCode': groupId,
       'groupName': groupName,
       'groupDescription': groupDescription,
@@ -258,7 +260,7 @@ class RewardScreen extends State<ConfigureRewards> {
     //tasksCollection.document().
   }
 
-  Future updateGroupsArrayForUser(FirebaseUser user) async{
+  Future updateGnYmapForUser(FirebaseUser user) async{
     //Map <String , int> map = Map.
     return await usersCollection.document(user.uid).setData({
       'groups&yoodoos' : {groupId : 0}

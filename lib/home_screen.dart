@@ -371,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Widget _buildChild() {
-    if (myTasks == null) {
+    if (myTasks == null || myTasks.isEmpty) {
       return Container(
         height: MediaQuery.of(context).size.height,
         child: new Center(
