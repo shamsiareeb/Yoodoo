@@ -218,8 +218,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () async {
                                 if (_formKey.currentState.validate()){
                                   _formKey.currentState.save();
-                                    save(userName, company, designation);
-                                    await defineHomescreenUI();
+                                  popupWait(context);
+                                  save(userName, company, designation);
+                                  await defineHomescreenUI();
+                                  Navigator.of(context).pop();
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -242,11 +244,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future save(_userName, _company, _designation) async{
     _userName = _userName.trim();
     userName = _userName;
-    return await usersCollection.document(user.uid).setData({
+    return await usersCollection.document(user.uid).updateData({
       'name': _userName,
       'workplace': _company,
-      'designation': _designation,
-      'groups': FieldValue.arrayUnion([])
+      'designation': _designation
     });
   }
 }

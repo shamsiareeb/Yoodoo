@@ -17,7 +17,7 @@ Future <bool> loadGroupsData(FirebaseUser user) async {
   groupOwners.clear();
   groupDescriptions.clear();
   await usersCollection.document(user.uid).get().then((DocumentSnapshot ds) async {
-    Map <String,int> groupsNyoodoos = new Map();
+    Map <String,dynamic> groupsNyoodoos = new Map();
     groupsNyoodoos = (ds['groups&yoodoos']);
     if(groupsNyoodoos != null) {
       groupsNyoodoos.keys.forEach((f) => groups.add((f)));

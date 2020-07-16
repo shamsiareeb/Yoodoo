@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/load_groups.dart';
 import 'group_info.dart';
 import 'dialogues.dart';
 import 'home_screen.dart';
@@ -258,9 +259,11 @@ class RewardScreen extends State<ConfigureRewards> {
   }
 
   Future updateGroupsArrayForUser(FirebaseUser user) async{
-    return await usersCollection.document(user.uid).updateData({
-      'groups' : FieldValue.arrayUnion([groupId]),
-      'myYoodoos' : FieldValue.arrayUnion([0]) //individual yoodoos of user for group
-    });
+    //Map <String , int> map = Map.
+    return await usersCollection.document(user.uid).setData({
+      'groups&yoodoos' : {groupId : 0}
+      //'groups' : FieldValue.arrayUnion([groupId]),
+      //'myYoodoos' : FieldValue.arrayUnion([0]) //individual yoodoos of user for group
+    }, merge: true);
   }
 }

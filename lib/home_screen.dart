@@ -470,6 +470,7 @@ Future <void> loadMyTasks() async{
 
 Future<void> defineHomescreenUI() async{
   uiFlag = await loadGroupsData(user);
+  await loadMyTasks();
   printArrays();
 }
 void printArrays(){
