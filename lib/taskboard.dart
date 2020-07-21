@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
 import 'package:yoodoo/create_instances.dart';
 import 'package:yoodoo/create_task.dart';
 import 'package:yoodoo/group_details.dart';
@@ -110,7 +113,7 @@ class _TaskboardState extends State<Taskboard> {
                           color: Colors.white,
                           border: Border.all(
                               width: 2,
-                              color: tpc.reversed.elementAt(index)
+                              color: tpc.elementAt(index)
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
@@ -123,7 +126,7 @@ class _TaskboardState extends State<Taskboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Container(
-                                  child: Text(taskNames.reversed.elementAt(index),
+                                  child: Text(taskNames.elementAt(index),
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 24,
@@ -135,7 +138,7 @@ class _TaskboardState extends State<Taskboard> {
                                 ),
                                 Container(
                                   //flex: 3,
-                                  child: Text(taskDescriptions.reversed.elementAt(index),
+                                  child: Text(taskDescriptions.elementAt(index),
                                     style: TextStyle(
                                       color: Colors.black54,
                                       fontSize: 16,
@@ -160,8 +163,15 @@ class _TaskboardState extends State<Taskboard> {
                                           ),
                                         ),
                                         child: GestureDetector(
-                                          onTap: (){
-
+                                          onTap: ()async{
+                                            popupWait(context);
+                                            var memberList = new List();
+                                            memberList = allGroupMembers[groupIndex];
+                                            memberList.shuffle();
+                                            await updateTaskAttributes(index);
+                                            await addToMyTasks(index, memberList.first);
+                                            await loadMyTasks();
+                                            Navigator.of(context).pop();
                                           },
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -200,7 +210,7 @@ class _TaskboardState extends State<Taskboard> {
                                           onTap: () async {
                                             popupWait(context);
                                             await updateTaskAttributes(index);
-                                            await addToMyTasks(index);
+                                            await addToMyTasks(index, user.uid);
                                             await loadMyTasks();
                                             Navigator.of(context).pop();//pops popupWait
                                           },
@@ -263,9 +273,9 @@ class _TaskboardState extends State<Taskboard> {
     });
   }
 
-  Future <void> addToMyTasks(int index) async{
+  Future <void> addToMyTasks(int index, String userid) async{
     String taskPath = ('groups/'+ groups[groupIndex]+'/tasks/'+tasks[index]);
-    await usersCollection.document(user.uid).updateData({
+    await usersCollection.document(userid).updateData({
       'myTasks': FieldValue.arrayUnion([taskPath])
     });
   }

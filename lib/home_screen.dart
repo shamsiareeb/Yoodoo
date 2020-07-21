@@ -20,6 +20,7 @@ var myTasks = new List();
 var myTaskNames = new List();
 var myTaskPriorities = new List();
 List<MaterialAccentColor> mytpc= new List<MaterialAccentColor>();
+int taskDetailsIndex;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -391,6 +392,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           itemBuilder: (context, index) {
             return GestureDetector(
                 onTap: () {
+                  taskDetailsIndex = index;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TaskDetails()),

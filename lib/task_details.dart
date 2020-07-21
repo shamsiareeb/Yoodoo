@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/create_instances.dart';
+import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/home_screen.dart';
+import 'load_groups.dart';
+import 'login_screen.dart';
 
 class TaskDetails extends StatefulWidget {
   @override
@@ -180,8 +186,40 @@ class _TaskDetailsState extends State<TaskDetails> {
                         )
                       ),
                     ),
-                    onTap: () {
+                    onTap: () async{
+                      popupWait(context);
+                      String g = myTasks[taskDetailsIndex];
+                      int i = groups.indexOf(g.substring(7,17));
 
+                      if(mytpc[i] == Colors.redAccent) {
+                        myYoodoos[i] = myYoodoos[i] - 4;
+                      }
+                      else if (mytpc[i] == Colors.orangeAccent){
+                        myYoodoos[i] = myYoodoos[i] - 2;
+                      }
+                      else{
+                        myYoodoos[i] = myYoodoos[i] - 1;
+                      }
+
+                      Map <String, int> GroupsYoodoos = new Map.fromIterables(groups, myYoodoos);
+                      await usersCollection.document(user.uid).updateData({
+                        'myTasks': FieldValue.arrayRemove([myTasks[taskDetailsIndex]]),
+                        'groups&yoodoos': GroupsYoodoos
+                      });
+
+                      print('Groups[groupIndex]= '+ groups[groupIndex]);
+                      CollectionReference tasksCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
+                      await tasksCollection.document(g.substring(24)).updateData({
+                        'taskAcceptor': '000',//000 stands for null
+                        'taskStatus': 0// 0 stands for null, 1 for accepted, 2 for claimed reward
+                      });
+
+                      await loadMyTasks();
+                      Navigator.of(context).pop();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     }
                 ),
               ),

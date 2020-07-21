@@ -2,13 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'create_instances.dart';
 
-var groups = List(); // stores IDs of groups which the user is a member of
+List <String> groups = List(); // stores IDs of groups which the user is a member of
 var groupNames = List();
 var groupDescriptions = List();
 var groupOwners = List();
-var myYoodoos = List();
-var individualGroupMembers = List();
-List allGroupMembers = List();
+List <int> myYoodoos = List();
+List <List> allGroupMembers = List();
 bool check;
 
 Future <bool> loadGroupsData(FirebaseUser user) async {
@@ -21,13 +20,15 @@ Future <bool> loadGroupsData(FirebaseUser user) async {
     groupsNyoodoos = (ds['groups&yoodoos']);
     if(groupsNyoodoos != null) {
       groupsNyoodoos.keys.forEach((f) => groups.add((f)));
-      groupsNyoodoos.keys.forEach((f) => myYoodoos.add((f)));
+      groupsNyoodoos.values.forEach((f) => myYoodoos.add((f)));
     }
   });
   return await calcArrayLength();
 }
 
 Future <bool> calcArrayLength() async{
+
+  var individualGroupMembers = List();
 
   if(groups.length != 0) {
     for (int i = 0; i < groups.length; i++) {
