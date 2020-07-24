@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/create_instances.dart';
+import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/group_info.dart';
 import 'package:yoodoo/home_screen.dart';
 import 'package:yoodoo/load_groups.dart';
@@ -213,13 +216,27 @@ class _GroupDetailsState extends State<GroupDetails> {
                         ),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: allGroupMemberNames[groupIndex].length,
                         itemBuilder: (context, index){
                           return ListTile(
                             contentPadding: EdgeInsets.symmetric(horizontal: 30),
                             trailing: ownerFlag == true ? new GestureDetector(
-                              onTap: (){
-
+                              onTap: () async {
+                                popupWait(context);
+                                Map <String,dynamic> groupsNyoodoos = new Map();
+                                await groupsCollection.document(groups[groupIndex]).updateData({
+                                  'memberUIDs': FieldValue.arrayRemove([allGroupMemberUIDs[groupIndex][index]]),
+                                  'memberNames': FieldValue.arrayRemove([allGroupMemberNames[groupIndex][index]])
+                                });
+                                await usersCollection.document(allGroupMemberUIDs[groupIndex][index]).get().then((
+                                    DocumentSnapshot ds){
+                                  groupsNyoodoos = (ds['groups&yoodoos']);
+                                  groupsNyoodoos.remove(groups[groupIndex]);
+                                });
+                                await usersCollection.document(allGroupMemberUIDs[groupIndex][index]).setData({
+                                  'groups&yoodoos': groupsNyoodoos
+                                }, merge: true);
+                                Navigator.of(context).pop();
                               },
                               child: Container(
                                 child: Icon(
@@ -230,7 +247,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                             ): Container(),
                             title: Container(
                               //padding: EdgeInsets.all(15),
-                              child: Text('Member Name',
+                              child: Text(allGroupMemberNames[groupIndex][index],
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 18,
