@@ -7,7 +7,8 @@ var groupNames = List();
 var groupDescriptions = List();
 var groupOwners = List();
 List <int> myYoodoos = List();
-List <List> allGroupMembers = List();
+List <List> allGroupMemberUIDs = List();
+List <List> allGroupMemberNames = List();
 bool check;
 
 Future <bool> loadGroupsData(FirebaseUser user) async {
@@ -28,7 +29,8 @@ Future <bool> loadGroupsData(FirebaseUser user) async {
 
 Future <bool> calcArrayLength() async{
 
-  var individualGroupMembers = List();
+  List individualGroupMemberUIDs = List();
+  List individualGroupMembersName = List();
 
   if(groups.length != 0) {
     for (int i = 0; i < groups.length; i++) {
@@ -37,8 +39,10 @@ Future <bool> calcArrayLength() async{
         groupNames.add(ds['groupName']);
         groupDescriptions.add(ds['groupDescription']);
         groupOwners.add(ds['ownerName']);
-        individualGroupMembers.add(ds['members']);
-        allGroupMembers.add(individualGroupMembers.last);
+        individualGroupMemberUIDs.add(ds['memberUIDs']);
+        individualGroupMembersName.add(ds['memberNames']);
+        allGroupMemberUIDs.add(individualGroupMemberUIDs.last);
+        allGroupMemberNames.add(individualGroupMembersName.last);
       });
     }
     return true;

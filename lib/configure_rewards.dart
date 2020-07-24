@@ -252,7 +252,8 @@ class RewardScreen extends State<ConfigureRewards> {
       'groupCode': groupId,
       'groupName': groupName,
       'groupDescription': groupDescription,
-      'members': FieldValue.arrayUnion([user.uid]),
+      'memberUIDs': FieldValue.arrayUnion([user.uid]),
+      'memberNames': FieldValue.arrayUnion([userName]),
       'taskuids': FieldValue.arrayUnion([])
     });
     //CollectionReference tasksCollection = Firestore.instance.collection('groups/tasks');

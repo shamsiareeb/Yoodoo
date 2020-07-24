@@ -19,6 +19,7 @@ int groupIndex;
 var myTasks = new List();
 var myTaskNames = new List();
 var myTaskPriorities = new List();
+var myTaskDescriptions = new List();
 List<MaterialAccentColor> mytpc= new List<MaterialAccentColor>();
 int taskDetailsIndex;
 
@@ -447,6 +448,7 @@ Future <void> loadMyTasks() async{
   myTasks.clear();
   myTaskNames.clear();
   myTaskPriorities.clear();
+  myTaskDescriptions.clear();
   await usersCollection.document(user.uid).get().then((DocumentSnapshot ds){
     myTasks = (ds['myTasks']);
   });
@@ -458,6 +460,7 @@ Future <void> loadMyTasks() async{
       CollectionReference taskCollection = Firestore.instance.collection(path);
       await taskCollection.document(myTasks.elementAt(i).substring(x+1)).get().then((DocumentSnapshot ds){
         myTaskNames.add(ds['taskName']);
+        myTaskDescriptions.add(ds['taskDescription']);
         myTaskPriorities.add(ds['taskPriority']);
         if(myTaskPriorities.elementAt(i) == "Colors.redAccent")
           mytpc.add(Colors.redAccent);

@@ -166,7 +166,7 @@ class _TaskboardState extends State<Taskboard> {
                                           onTap: ()async{
                                             popupWait(context);
                                             var memberList = new List();
-                                            memberList = allGroupMembers[groupIndex];
+                                            memberList = allGroupMemberUIDs[groupIndex];
                                             memberList.shuffle();
                                             await updateTaskAttributes(index);
                                             await addToMyTasks(index, memberList.first);

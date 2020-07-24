@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:yoodoo/create_instances.dart';
 import 'package:yoodoo/dialogues.dart';
 import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/load_tasks.dart';
 import 'load_groups.dart';
 import 'login_screen.dart';
 
@@ -56,7 +57,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       padding: EdgeInsets.all(10),
                       //height: 200,
                       width: MediaQuery.of(context).size.width,
-                      child: Text('The description of a particular group will be shown here.',
+                      child: Text(myTasks[taskDetailsIndex].substring(7,18),//group name
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400
@@ -88,7 +89,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       padding: EdgeInsets.all(10),
                       //height: 200,
                       width: MediaQuery.of(context).size.width,
-                      child: Text('The description of a particular group will be shown here. As you can see, this is not much.',
+                      child: Text(myTaskNames[taskDetailsIndex],//task name
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400
@@ -120,8 +121,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       padding: EdgeInsets.all(10),
                       //height: 200,
                       width: MediaQuery.of(context).size.width,
-                      child: Text('The description of a particular group will be shown here. As you can see, this is not much'
-                          'coz we dont have enough data as for now. But in a while, we will have everything we dont have right now.',
+                      child: Text(taskDescriptions[taskDetailsIndex],//task description
                         style: TextStyle(
                             fontSize: 16,
                           fontWeight: FontWeight.w400

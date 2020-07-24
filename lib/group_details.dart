@@ -155,7 +155,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                       SizedBox(
                         height: 15,
                       ),
-                      Text('8',
+                      Text(myYoodoos[groupIndex].toString(),
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w400,

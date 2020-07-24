@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yoodoo/load_groups.dart';
 import 'package:yoodoo/load_tasks.dart';
 import 'group_info.dart';
 import 'home_screen.dart';
@@ -788,12 +789,12 @@ void popupJoin(BuildContext context) {
                             /* updateData has been used because it does not create a new document unlike setData
                                which creates a new firebase document in case it finds that there is no such document in the db */
                             await groupsCollection.document(_code).updateData({
-                              'members' : FieldValue.arrayUnion([userName])
+                              'memberUIDs' : FieldValue.arrayUnion([user.uid]),
+                              'memberNames' : FieldValue.arrayUnion([userName]),
                             });
-                            await usersCollection.document(user.uid).updateData({
-                              'groups' : FieldValue.arrayUnion([_code]),
-                              'myYoodoos' : FieldValue.arrayUnion([0])
-                            });
+                            await usersCollection.document(user.uid).setData({
+                              'groups&yoodoos' : {groups[groupIndex] : 0}
+                            }, merge: true);
                             await defineHomescreenUI();
                             Navigator.of(context).pop();//closes popupWait()
                             Navigator.of(context).pop();//closes popupJoin()
