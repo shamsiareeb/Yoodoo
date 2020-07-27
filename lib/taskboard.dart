@@ -147,93 +147,8 @@ class _TaskboardState extends State<Taskboard> {
                                 Expanded(
                                   child: SizedBox(),
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    ownerFlag == true ? new Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: Container(
-                                        height: 35,
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                                          border: Border.all(
-                                            color: Colors.orange,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: ()async{
-                                            popupWait(context);
-                                            var memberList = new List();
-                                            memberList = allGroupMemberUIDs[groupIndex];
-                                            memberList.shuffle();
-                                            await updateTaskAttributes(index);
-                                            await addToMyTasks(index, memberList.first);
-                                            await loadMyTasks();
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              /*Icon(
-                                                Icons.arrow_downward,
-                                                color: Colors.white,
-                                              ),*/
-                                              Text('ALLOCATE',
-                                                style: TextStyle(
-                                                  color: Colors.orange,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ) : Expanded(
-                                      child: SizedBox(),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: Container(
-                                        height: 35,
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () async {
-                                            popupWait(context);
-                                            await updateTaskAttributes(index);
-                                            await addToMyTasks(index, user.uid);
-                                            await loadMyTasks();
-                                            Navigator.of(context).pop();//pops popupWait
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              /*Icon(
-                                                Icons.arrow_downward,
-                                                color: Colors.white,
-                                              ),*/
-                                              Text('ACCEPT',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                Container(
+                                  child: _status(),
                                 ),
                               ],
                             ),
@@ -278,5 +193,109 @@ class _TaskboardState extends State<Taskboard> {
     await usersCollection.document(userid).updateData({
       'myTasks': FieldValue.arrayUnion([taskPath])
     });
+  }
+
+  Widget _status(){
+    if (taskStatuses.elementAt(index) == 0) {
+      return Row(
+        children: <Widget>[
+          ownerFlag == true ? new Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              height: 35,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                border: Border.all(
+                  color: Colors.orange,
+                  width: 1.0,
+                ),
+              ),
+              child: GestureDetector(
+                onTap: ()async{
+                  popupWait(context);
+                  var memberList = new List();
+                  memberList = allGroupMemberUIDs[groupIndex];
+                  memberList.shuffle();
+                  await updateTaskAttributes(index);
+                  await addToMyTasks(index, memberList.first);
+                  await loadMyTasks();
+                  Navigator.of(context).pop();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('ALLOCATE',
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ) : Expanded(
+            child: SizedBox(),
+          ),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              height: 35,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
+              child: GestureDetector(
+                onTap: () async {
+                  popupWait(context);
+                  await updateTaskAttributes(index);
+                  await addToMyTasks(index, user.uid);
+                  await loadMyTasks();
+                  Navigator.of(context).pop();//pops popupWait
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('ACCEPT',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+    else {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.done,
+            color: Colors.green,
+          ),
+          Text('This task has been assigned.',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+        ],
+      );
+    }
   }
 }

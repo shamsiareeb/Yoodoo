@@ -90,7 +90,7 @@ class _GroupDetailsState extends State<GroupDetails> {
                 ),
               ):
               new Container(
-                //height: 0,
+                height: 30,
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 18.0),
@@ -169,98 +169,103 @@ class _GroupDetailsState extends State<GroupDetails> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 28,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 18.0),
-                child: Divider(
-                  color: Colors.black,
-                  thickness: 0.5,
-                  indent: 25,
-                  endIndent: 25,
-                ),
-              ),
-              SizedBox(
-                height: 28,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 18.0),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Group Members",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w300,
+              ownerFlag == true ?
+                  new Column(
+                    children: [
+                      SizedBox(
+                        height: 28,
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: ListView.separated(
-                          physics: NeverScrollableScrollPhysics(),
-                        separatorBuilder: (context, index) => Divider(
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 18.0),
+                        child: Divider(
+                          color: Colors.black,
+                          thickness: 0.5,
                           indent: 25,
                           endIndent: 25,
-                          color: Colors.black,
                         ),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: allGroupMemberNames[groupIndex].length,
-                        itemBuilder: (context, index){
-                          return ListTile(
-                            contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                            trailing: ownerFlag == true ? new GestureDetector(
-                              onTap: () async {
-                                popupWait(context);
-                                Map <String,dynamic> groupsNyoodoos = new Map();
-                                await groupsCollection.document(groups[groupIndex]).updateData({
-                                  'memberUIDs': FieldValue.arrayRemove([allGroupMemberUIDs[groupIndex][index]]),
-                                  'memberNames': FieldValue.arrayRemove([allGroupMemberNames[groupIndex][index]])
-                                });
-                                await usersCollection.document(allGroupMemberUIDs[groupIndex][index]).get().then((
-                                    DocumentSnapshot ds){
-                                  groupsNyoodoos = (ds['groups&yoodoos']);
-                                  groupsNyoodoos.remove(groups[groupIndex]);
-                                });
-                                await usersCollection.document(allGroupMemberUIDs[groupIndex][index]).setData({
-                                  'groups&yoodoos': groupsNyoodoos
-                                }, merge: true);
-                                Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                child: Icon(
-                                  Icons.do_not_disturb,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ): Container(),
-                            title: Container(
-                              //padding: EdgeInsets.all(15),
-                              child: Text(allGroupMemberNames[groupIndex][index],
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                      ),
+                      SizedBox(
+                        height: 28,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 18.0),
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Group Members",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w300,
                               ),
                             ),
-                          );
-                        },
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: ListView.separated(
+                                physics: NeverScrollableScrollPhysics(),
+                                separatorBuilder: (context, index) => Divider(
+                                  indent: 25,
+                                  endIndent: 25,
+                                  color: Colors.black,
+                                ),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: allGroupMemberNames[groupIndex].length,
+                                itemBuilder: (context, index){
+                                  return ListTile(
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                                    trailing: ownerFlag == true ? new GestureDetector(
+                                      onTap: () async {
+                                        popupWait(context);
+                                        Map <String,dynamic> groupsNyoodoos = new Map();
+                                        await groupsCollection.document(groups[groupIndex]).updateData({
+                                          'memberUIDs': FieldValue.arrayRemove([allGroupMemberUIDs[groupIndex][index]]),
+                                          'memberNames': FieldValue.arrayRemove([allGroupMemberNames[groupIndex][index]])
+                                        });
+                                        await usersCollection.document(allGroupMemberUIDs[groupIndex][index]).get().then((
+                                            DocumentSnapshot ds){
+                                          groupsNyoodoos = (ds['groups&yoodoos']);
+                                          groupsNyoodoos.remove(groups[groupIndex]);
+                                        });
+                                        await usersCollection.document(allGroupMemberUIDs[groupIndex][index]).setData({
+                                          'groups&yoodoos': groupsNyoodoos
+                                        }, merge: true);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Container(
+                                        child: Icon(
+                                          Icons.do_not_disturb,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ): Container(),
+                                    title: Container(
+                                      //padding: EdgeInsets.all(15),
+                                      child: Text(allGroupMemberNames[groupIndex][index],
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    ],
+                  ): new Container(),
             ],
           ),
         ),
