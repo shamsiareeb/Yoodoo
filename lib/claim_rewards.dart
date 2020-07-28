@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yoodoo/create_instances.dart';
+import 'package:yoodoo/dialogues.dart';
+import 'package:yoodoo/home_screen.dart';
+import 'package:yoodoo/load_groups.dart';
+import 'login_screen.dart';
 import 'taskboard.dart';
 
 class ClaimRewardsPage extends StatefulWidget{
@@ -45,8 +51,20 @@ class _ClaimRewardsPageState extends State<ClaimRewardsPage> {
               child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 25),
                 trailing: new GestureDetector(
-                  onTap: (){
-
+                  onTap: () async{
+                    if(myYoodoos[groupIndex] <= yoodoosNeeded[index]){
+                      popupWait(context);
+                      myYoodoos[groupIndex] = myYoodoos[groupIndex]-yoodoosNeeded[index];
+                      Map <String, int> GroupsYoodoos = new Map.fromIterables(groups, myYoodoos);
+                      await usersCollection.document(user.uid).updateData({
+                        'groups&yoodoos': GroupsYoodoos
+                      });
+                      Navigator.of(context).pop();
+                      popupRewardClaimed(context);
+                    }
+                    else{
+                      popupNotEnoughYoodoos(context);
+                    }
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

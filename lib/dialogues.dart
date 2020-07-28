@@ -859,6 +859,82 @@ void popupRejectTask(BuildContext context) {
   );
 }
 
+void popupRewardClaimed(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
+                content: Text("You bought a reward!"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Yay!",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
+                      //acceptGroupName(context);
+                    },
+                  ),
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
+void popupNotEnoughYoodoos(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child:AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
+                ),
+                title: Text("Yoodoo",
+                  style: TextStyle(
+                      fontFamily: 'TypoHoop',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 25.0,
+                      color: Colors.black
+                  ),),
+                content: Text("You don't have enough Yoodoos!"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Ok",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      //Navigator.of(context).pop();
+                      //acceptGroupName(context);
+                    },
+                  ),
+                ]
+            )
+        );
+      },
+      barrierDismissible: false
+  );
+}
+
   Future <void> signOut(BuildContext context)  async{
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
