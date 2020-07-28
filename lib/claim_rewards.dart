@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'taskboard.dart';
 
 class ClaimRewardsPage extends StatefulWidget{
   @override
@@ -32,7 +33,7 @@ class _ClaimRewardsPageState extends State<ClaimRewardsPage> {
         child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: 10,
+          itemCount: groupRewards.length,
           itemBuilder: (context, index){
             return Container(
               margin: EdgeInsets.symmetric(vertical: 10),
@@ -66,7 +67,7 @@ class _ClaimRewardsPageState extends State<ClaimRewardsPage> {
                 ),
                 title: new Column(
                   children: [
-                    Text('This is a notification, lets see to what extent it goes. And what if I extend it a bit more?',
+                    Text(groupRewards[index],
                       overflow: TextOverflow.visible,
                       style: TextStyle(
                         fontSize: 18,
@@ -84,7 +85,7 @@ class _ClaimRewardsPageState extends State<ClaimRewardsPage> {
                       style: TextStyle(
                         fontSize: 17,
                       ),),
-                    Text('8',
+                    Text(yoodoosNeeded[index].toString(),
                       style: TextStyle(
                         fontSize: 17,
                       ),),

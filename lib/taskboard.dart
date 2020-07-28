@@ -14,6 +14,10 @@ import 'package:yoodoo/load_groups.dart';
 import 'package:yoodoo/login_screen.dart';
 import 'package:yoodoo/claim_rewards.dart';
 
+
+List <String> groupRewards = new List();
+List<int> yoodoosNeeded = new List();
+
 class Taskboard extends StatefulWidget{
   @override
   _TaskboardState createState() => new _TaskboardState();
@@ -24,6 +28,7 @@ class _TaskboardState extends State<Taskboard> {
   //int number = tasks.length;
   int index;
   Widget build(BuildContext context) {
+    Map <String,dynamic> gnr = new Map();
     return new Scaffold(
       backgroundColor: Color(0xFFE1E1E1),
       appBar: new AppBar(
@@ -43,7 +48,15 @@ class _TaskboardState extends State<Taskboard> {
              Padding(
                padding: EdgeInsets.only(right: 25.0),
                child: GestureDetector(
-                 onTap: (){
+                 onTap: () async{
+                   popupWait(context);
+                   await groupsCollection.document(groups[groupIndex]).get().then((DocumentSnapshot ds){
+                     gnr = (ds['rewards&yoodoos']);
+                   });
+                   groupRewards.clear();
+                   yoodoosNeeded.clear();
+                   gnr.keys.forEach((f) => groupRewards.add((f)));
+                   gnr.values.forEach((f) => yoodoosNeeded.add((f)));
                    Navigator.push(context,
                      MaterialPageRoute (builder: (context) => ClaimRewardsPage()),
                    );

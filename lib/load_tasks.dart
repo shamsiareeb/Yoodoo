@@ -5,7 +5,7 @@ import 'home_screen.dart';
 import 'create_instances.dart';
 import 'login_screen.dart';
 
-List <String> tasks = new List();
+List tasks = new List();
 var taskNames = new List();
 var taskDescriptions = new List();
 var taskPriorities = new List();
