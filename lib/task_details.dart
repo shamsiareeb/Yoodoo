@@ -57,7 +57,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       padding: EdgeInsets.all(10),
                       //height: 200,
                       width: MediaQuery.of(context).size.width,
-                      child: Text(myTasks[taskDetailsIndex].substring(7,18),//group name
+                      child: Text(myTasks[taskDetailsIndex].substring(7,17),//group name
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400
@@ -192,7 +192,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       int i = groups.indexOf(g.substring(7,17));
 
                       if(mytpc[i] == Colors.redAccent) {
-                        myYoodoos[i] = myYoodoos[i] - 4;
+                        myYoodoos[i] = myYoodoos[i] - 3;
                       }
                       else if (mytpc[i] == Colors.orangeAccent){
                         myYoodoos[i] = myYoodoos[i] - 2;
