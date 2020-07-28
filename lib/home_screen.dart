@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ),),
                   ),
                   actions: <Widget>[
-                    Padding(
+                    /*Padding(
                       padding: EdgeInsets.only(right: 25.0),
                       child: GestureDetector(
                         onTap: () {
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           color: Colors.black,
                         ),
                       ),
-                    ),
+                    ),*/
                     Padding(
                       padding: EdgeInsets.only(right: 25.0),
                       child: GestureDetector(

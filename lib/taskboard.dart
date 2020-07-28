@@ -334,7 +334,23 @@ class _TaskboardState extends State<Taskboard> {
                 ),
               ),
             ) : Expanded(
-              child: SizedBox(),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.done_all,
+                    color: Colors.green,
+                  ),
+                  Text('This task has been completed.',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         );
