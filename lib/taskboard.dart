@@ -184,7 +184,8 @@ class _TaskboardState extends State<Taskboard> {
     CollectionReference taskCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
     await taskCollection.document(tasks[index]).updateData({
       'taskStatus': 1,// 1 for accepted
-      'taskAcceptor': userName
+      'taskAcceptor': userName,
+      'taskAcceptorId': user.uid
     });
   }
 
@@ -318,6 +319,43 @@ class _TaskboardState extends State<Taskboard> {
                 ),
                 child: GestureDetector(
                   onTap: ()async{
+                    popupWait(context);
+                    String taskAcceptorId;
+                    String priority;
+                    Map <String,dynamic> gny = new Map();
+                    List<String> g = new List();
+                    List<int> y = new List();
+                    CollectionReference taskCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
+                    await taskCollection.document(tasks[index]).get().then((DocumentSnapshot ds){
+                      taskAcceptorId = (ds['taskAcceptorId']);
+                      priority = (ds['taskPriority']);
+                    });
+                    await usersCollection.document(taskAcceptorId).get().then((DocumentSnapshot ds){
+                      gny = (ds['groups&yoodoos']);
+                      gny.keys.forEach((f) => g.add((f)));
+                      gny.values.forEach((f) => y.add((f)));
+                    });
+                    int i = g.indexOf(groups[groupIndex]);
+                    if(priority == "Colors.green")
+                      y[i] = y[i] - 1;
+                    else if (priority == "Colors.orangeAccent")
+                      y[i] = y[i] - 2;
+                    else
+                      y[i] = y[i] - 3;
+                    Map <String, int> GroupsYoodoos = new Map.fromIterables(g, y);
+                    await usersCollection.document(taskAcceptorId).updateData({
+                      'groups&yoodoos': GroupsYoodoos
+                    });
+                    await taskCollection.document(tasks[index]).delete();
+                    groupsCollection.document(groups[groupIndex]).updateData({
+                      'taskuids': FieldValue.arrayRemove([tasks[index]])
+                    });
+                    defineTaskboardUI(groupIndex);
+                    Navigator.of(context).pop();//pops popupWait
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Taskboard()),
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
