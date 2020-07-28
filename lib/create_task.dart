@@ -190,7 +190,7 @@ class _CreateTaskState extends State<CreateTask> {
                                 });
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
@@ -209,7 +209,7 @@ class _CreateTaskState extends State<CreateTask> {
                                         setState(() { _value = value; });
                                       },
                                     ),
-                                    Text('High Priority (8 Yoodoos)',
+                                    Text('High Priority (3 Yoodoos)',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400
@@ -230,7 +230,7 @@ class _CreateTaskState extends State<CreateTask> {
                                 });
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(10)),
                                   color: Colors.white,
@@ -248,7 +248,7 @@ class _CreateTaskState extends State<CreateTask> {
                                         setState(() { _value = value; });
                                       },
                                     ),
-                                    Text('Medium Priority (4 Yoodoos)',
+                                    Text('Medium Priority (2 Yoodoos)',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 18
@@ -269,7 +269,7 @@ class _CreateTaskState extends State<CreateTask> {
                                 });
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(10)),
                                   color: Colors.white,

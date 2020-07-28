@@ -10,7 +10,7 @@ var taskNames = new List();
 var taskDescriptions = new List();
 var taskPriorities = new List();
 var taskAcceptors = new List();
-var taskStatuses = new List();
+List <int> taskStatuses = new List();
 List<MaterialAccentColor> tpc= new List<MaterialAccentColor>();
 
 Future <void> checkGroupOwner(int index) async{

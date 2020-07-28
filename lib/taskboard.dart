@@ -148,7 +148,7 @@ class _TaskboardState extends State<Taskboard> {
                                   child: SizedBox(),
                                 ),
                                 Container(
-                                  child: _status(),
+                                  child: _status(index),
                                 ),
                               ],
                             ),
@@ -195,8 +195,8 @@ class _TaskboardState extends State<Taskboard> {
     });
   }
 
-  Widget _status(){
-    if (taskStatuses.elementAt(index) == 0) {
+  Widget _status(int index){
+    if (taskStatuses[index] == 0) {
       return Row(
         children: <Widget>[
           ownerFlag == true ? new Align(
@@ -257,8 +257,11 @@ class _TaskboardState extends State<Taskboard> {
                   popupWait(context);
                   await updateTaskAttributes(index);
                   await addToMyTasks(index, user.uid);
-                  await loadMyTasks();
+                  await defineHomescreenUI();
+                  await defineTaskboardUI(groupIndex);
                   Navigator.of(context).pop();//pops popupWait
+                  Navigator.of(context).pop();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Taskboard()),);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -290,7 +293,7 @@ class _TaskboardState extends State<Taskboard> {
           Text('This task has been assigned.',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w300,
             ),
           ),
