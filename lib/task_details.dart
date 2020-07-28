@@ -161,8 +161,22 @@ class _TaskDetailsState extends State<TaskDetails> {
                         color: Colors.green,
                       ),
                     ),
-                    onTap: () {
-
+                    onTap: () async{
+                      popupWait(context);
+                      CollectionReference taskCollection = Firestore.instance.collection('groups/'+myTasks[taskDetailsIndex].substring(7,17)+'/tasks');
+                      await taskCollection.document(myTasks[taskDetailsIndex].substring(24)).updateData({
+                        'taskStatus': 2// 2 for yoodoos claimed
+                      });
+                      await usersCollection.document(user.uid).updateData({
+                        'myTasks': FieldValue.arrayRemove([myTasks[taskDetailsIndex]])
+                      });
+                      loadMyTasks();
+                      Navigator.of(context).pop();//pops popup Wait
+                      Navigator.of(context).pop();//pops taskDetails
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     }
                 ),
               ),
@@ -215,7 +229,8 @@ class _TaskDetailsState extends State<TaskDetails> {
                       });
 
                       await loadMyTasks();
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();//pops popupWait
+                      Navigator.of(context).pop();//pops taskDetails
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),

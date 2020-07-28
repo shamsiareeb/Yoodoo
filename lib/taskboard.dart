@@ -180,7 +180,7 @@ class _TaskboardState extends State<Taskboard> {
       ),*/
     );
   }
-  Future <void> updateTaskAttributes(int index) async{
+  Future <void> updateAfterAcceptTaskAttributes(int index) async{
     CollectionReference taskCollection = Firestore.instance.collection('groups/'+groups[groupIndex]+'/tasks');
     await taskCollection.document(tasks[index]).updateData({
       'taskStatus': 1,// 1 for accepted
@@ -218,7 +218,7 @@ class _TaskboardState extends State<Taskboard> {
                   var memberList = new List();
                   memberList = allGroupMemberUIDs[groupIndex];
                   memberList.shuffle();
-                  await updateTaskAttributes(index);
+                  await updateAfterAcceptTaskAttributes(index);
                   await addToMyTasks(index, memberList.first);
                   await loadMyTasks();
                   Navigator.of(context).pop();
@@ -255,7 +255,7 @@ class _TaskboardState extends State<Taskboard> {
               child: GestureDetector(
                 onTap: () async {
                   popupWait(context);
-                  await updateTaskAttributes(index);
+                  await updateAfterAcceptTaskAttributes(index);
                   await addToMyTasks(index, user.uid);
                   await defineHomescreenUI();
                   await defineTaskboardUI(groupIndex);
@@ -281,7 +281,7 @@ class _TaskboardState extends State<Taskboard> {
         ],
       );
     }
-    else {
+    else if(taskStatuses[index]==1){
       return Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -299,6 +299,30 @@ class _TaskboardState extends State<Taskboard> {
           ),
         ],
       );
+    }
+    else{
+      if(ownerFlag == false){
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.done,
+              color: Colors.green,
+            ),
+            Text('This task has been completed.',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ],
+        );
+      }
+      else{
+
+      }
     }
   }
 }
