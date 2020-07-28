@@ -52,7 +52,7 @@ class _ClaimRewardsPageState extends State<ClaimRewardsPage> {
                 contentPadding: EdgeInsets.symmetric(horizontal: 25),
                 trailing: new GestureDetector(
                   onTap: () async{
-                    if(myYoodoos[groupIndex] <= yoodoosNeeded[index]){
+                    if(myYoodoos[groupIndex] >= yoodoosNeeded[index]){
                       popupWait(context);
                       myYoodoos[groupIndex] = myYoodoos[groupIndex]-yoodoosNeeded[index];
                       Map <String, int> GroupsYoodoos = new Map.fromIterables(groups, myYoodoos);
