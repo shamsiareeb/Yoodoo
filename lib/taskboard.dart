@@ -57,6 +57,7 @@ class _TaskboardState extends State<Taskboard> {
                    yoodoosNeeded.clear();
                    gnr.keys.forEach((f) => groupRewards.add((f)));
                    gnr.values.forEach((f) => yoodoosNeeded.add((f)));
+                   Navigator.of(context).pop();
                    Navigator.push(context,
                      MaterialPageRoute (builder: (context) => ClaimRewardsPage()),
                    );
