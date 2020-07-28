@@ -300,6 +300,45 @@ class _TaskboardState extends State<Taskboard> {
         ],
       );
     }
+    else if(taskStatuses[index]==2){
+      return Row(
+        children: [
+          ownerFlag == true ? new Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              height: 35,
+              width: 125,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                border: Border.all(
+                  color: Colors.green,
+                  width: 1.0,
+                ),
+              ),
+              child: GestureDetector(
+                onTap: ()async{
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('GIVE YOODOOS',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ) : Expanded(
+            child: SizedBox(),
+          ),
+        ],
+      );
+    }
     else{
       if(ownerFlag == false){
         return Row(
